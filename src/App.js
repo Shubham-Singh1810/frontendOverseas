@@ -9,10 +9,8 @@ import {GlobalStateProvider} from './GlobalProvider';
 import Header from "./components/Header";
 import AllRoutes from "./routes/AllRoutes";
 function App() {
-  
   return (
-    <GlobalStateProvider><AllRoutes/></GlobalStateProvider>
-    
+    <GlobalStateProvider><AllRoutes/></GlobalStateProvider>  
   );
 }
 

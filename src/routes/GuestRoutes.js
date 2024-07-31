@@ -13,14 +13,17 @@ import CandidateSignUp from '../pages/CandidateSignUp'
 import OtpVerification from '../pages/OtpVerification'
 import PageNotFound from '../pages/PageNotFound'
 import ResumeBuilding from '../pages/ResumeBuilding'
+import { useLocation } from 'react-router-dom'
 function GuestRoutes() {
+  const location = useLocation()
+  console.log("from all guest route",location.pathname)
   return (
     <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" index   element={<Home/>}/>
         <Route path="/about-us" element={<Aboutus/>}/>
         <Route path="/jobs" element={<JobList/>}/>
         <Route path="/jobs/:filter" element={<JobList/>}/>
-        <Route path="resume-building" element={<ResumeBuilding/>}/>
+        <Route path="/resume-building" element={<ResumeBuilding/>}/>
         <Route path="/contact-us" element={<Contactus/>}/>
         <Route path="/job/:location/:title/:id" element={<JobDiscription/>}/>
         <Route path="/login" element={<Login/>}/>

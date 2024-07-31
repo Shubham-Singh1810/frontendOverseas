@@ -22,7 +22,7 @@ function UserRoutes() {
         <Route path="/" element={<Home/>}/>
         <Route path="/about-us" element={<Aboutus/>}/>
         <Route path="/jobs" element={<JobList/>}/>
-        {/* <Route path="/jobs/:filter" element={<JobList/>}/> */}
+        <Route path="/jobs/:filter" element={<JobList/>}/>
         <Route path="/contact-us" element={<Contactus/>}/>
         <Route path="/job/:location/:title/:id" element={<JobDiscription/>}/>
         <Route path="/login" element={<Login/>}/>
