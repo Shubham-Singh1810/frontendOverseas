@@ -1,16 +1,35 @@
 import React from "react";
-import {useGlobalState} from '../GlobalProvider';
+import { useGlobalState } from "../GlobalProvider";
 import { ToastContainer, toast } from "react-toastify";
+import { applyCourse } from "../services/institute.service";
 import "react-toastify/dist/ReactToastify.css";
-function CourseCard({ v }) {
-    const { globalState, setGlobalState} = useGlobalState();
-    const handleCourseApply = ()=>{
-       if(globalState.user){
+import { Link } from "react-router-dom";
+function CourseCard({ v , getCourseListFunc}) {
+  const { globalState, setGlobalState } = useGlobalState();
 
-       }else{
-        toast.warning("Please login to apply for the course")
-       }
+  const handleCourseApply = async () => {
+    if (globalState.user) {
+      try {
+        let response = await applyCourse({
+          id: v?.id,
+          access_token: globalState?.user?.access_token,
+        });
+        console.log(response);
+        if (response?.message == "Application submitted successfully!") {
+          toast.success("Application submitted successfully!");
+          setTimeout(()=>{
+
+            getCourseListFunc()
+          }, 5000)
+          
+        } else {
+          toast.success(response?.message);
+        }
+      } catch (error) {}
+    } else {
+      toast.warning("Please login to apply for the course");
     }
+  };
   return (
     <div className="col-12 col-md-6">
       <div className="shadow mx-3 my-4 p-4 rounded">
@@ -46,17 +65,26 @@ function CourseCard({ v }) {
           </div>
         </div>
         <div className="d-flex justify-content-between mt-3">
-          <a href="">Read More</a>
-          <button
-            className="btn btn-sm btn-outline-primary"
-            style={{ width: "30%" }}
-            onClick={()=>handleCourseApply()}
-          >
-            Apply
-          </button>
+          <Link to={"/course-details/" + v?.id}>Read More</Link>
+          {v?.appliedStatus ? (
+            <button
+              className="btn btn-sm btn-warning"
+              style={{ width: "30%" }}
+            >
+              Applied
+            </button>
+          ) : (
+            <button
+              className="btn btn-sm btn-outline-primary"
+              style={{ width: "30%" }}
+              onClick={() => handleCourseApply()}
+            >
+              Apply
+            </button>
+          )}
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }

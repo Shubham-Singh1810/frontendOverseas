@@ -21,6 +21,8 @@ import Institutes from '../pages/Institutes'
 import TradeTestCenters from '../pages/TradeTestCenters'
 import TrainingInstitute from '../pages/TrainingInstitute'
 import TradeTestingList from '../pages/TradeTestingList'
+import CourseDetails from '../pages/CourseDetails'
+import TradeTestCourseDetails from '../pages/TradeTestCourseDetails'
 function UserRoutes() {
   return (
     <Routes>
@@ -42,6 +44,9 @@ function UserRoutes() {
         <Route path="/resume-building" element={<ResumeBuilding/>}/>
         <Route path="/training-institute" element={<TrainingInstitute/>}/>
         <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
+        <Route path="/course-details/:id" element={<CourseDetails/>}/>
+        <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>
+        
         <Route path="*" element={<PageNotFound/>}/>
     </Routes>
   )

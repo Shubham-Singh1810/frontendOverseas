@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getCourseList } from "../services/institute.service";
 import CourseCard from "../components/CourseCard";
+import { useGlobalState } from "../GlobalProvider";
 function TrainingInstitute() {
+  const { globalState, setGlobalState } = useGlobalState();
   const [courseList, setCourseList] = useState([]);
   const getCourseListFunc = async () => {
     try {
-      let response = await getCourseList();
+      let response = await getCourseList(globalState?.user?.access_token);
       console.log(response.data);
       setCourseList(response.data);
     } catch (error) { }
@@ -70,7 +72,7 @@ function TrainingInstitute() {
           )}
           {courseList?.map((v, i) => {
             return (
-              <CourseCard v={v}/>
+              <CourseCard v={v} getCourseListFunc={getCourseListFunc}/>
             );
           })}
         </div>

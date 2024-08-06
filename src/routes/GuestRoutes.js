@@ -18,9 +18,11 @@ import Institutes from '../pages/Institutes'
 import TradeTestCenters from '../pages/TradeTestCenters'
 import TrainingInstitute from '../pages/TrainingInstitute'
 import TradeTestingList from '../pages/TradeTestingList'
+import CourseDetails from '../pages/CourseDetails'
+import TradeTestCourseDetails from '../pages/TradeTestCourseDetails'
 function GuestRoutes() {
   const location = useLocation()
-  console.log("from all guest route",location.pathname)
+  
   return (
     <Routes>
         <Route path="/" index   element={<Home/>}/>
@@ -40,7 +42,8 @@ function GuestRoutes() {
         <Route path="/otp-verification" element={<OtpVerification/>}/>
         <Route path="/training-institute" element={<TrainingInstitute/>}/>
         <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
-        
+        <Route path="/course-details/:id" element={<CourseDetails/>}/>
+        <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getCourseList, getTradeTestList } from "../services/institute.service";
 import TradeTestCard from "../components/TradeTestCard";
+import { useGlobalState } from "../GlobalProvider";
 function TradeTestingList() {
   const [courseList, setCourseList] = useState([]);
+  const { globalState, setGlobalState } = useGlobalState();
   const getTestTradeListFunc = async () => {
     try {
-      let response = await getTradeTestList();
+      let response = await getTradeTestList(globalState?.user?.access_token);
       setCourseList(response.data);
     } catch (error) {}
   };
@@ -71,7 +73,7 @@ function TradeTestingList() {
           )}
           {courseList?.map((v, i) => {
             return (
-              <TradeTestCard v={v}/>
+              <TradeTestCard v={v} getTestTradeListFunc={getTestTradeListFunc}/>
             );
           })}
         </div>

@@ -58,7 +58,7 @@ export const getCourseByInstitute = async params => {
   try {
     const response = await axios.post(
       BASE_URL + 'courses-by-institute',
-      {instId: params.instId},
+      {instId: params},
       {
         headers: {
           Authorization: `Bearer ${params.access_token}`,
@@ -75,7 +75,7 @@ export const getTestByInstitute = async params => {
   try {
     const response = await axios.post(
       BASE_URL + 'tests-by-institute',
-      {instId: params.instId},
+      {instId: params},
       {
         headers: {
           Authorization: `Bearer ${params.access_token}`,
@@ -234,6 +234,21 @@ export const addReviewForInstitute = async (formData, access_token) => {
 export const editReviewForInstitute = async (formData, access_token) => {
   try {
     const response = await axios.post(BASE_URL + 'edit-rate-review-institute', formData, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error.response.data.msg);
+    throw error;
+  }
+};
+
+export const getCourseById = async (id, access_token) => {
+  try {
+    const response = await axios.get(BASE_URL + 'course/'+id, {
       headers: {
         'Content-Type': `multipart/form-data`,
         Authorization: `Bearer ${access_token}`,
