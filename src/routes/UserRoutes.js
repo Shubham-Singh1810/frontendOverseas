@@ -16,6 +16,11 @@ import PartnerSignUp from '../pages/PartnerSignUp'
 import OtpVerification from '../pages/OtpVerification'
 import MyProfile from '../pages/MyProfile'
 import PageNotFound from '../pages/PageNotFound'
+import ResumeBuilding from "../pages/ResumeBuilding"
+import Institutes from '../pages/Institutes'
+import TradeTestCenters from '../pages/TradeTestCenters'
+import TrainingInstitute from '../pages/TrainingInstitute'
+import TradeTestingList from '../pages/TradeTestingList'
 function UserRoutes() {
   return (
     <Routes>
@@ -27,11 +32,16 @@ function UserRoutes() {
         <Route path="/job/:location/:title/:id" element={<JobDiscription/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/companies" element={<Companies/>}/>
+        <Route path="/institutes" element={<Institutes/>}/>
+        <Route path="/trade-test-center" element={<TradeTestCenters/>}/>
         <Route path="/company/:id" element={<CampanyDetails/>}/>
         <Route path="/candidate-register-step2" element={<CandidateRegister/>}/>
         <Route path="/candidate-register" element={<CandidateSignUp/>}/>
         <Route path="/otp-verification" element={<OtpVerification/>}/>
         <Route path="/my-profile" element={<MyProfile/>}/>
+        <Route path="/resume-building" element={<ResumeBuilding/>}/>
+        <Route path="/training-institute" element={<TrainingInstitute/>}/>
+        <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
         <Route path="*" element={<PageNotFound/>}/>
     </Routes>
   )

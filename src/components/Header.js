@@ -8,7 +8,7 @@ function Header() {
     dots: false,
     infinite: true,
     arrows: false,
-    speed: 2500,
+    speed: 6500,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,

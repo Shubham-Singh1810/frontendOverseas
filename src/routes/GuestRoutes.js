@@ -14,6 +14,10 @@ import OtpVerification from '../pages/OtpVerification'
 import PageNotFound from '../pages/PageNotFound'
 import ResumeBuilding from '../pages/ResumeBuilding'
 import { useLocation } from 'react-router-dom'
+import Institutes from '../pages/Institutes'
+import TradeTestCenters from '../pages/TradeTestCenters'
+import TrainingInstitute from '../pages/TrainingInstitute'
+import TradeTestingList from '../pages/TradeTestingList'
 function GuestRoutes() {
   const location = useLocation()
   console.log("from all guest route",location.pathname)
@@ -25,6 +29,8 @@ function GuestRoutes() {
         <Route path="/jobs/:filter" element={<JobList/>}/>
         <Route path="/resume-building" element={<ResumeBuilding/>}/>
         <Route path="/contact-us" element={<Contactus/>}/>
+        <Route path="/institutes" element={<Institutes/>}/>
+        <Route path="/trade-test-center" element={<TradeTestCenters/>}/>
         <Route path="/job/:location/:title/:id" element={<JobDiscription/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/companies" element={<Companies/>}/>
@@ -32,6 +38,9 @@ function GuestRoutes() {
         <Route path="/candidate-register-step2" element={<CandidateRegister/>}/>
         <Route path="/candidate-register" element={<CandidateSignUp/>}/>
         <Route path="/otp-verification" element={<OtpVerification/>}/>
+        <Route path="/training-institute" element={<TrainingInstitute/>}/>
+        <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
+        
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

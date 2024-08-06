@@ -49,15 +49,17 @@ function Navbar() {
           name: "Resume Building",
           path: "resume-building",
         },
-        {
-          name: "Language Training",
-        },
+        // {
+        //   name: "Language Training",
+        //   path: "institutes",
+        // },
         {
           name: "Skill Training",
+          path:"training-institute"
         },
         {
           name: "Trade Testing",
-          path: "",
+          path:"trade-testing-institute"
         },
       ],
     },
@@ -72,9 +74,11 @@ function Navbar() {
       subMenu: [
         {
           name: "Training Institutes",
+          path: "institutes",
         },
         {
           name: "Trade Test Centres",
+          path:"trade-test-center"
         },
       ],
     },
@@ -157,7 +161,7 @@ function Navbar() {
     setShowCountry(false)
   }
   useEffect(()=>{
-    navigatePage()
+    // navigatePage()
   }, [searchKey])
   return (
     <>

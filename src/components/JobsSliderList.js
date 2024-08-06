@@ -32,7 +32,7 @@ function JobsSliderList({ title, backgroundColor, rounded, data }) {
   const container = useRef(null);
   const isInView = useInView(container);
   return (
-    <div className="vh-100 d-flex justify-content-center align-items-center" style={{ background: backgroundColor }} ref={container}>
+    <div className="customSliderHeight d-flex justify-content-center align-items-center" style={{ background: backgroundColor }} ref={container}>
       <div className="container">
         <div className="">
           <motion.h1

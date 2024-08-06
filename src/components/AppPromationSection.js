@@ -8,6 +8,7 @@ function AppPromationSection() {
     <div className="container pb-3 pb-md-5" ref={container}>
       <div className="row py-5 ">
         <div className="col-md-7 col-12 order-lg-1 order-2 my-auto">
+          <div className="text-md-start text-center">
           <motion.h1
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
@@ -18,7 +19,7 @@ function AppPromationSection() {
           >
             Get the <span className="textBlue">Overseas Jobs</span> App
           </motion.h1>
-          <motion.div className="d-flex   mt-3">
+          <motion.div className="d-flex justify-content-center justify-content-md-start  mt-3">
             <motion.div
               className=""
               initial={{ opacity: 0, y: 100 }}
@@ -31,7 +32,7 @@ function AppPromationSection() {
               <p className="mb-0 text-center">
                 4.7 <i className="fa fa-star text-warning"></i>
               </p>
-              <p className="text-secondary font10">61 Reviews</p>
+              <p className="text-secondary font10">612 Reviews</p>
             </motion.div>
             <motion.div
               className="mx-5"
@@ -42,7 +43,7 @@ function AppPromationSection() {
                 delay: 0.5,
               }}
             >
-              <p className="mb-0 text-center">1k+</p>
+              <p className="mb-0 text-center">10k+</p>
               <p className="text-secondary font10">Downloads</p>
             </motion.div>
             <motion.div
@@ -53,8 +54,8 @@ function AppPromationSection() {
                 delay: 0.75,
               }}
             >
-              <p className="mb-0 text-center">12+</p>
-              <p className="text-secondary font10">Rated for 12+</p>
+              <p className="mb-0 text-center">612+</p>
+              <p className="text-secondary font10">Rated for 612+</p>
             </motion.div>
           </motion.div>
           <motion.button
@@ -74,6 +75,7 @@ function AppPromationSection() {
               Download App
             </a>
           </motion.button>
+          </div>
         </div>
         <div className="col-md-5 col-12 order-lg-2 order-1 justify-content-end d-flex">
           <motion.img

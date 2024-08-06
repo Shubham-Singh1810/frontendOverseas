@@ -67,10 +67,10 @@ function SuccessfulPlacedCandidateList({ title, backgroundColor, rounded }) {
                 duration: 1,
               }}
               className=" text-center mb-5 mt-lg-5 px-md-5 mx-5"
-              style={{ fontFamily: "monospace", color: "white" }}
+              style={{ fontFamily: "sans", color: "white" }}
             >
               {/* Direct <span className="textBlue">Hiring</span> App for Founders, Team Leaders and Hiring Managers */}
-              <b>Join the community of 5 crore satisfied job seekers...</b>
+              <b>Join the community of 5k satisfied job seekers...</b>
             </motion.h1>
             <motion.div className="d-flex justify-content-center">
               <motion.p

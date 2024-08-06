@@ -12,8 +12,9 @@ import {
   getVillage,
   getCountries,
 } from "../services/info.service";
-import Select from "react-select";
+
 import { useNavigate, Link } from "react-router-dom";
+import Select from "react-select";
 import {
   registerUserStep1,
   addExperienceStep2,
@@ -131,6 +132,7 @@ const refrenceDistanceOption = [
   { label: "50-100 km", value: "50-100 km" },
   { label: "Above 100 km", value: "Above 100 km" },
 ];
+
 const CandidateRegister = () => {
   const navigate = useNavigate();
   const [countryCodeArr, setCountryCodeArr] = useState([]);
@@ -139,7 +141,7 @@ const CandidateRegister = () => {
     empGender: "",
     empWhatsapp: "",
     empWhatsappCountryCode: "+91",
-    empLanguage: "",
+    // empLanguage: "",
     empMS: "",
     empPassportQ: "",
     empSkill: "",
@@ -166,17 +168,17 @@ const CandidateRegister = () => {
     empRefPhone: "",
     empRefDistance: "",
   };
-
+  const [empLanguage, setEmpLanguage]=useState([])
   const handleSubmit = async (values) => {
     try {
       const finalPayload = {
         ...values,
-        empLanguage: JSON.stringify(values.empLanguage),
+        empLanguage: JSON.stringify(empLanguage),
         type:"web"
       };
       let response = await registerUserStep1(
         finalPayload,
-        JSON.parse(localStorage.getItem("overseasUser")).access_token
+        JSON.parse(localStorage.getItem("semiUser")).access_token
       );
       if (response?.msg == "Data Updated Successfully") {
         toast.success("Data Updated Successfully");
@@ -190,6 +192,7 @@ const CandidateRegister = () => {
       }
     } catch (error) {
       toast.error("Internal Server Error");
+      console.log(error)
     }
   };
 
@@ -310,10 +313,16 @@ const CandidateRegister = () => {
     };
     getOccupationList();
     getStateList();
-
     getListOfCountry();
     getListOfCountryCode();
   }, []);
+  const handleLanguageChange = (e)=>{
+    e.map((v, i)=>{
+      return(
+        setEmpLanguage([...empLanguage, v.value])
+      )
+    })
+  }
   return (
     <div className="container mt-5 pt-5 customLabel">
       <div className="mt-md-5 py-5 mb-5">
@@ -447,7 +456,7 @@ const CandidateRegister = () => {
                   <p className="mb-0">Educational Details</p>
                   <div className="form-group col-md-6 my-2">
                     <label htmlFor="empLanguage">Languages Known</label>
-                    <Field
+                    {/* <Field
                       as="select"
                       name="empLanguage"
                       className="form-control"
@@ -460,8 +469,8 @@ const CandidateRegister = () => {
                           {v?.label}
                         </option>
                       ))}
-                    </Field>
-
+                    </Field> */}
+                    <Select isMulti={true} options={languageOption} onChange={(e)=>handleLanguageChange(e) }/>
                     {errors.empLanguage && touched.empLanguage ? (
                       <div className="text-danger">{errors.empLanguage}</div>
                     ) : null}

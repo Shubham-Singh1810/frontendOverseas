@@ -49,7 +49,7 @@ function JobOpeningInTopCompany() {
   return (
     <div
       style={{ background: "#F4F2F6" }}
-      className="vh-100 d-flex justify-content-center align-items-center"
+      className="customSliderHeight d-flex justify-content-center align-items-center"
       ref={container}
     >
       <div className="container">

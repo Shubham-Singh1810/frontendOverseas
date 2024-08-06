@@ -4,6 +4,30 @@ import axios from 'axios';
 const BASE_URL = 'https://overseas.ai/api/';
 // const BASE_URL = "https://test.overseas.ai/api/"; // test api
 // Function to get job occupation list
+
+export const getInstituteRegistrationOtp = async (formData) => { 
+  try {
+    const response = await axios.post(BASE_URL + 'get-institute-register-otp', formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error posting data:', error);
+    throw error;
+  }
+};
+export const registerInstitute = async (formData) => { 
+  try {
+    const response = await axios.post(BASE_URL + 'register-institute', formData, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+       
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error posting data:', error);
+    throw error;
+  }
+};
 export const getInstituteList = async access_token => { 
   try {
     const response = await axios.get(BASE_URL + 'list-training-institute', {
@@ -80,6 +104,22 @@ export const getCourseList = async access_token => {
     throw error;
   }
 };
+export const getTradeTestList = async access_token => {
+  try {
+    const response = await axios.get(
+      BASE_URL + 'list-all-trade-test',
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error posting data:', error);
+    throw error;
+  }
+};
 export const getTestList = async access_token => {
   try {
     const response = await axios.get(
@@ -96,7 +136,6 @@ export const getTestList = async access_token => {
     throw error;
   }
 };
-
 export const searchForCourse = async (params) => {
   try {
     const response = await axios.post(

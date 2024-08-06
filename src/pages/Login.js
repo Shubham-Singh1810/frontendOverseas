@@ -43,13 +43,21 @@ function Login() {
   return (
     <div className="vh-100 d-flex justify-content-center align-items-center" style={{background:"url(https://www.bacancytechnology.com/main/img/job-recruitment-portal-development/banner.jpg?v-1)",backgroundSize:"100% 100%", backgroundRepeat:"no-repeat"}}>
       <div className="shadow-lg bg-light  p-5 ">
-        <div
+      <div
+          className="d-flex justify-content-end"
+          onClick={() => navigate("/")}
+          style={{ cursor: "pointer", position:"relative", top:"-30px", left:"20px" }}
+        >
+          <i className="fa fa-close text-danger  bg-light border p-1 rounded"></i>
+        </div>
+        {/* <div
           className="bgBlue justify-content-end badge mb-4 "
           onClick={() => navigate("/")}
           style={{ cursor: "pointer" }}
         >
           <i className="fa fa-arrow-left me-1"></i> <span to="/">Home</span>
-        </div>
+        </div> */}
+        
         <div className="text-center">
           <img src="https://overseas.ai/frontend/logo/logo_en.gif" alt="Logo" />
         </div>

@@ -1,6 +1,17 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import { getNewsFeedData } from "../services/info.service";
+import moment from "moment";
 function NewsSlider() {
+  const [newsArr, setNewsArr] = useState([]);
+  const getNewsDataFunc = async () => {
+    try {
+      let response = await getNewsFeedData();
+      setNewsArr(response?.data?.newsData);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getNewsDataFunc();
+  }, []);
   return (
     <div
       style={{ background: "#F4F2F6" }}
@@ -16,6 +27,7 @@ function NewsSlider() {
               id="carouselExampleCaptions"
               className="carousel slide  vh50"
               data-bs-ride="carousel "
+              
             >
               <div className="carousel-indicators">
                 <button
@@ -39,46 +51,43 @@ function NewsSlider() {
                   aria-label="Slide 3"
                 />
               </div>
-              <div className="carousel-inner vh50 bg-dark">
+              <div className="carousel-inner vh50">
                 <div className="carousel-item active">
                   <img
-                    src="https://bootstrapmade.com/demo/templates/ZenBlog/assets/img/post-landscape-3.jpg"
+                    src={newsArr[0]?.image}
                     className="d-block w-100 vh50"
                     alt="..."
                   />
-                  <div className="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
+                  <div className="carousel-caption d-none d-md-block  p-3" >
+                    <h5>{newsArr[0]?.ArticleTitle}</h5>
                     <p>
-                      Some representative placeholder content for the first
-                      slide.
+                      {newsArr[0]?.summary}
                     </p>
                   </div>
                 </div>
                 <div className="carousel-item">
                   <img
-                    src="https://bootstrapmade.com/demo/templates/ZenBlog/assets/img/post-landscape-3.jpg"
+                   src={newsArr[1]?.image}
                     className="d-block w-100 vh50"
                     alt="..."
                   />
-                  <div className="carousel-caption d-none d-md-block">
-                    <h5>Second slide label</h5>
+                  <div className="carousel-caption d-none d-md-block  p-3">
+                    <h5>{newsArr[1]?.ArticleTitle}</h5>
                     <p>
-                      Some representative placeholder content for the second
-                      slide.
+                      {newsArr[1]?.summary}
                     </p>
                   </div>
                 </div>
                 <div className="carousel-item">
                   <img
-                    src="https://bootstrapmade.com/demo/templates/ZenBlog/assets/img/post-landscape-3.jpg"
+                    src={newsArr[2]?.image}
                     className="d-block w-100 vh50"
                     alt="..."
                   />
-                  <div className="carousel-caption d-none d-md-block">
-                    <h5>Third slide label</h5>
+                  <div className="carousel-caption d-none d-md-block p-3">
+                    <h5>{newsArr[2]?.ArticleTitle}</h5>
                     <p>
-                      Some representative placeholder content for the third
-                      slide.
+                    {newsArr[2]?.summary}
                     </p>
                   </div>
                 </div>
@@ -109,22 +118,22 @@ function NewsSlider() {
               </button>
             </div>
             <div className="d-flex justify-content-center mt-5">
-            <button className="btn btn-primary" style={{width:"200px"}}>View All</button>
+              <button className="btn btn-primary" style={{ width: "200px" }}>
+                View All
+              </button>
             </div>
           </div>
           <div className="col-md-4 custom-scrollbar">
-      {[1, 2,3,4, 5].map((v, i) => (
-        <div key={i}>
-          <img
-            src="https://bootstrapmade.com/demo/templates/ZenBlog/assets/img/post-landscape-2.jpg"
-            className="img-fluid"
-            alt="Post"
-          />
-          <p className="text-secondary mb-1"><b>BUSINESS • JUL 5TH '22</b></p>
-          <h5 className="mb-3">6 Easy Steps To Create Your Own Cute Merch For Instagram</h5>
-        </div>
-      ))}
-    </div>
+            {newsArr?.map((v, i) => (
+              <div key={i}>
+                <img src={v?.image} className="img-fluid" alt="Post" />
+                <p className="text-secondary mb-1">
+                  <b>{moment(v?.Date).format("DD MMMM YYYY")}</b>
+                </p>
+                <h5 className="mb-3">{v?.ArticleTitle}</h5>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
