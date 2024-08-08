@@ -476,3 +476,19 @@ export const storeUserLocation = async (formData, access_token) => {
     throw error;
   }
 };
+
+export const getUserDetails = async (access_token) => {
+  try {
+    const response = await axios.get(BASE_URL+"user-dashboard-applied-datas",  {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        Authorization: `Bearer ${access_token}`
+      }
+    } );
+    return (response);
+  } catch (error) {
+    // Handle error (e.g., log or throw an error)
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};

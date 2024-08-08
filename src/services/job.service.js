@@ -86,7 +86,6 @@ export const getSearchResult = async (occuId, countryId) => {
 
 // apply job
 export const applyJobApi = async (formData, access_token) => {
-  console.log(formData, access_token)
   try {
     const response = await axios.post(BASE_URL + `apply-job-r`, formData, {
       headers: {

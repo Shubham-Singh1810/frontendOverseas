@@ -4,7 +4,7 @@ import { applyCourse } from "../services/institute.service";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-function CourseCard({ v , getCourseListFunc}) {
+function AppliedCourseCard({ v , getCourseListFunc}) {
   const { globalState, setGlobalState } = useGlobalState();
 
   const handleCourseApply = async () => {
@@ -31,7 +31,7 @@ function CourseCard({ v , getCourseListFunc}) {
     }
   };
   return (
-    <div className="col-12 col-md-6">
+    <div className="">
       <div className="shadow mx-3 my-4 p-4 rounded">
         <div className="d-flex justify-content-start mb-3">
           <span className="bg-success badge">
@@ -51,7 +51,7 @@ function CourseCard({ v , getCourseListFunc}) {
           </div>
           <div className="col-12 col-md-8">
             <p className="mb-0">
-              <span>Course Name : </span> {v?.course_name}
+              <span>Course Name : </span> {v?.course_name?.substring(0, 10)}
             </p>
             <p className="mb-0">
               <span>Duration : </span> {v?.course_duration}
@@ -66,22 +66,15 @@ function CourseCard({ v , getCourseListFunc}) {
         </div>
         <div className="d-flex justify-content-between mt-3">
           <Link to={"/course-details/" + v?.id}>Read More</Link>
-          {v?.appliedStatus ? (
+          
             <button
               className="btn btn-sm btn-warning"
               style={{ width: "30%" }}
             >
               Applied
             </button>
-          ) : (
-            <button
-              className="btn btn-sm btn-outline-primary"
-              style={{ width: "30%" }}
-              onClick={() => handleCourseApply()}
-            >
-              Apply
-            </button>
-          )}
+        
+            
         </div>
       </div>
       <ToastContainer />
@@ -89,4 +82,4 @@ function CourseCard({ v , getCourseListFunc}) {
   );
 }
 
-export default CourseCard;
+export default AppliedCourseCard;

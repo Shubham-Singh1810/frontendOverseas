@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import BreadCrumb from "../components/BreadCrumb";
-import { getJobById } from "../services/job.service";
+import { getJobById , applyJobApi} from "../services/job.service";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useGlobalState } from "../GlobalProvider";
 function JobDiscription() {
+  const { globalState, setGlobalState } = useGlobalState();
   const params = useParams();
   const [jobDetails, setJobDetails] = useState(null);
   const getDetails = async (id) => {
@@ -16,6 +20,23 @@ function JobDiscription() {
   useEffect(() => {
     getDetails(params?.id);
   }, [params?.id]);
+  const handleApplyJob = async(event)=>{
+    event.stopPropagation(); 
+    let payload = {
+      id: jobDetails?.id,
+      'apply-job': '',
+    };
+    try {
+      let response = await applyJobApi(payload, globalState?.user?.access_token )
+      if(response?.data?.msg=="Job Applied Successfully"){
+        toast.success(response?.data?.msg)
+      }else{
+        toast.error(response?.data?.error)
+      }
+    } catch (error) {
+      toast.error("Internal Server Error")
+    }
+  }
   return (
     <div className="pt-5">
       <div className="row p-0 m-0 w-100 justify-content-center d-flex">
@@ -39,7 +60,7 @@ function JobDiscription() {
             </div>
           </div>
           <div className="my-3">
-            <button className="btn btn-primary w-100 bgBlue"style={{borderRadius:"25px", outline:"none", border:"none"}}>Apply Now</button>
+            <button className="btn btn-primary w-100 bgBlue"style={{borderRadius:"25px", outline:"none", border:"none"}} onClick={handleApplyJob}>Apply Now</button>
           </div>
           <div className="p-md-3 p-2 mx-0 mt-5 row  border shadow-lg rounded ">
             <div className="col-md-6 col-12">
@@ -216,6 +237,7 @@ function JobDiscription() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

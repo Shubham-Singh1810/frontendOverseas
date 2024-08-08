@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { getCourseById, getTestByInstitute } from "../services/institute.service";
+import { getCourseById, getTestByInstitute, applyCourse } from "../services/institute.service";
 import AppPromationSection from "../components/AppPromationSection";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
+import { useGlobalState } from "../GlobalProvider";
 function TradeTestCourseDetails() {
   const params = useParams();
   const [courseDetails, setCourseDetails] = useState("");
@@ -53,7 +55,24 @@ function TradeTestCourseDetails() {
       },
     ],
   };
-
+  const { globalState, setGlobalState } = useGlobalState();
+  const handleCourseApply = async () => {
+    if (globalState.user) {
+      try {
+        let response = await applyCourse({
+          id: courseDetails?.id,
+          access_token: globalState?.user?.access_token,
+        });
+        if (response?.message == "Application submitted successfully!") {
+          toast.success("Application submitted successfully!");
+        } else {
+          toast.success(response?.message);
+        }
+      } catch (error) {}
+    } else {
+      toast.warning("Please login to apply for the course");
+    }
+  };
   return (
     <>
       <div className="mt-5 pt-5">
@@ -99,7 +118,7 @@ function TradeTestCourseDetails() {
             </div>
           </div>
 
-          <button className="btn bgBlue btn-primary mt-5 w-100">Apply</button>
+          <button className="btn bgBlue btn-primary mt-5 w-100" onClick={handleCourseApply}>Apply</button>
         </div>
       </div>
       <div className="">
@@ -141,6 +160,7 @@ function TradeTestCourseDetails() {
         </div>
       </div>
       <AppPromationSection />
+      <ToastContainer/>
     </>
   );
 }

@@ -55,8 +55,8 @@ function Contactus() {
     zoom: 15,
   };
   return (
-    <div className="container contactUsHeight d-flex align-items-center" >
-      <div className="row mx-0  mt-5 pt-3 pt-md-0">
+    <div className="container contactUsHeight mt-md-5 d-flex align-items-center" >
+      <div className="row mx-0  mt-5 pt-3 pt-md-5">
         <div className="col-md-6 col-12 order-lg-2 order-1 ">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230.2354758400895!2d88.40076123612282!3d22.587793268138633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0276754e7c9489%3A0x66ada39be5c2da58!2sCA-191%2C%20CA%20Block%2C%20Sector%201%2C%20Bidhannagar%2C%20Kolkata%2C%20West%20Bengal%20700136!5e0!3m2!1sen!2sin!4v1667212481498!5m2!1sen!2sin"

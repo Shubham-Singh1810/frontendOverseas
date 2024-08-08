@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { getCourseById, getCourseByInstitute } from "../services/institute.service";
+import { getCourseById, getCourseByInstitute, applyCourse } from "../services/institute.service";
 import AppPromationSection from "../components/AppPromationSection";
-
+import { useGlobalState } from "../GlobalProvider";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function CourseDetails() {
   const params = useParams();
   const [courseDetails, setCourseDetails] = useState("");
   const getCourseDetails = async () => {
     try {
       let response = await getCourseById(params?.id);
-
       setCourseDetails(response?.data?.data);
       getCourseByInsListFunc(response?.data?.data?.institute_details?.institute_id)
     } catch (error) {}
@@ -54,7 +55,28 @@ function CourseDetails() {
       },
     ],
   };
+  const { globalState, setGlobalState } = useGlobalState();
 
+  const handleCourseApply = async () => {
+    if (globalState.user) {
+      try {
+        let response = await applyCourse({
+          id: courseDetails?.id,
+          access_token: globalState?.user?.access_token,
+        });
+        console.log(response);
+        if (response?.message == "Application submitted successfully!") {
+          toast.success("Application submitted successfully!");
+          
+          
+        } else {
+          toast.success(response?.message);
+        }
+      } catch (error) {}
+    } else {
+      toast.warning("Please login to apply for the course");
+    }
+  };
   return (
     <>
       <div className="mt-5 pt-5">
@@ -106,7 +128,23 @@ function CourseDetails() {
               </div>{" "}
             </div>
           </div>
-          <button className="btn bgBlue btn-primary w-100">Apply</button>
+          {courseDetails?.appliedStatus ? (
+            <button
+              className="btn w-100 btn-sm btn-warning"
+           
+            >
+              Applied
+            </button>
+          ) : (
+            <button
+              className="btn bgBlue btn-primary w-100"
+              
+              onClick={() => handleCourseApply()}
+            >
+              Apply
+            </button>
+          )}
+          {/* <button className="btn bgBlue btn-primary w-100" >Apply</button> */}
         </div>
       </div>
       <div className="">
@@ -148,6 +186,7 @@ function CourseDetails() {
         </div>
       </div>
       <AppPromationSection />
+      <ToastContainer/>
     </>
   );
 }

@@ -23,6 +23,7 @@ import TrainingInstitute from '../pages/TrainingInstitute'
 import TradeTestingList from '../pages/TradeTestingList'
 import CourseDetails from '../pages/CourseDetails'
 import TradeTestCourseDetails from '../pages/TradeTestCourseDetails'
+import CourseApplied from '../pages/CourseApplied'
 function UserRoutes() {
   return (
     <Routes>
@@ -46,8 +47,9 @@ function UserRoutes() {
         <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
         <Route path="/course-details/:id" element={<CourseDetails/>}/>
         <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>
+        <Route path="/applied-courses" element={<CourseApplied/>}/>
         
-        <Route path="*" element={<PageNotFound/>}/>
+        {/* <Route path="*" element={<PageNotFound/>}/> */}
     </Routes>
   )
 }

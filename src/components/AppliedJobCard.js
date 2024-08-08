@@ -1,28 +1,33 @@
 import React from "react";
 import { useNavigate, useNavigation } from "react-router-dom";
-import {applyJobApi} from "../services/job.service";
-import { useGlobalState } from "../GlobalProvider";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-function JobCard({ value }) {
-  const { globalState, setGlobalState } = useGlobalState();
+function AppliedJobCard({ value }) {
   const navigate = useNavigate();
-  const handleApplyJob = async(event)=>{
-    event.stopPropagation(); 
-    let payload = {
-      id: value?.id,
-      'apply-job': '',
-    };
+  const handleApplyJob = ()=>{
     try {
-      let response = await applyJobApi(payload, globalState?.user?.access_token )
-      if(response?.data?.msg=="Job Applied Successfully"){
-        toast.success(response?.data?.msg)
-      }else{
-        toast.error(response?.data?.error)
-      }
+      alert(value?.id)
     } catch (error) {
-      toast.error("Internal Server Error")
+      alert("ghdjfg")
     }
+  }
+  const showStatusMessage =(value)=>{
+    if(value==0){
+      return "Application rejected"
+     }
+     if(value==1){
+      return "Application in progress"
+     }
+     if(value==2){
+      return "Medical and pcc uploaded"
+     }
+     if(value==3){
+      return "Application sent to HR"
+     }
+     if(value==4){
+      return "VISA and passport reliesed"
+     }
+     if(value==5){
+      return "Placed"
+     }
   }
   return (
     <div
@@ -51,11 +56,7 @@ function JobCard({ value }) {
               )}{" "}
               INR
             </p>
-            <p className="mb-0 text-sm">
-              <small class=" text-success">
-                Apply Before - {value?.jobDeadline}
-              </small>
-            </p>
+            
           </div>
         </div>
 
@@ -71,10 +72,9 @@ function JobCard({ value }) {
               />
               <p className="mb-0 ms-2">{value?.jobLocationCountry?.name}</p>
             </div>
-            <p className="my-1">Department : {value?.occupation}</p>
-            <p className="my-1">Age Limit : {value?.jobAgeLimit}</p>
-            <p className="my-1">Passport Type : {value?.passportType}</p>
+            
             <p className="my-1">Experience Type : {value?.jobExpTypeReq}</p>
+            <p className="my-1"> {value?.jobWages} {value?.jobWagesCurrencyType}</p>
           </div>
           <div className="col-4  col-md-4">
             <img
@@ -84,14 +84,15 @@ function JobCard({ value }) {
             />
           </div>
         </div>
+        
         <div className="d-flex justify-content-between align-items-center">
-          <button className="btn btn-primary bgBlue" onClick={handleApplyJob}>Apply Now</button>
+          <p className="mb-0 mt-4 text-secondary">Applied On - {value?.appliedOn}</p> 
           <p className="mb-0 mt-4 text-primary" style={{cursor:"pointer"}}>Read Details</p>
         </div>
+        <p className="text-light px-2 mb-0 border rounded bg-secondary mt-2">{showStatusMessage(value?.interviewStatus)}</p>
       </div>
-      <ToastContainer/>
     </div>
   );
 }
 
-export default JobCard;
+export default AppliedJobCard;

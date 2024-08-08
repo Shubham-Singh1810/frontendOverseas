@@ -58,9 +58,9 @@ function Footer() {
     <>
       <div
         className=" p-lg-5 px-0 py-5"
-        style={{ background: "linear-gradient(to right, #17487f, skyblue)" }}
+        style={{ background: "linear-gradient(to right, #17487f, #17487f, #17487f)" }}
       >
-        <div className="px-lg-5  text-light">
+        <div className="px-lg-5 text-light">
           <div className="row m-0">
             <div className="col-lg-3">
               <div className="mx-3">
