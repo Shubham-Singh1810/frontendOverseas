@@ -1,39 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { getCourseList } from "../services/institute.service";
+import {  getListOfAppliedCourse } from "../services/institute.service";
 import CourseCard from "../components/CourseCard";
 import { useGlobalState } from "../GlobalProvider";
+import AppliedCourseCard from "../components/AppliedCourseCard";
 function CourseApplied() {
   const { globalState, setGlobalState } = useGlobalState();
   const [courseList, setCourseList] = useState([]);
-  const getCourseListFunc = async () => {
+  const getAppliedCourseListFunc = async () => {
     try {
-      let response = await getCourseList(globalState?.user?.access_token);
-      console.log(response.data);
-      setCourseList(response.data);
+      let response = await getListOfAppliedCourse(globalState?.user?.access_token);
+      console.log(response);
+      setCourseList(response?.applied_courses);
     } catch (error) { }
   };
   useEffect(() => {
-    getCourseListFunc();
+    getAppliedCourseListFunc();
   }, []);
   return (
     <div className="  mt-5 pt-5">
       <div className="mt-5 pt-md-5 container">
-        {/* <div className="row mx-3 mb-5 mt-3">
-          <div className="col-md-6 col-12 my-auto order-md-1 order-2">
-            <div className="py-5">
-              <h5 className="textBlue">UPGRADE YOUR SKILL</h5>
-              <h1 className="heading ">Get Certified to get your dream job.</h1>
-              <p>More than 500 cources | 100 institutes</p>
-            </div>
-          </div>
-          <div className="col-md-6 col-12 my-auto order-md-1  d-flex justify-content-center">
-            <img
-              className="img-fluid"
-              src="/images/institute.png"
-              style={{ height: "350px" }}
-            />
-          </div>
-        </div> */}
+        
         <h5
           className="text-center my-md-5  pb-3 textBlue"
           style={{ fontFamily: "Inter, sans-serif", fontWeight: "600" }}
@@ -72,7 +58,8 @@ function CourseApplied() {
           )}
           {courseList?.map((v, i) => {
             return (
-              <CourseCard v={v} getCourseListFunc={getCourseListFunc}/>
+              <div className="col-md-6 col-12"><AppliedCourseCard v={v} /></div>
+              
             );
           })}
         </div>

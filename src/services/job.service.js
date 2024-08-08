@@ -176,7 +176,6 @@ export const saveJobById = async (jobId, access_token) => {
   }
 };
 export const  savedJobList = async (access_token) => {
-  console.log( access_token)
   try {
     const response = await axios.get(BASE_URL + `user-saved-job-list`, {
       headers: {

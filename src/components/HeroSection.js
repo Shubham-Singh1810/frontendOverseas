@@ -7,8 +7,8 @@ function HeroSection({data}) {
   const container = useRef(null);
   const isInView = useInView(container);
   return (
-    <div className="bg-light" ref={container} style={{background:"url(https://www.bacancytechnology.com/main/img/job-recruitment-portal-development/banner.jpg?v-1)",backgroundSize:"100% 100%", backgroundRepeat:"no-repeat"}}>
-      <div style={{background:("rgba(0, 0, 0, 0.6)")}}>
+    <div className="bg-light" ref={container} style={{background:"url(/images/homeBg.jpg)",backgroundSize:"100% , 100%", backgroundRepeat:"no-repeat"}}>
+      <div style={{background:("rgba(0, 0, 0, 0.8)")}}>
       <div className="container py-5 mt-5 " >
         <div className="pt-md-5 mt-md-5 ">
           <div className="mt-md-5 pt-5">

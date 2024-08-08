@@ -24,6 +24,10 @@ import TradeTestingList from '../pages/TradeTestingList'
 import CourseDetails from '../pages/CourseDetails'
 import TradeTestCourseDetails from '../pages/TradeTestCourseDetails'
 import CourseApplied from '../pages/CourseApplied'
+import JobApplied from '../pages/JobApplied'
+import MyDocuments from '../pages/MyDocuments'
+import SavedJobs from '../pages/SavedJobs'
+import Notifications from '../pages/Notifications'
 function UserRoutes() {
   return (
     <Routes>
@@ -48,6 +52,11 @@ function UserRoutes() {
         <Route path="/course-details/:id" element={<CourseDetails/>}/>
         <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>
         <Route path="/applied-courses" element={<CourseApplied/>}/>
+        <Route path="/applied-jobs" element={<JobApplied/>}/>
+        <Route path="/my-documents" element={<MyDocuments/>}/>
+        <Route path="/saved-jobs" element={<SavedJobs/>}/>
+        <Route path="/notifications" element={<Notifications/>}/>
+
         
         {/* <Route path="*" element={<PageNotFound/>}/> */}
     </Routes>

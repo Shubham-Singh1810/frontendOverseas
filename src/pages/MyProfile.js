@@ -155,7 +155,7 @@ function MyProfile() {
     <div className="container mt-5 pt-5">
       <div className="mt-md-5 py-5 mb-5">
         <div className="row">
-          <div className="col-4">
+          <div className="col-md-4 col-12">
             <div className="p-3  shadow-sm border rounded">
               <div className="d-flex my-3 align-items-center">
                 <div>
@@ -234,7 +234,7 @@ function MyProfile() {
               </div>
             </div>
           </div>
-          <div className="col-8  ">
+          <div className="col-8  d-none d-md-block custom-myProfile-scrollbar">
             <div className="ms-2  p-2 ">
               <h4 className="text-center py-1 bgBlue text-light">
                 Applied Jobs
