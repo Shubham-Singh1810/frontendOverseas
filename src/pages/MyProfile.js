@@ -7,7 +7,7 @@ import AppliedCourseCard from "../components/AppliedCourseCard";
 import Slider from "react-slick";
 import AppliedJobCard from "../components/AppliedJobCard";
 import AppliedTestCard from "../components/AppliedTestCard";
-import JobCard from "../components/JobCard"
+import JobCard from "../components/JobCard";
 function MyProfile() {
   const navigate = useNavigate();
   const { globalState, setGlobalState } = useGlobalState();
@@ -97,6 +97,60 @@ function MyProfile() {
       },
     ],
   };
+  const renderStart = (star) => {
+    if (star >= 80) {
+      return (
+        <h5 className="mb-0">
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+        </h5>
+      );
+    }
+    if (star > 60 && star<80) {
+      return (
+        <h5 className="mb-0">
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+          
+        </h5>
+      );
+    }
+    if (star > 40 && star<60) {
+      return (
+        <h5 className="mb-0">
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+   
+          
+        </h5>
+      );
+    }
+    if (star > 20 && star<40) {
+      return (
+        <h5 className="mb-0">
+          <i className="fa fa-star text-warning me-1"></i>
+          <i className="fa fa-star text-warning me-1"></i>
+         
+          
+        </h5>
+      );
+    }
+    if (star > 0 && star<20) {
+      return (
+        <h5 className="mb-0">
+          <i className="fa fa-star text-warning me-1"></i>
+         
+          
+        </h5>
+      );
+    }
+  };
   return (
     <div className="container mt-5 pt-5">
       <div className="mt-md-5 py-5 mb-5">
@@ -106,34 +160,43 @@ function MyProfile() {
               <div className="d-flex my-3 align-items-center">
                 <div>
                   <img
-                    src="https://tse1.mm.bing.net/th?id=OIP.1S5uaNuMx81OHFB8GMJq5wHaLG&pid=Api&P=0&h=180"
+                    src={globalState?.user?.empData?.empPhoto}
                     style={{
                       height: "110px",
                       width: "110px",
                       borderRadius: "50%",
                     }}
                   />
-                  <p className="text-center textBlue">
+                  <p className="text-center textBlue" style={{cursor:"pointer"}} onClick={()=>alert("Work in progress")}>
                     <u>Edit</u>
                   </p>
                 </div>
 
                 <div className="ms-3">
-                  <h4 className="mb-1">Shubham Singh</h4>
-                  <h5 className="mb-0">
-                    <i className="fa fa-star text-warning me-1"></i>
-                    <i className="fa fa-star text-warning me-1"></i>
-                    <i className="fa fa-star text-warning me-1"></i>
-                  </h5>
-                  <p className="mb-0">Driver / Operator - Dumper Driver</p>
+                  <h4 className="mb-1">
+                    {globalState?.user?.empData?.empName}
+                  </h4>
+                  {renderStart(parseInt(
+                      globalState?.user?.empData?.profileStrength
+                    ))}
+                  <p className="mb-0">
+                    {globalState?.user?.empData?.empOccupationModel?.occupation}
+                  </p>
                   <p>
-                    <i className="fa fa-phone"></i> 7762042085
+                    <i className="fa fa-phone"></i>{" "}
+                    {globalState?.user?.empData?.empWhatsapp}
                   </p>
                 </div>
               </div>
               <div className="border" style={{ marginTop: "-10px" }}>
                 <div
-                  style={{ width: "70%", height: "7px", background: "green" }}
+                  style={{
+                    width: parseInt(
+                      globalState?.user?.empData?.profileStrength
+                    ),
+                    height: "7px",
+                    background: "green",
+                  }}
                 ></div>
               </div>
               <span>Profile Strength</span>
@@ -240,7 +303,7 @@ function MyProfile() {
                 </button>
               </div>
               <h4 className="text-center py-1 bg-primary text-light">
-              Favourite Jobs
+                Favourite Jobs
               </h4>
               <div className="row">
                 <Slider {...settings}>
