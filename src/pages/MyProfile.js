@@ -6,6 +6,8 @@ import CourseCard from "../components/CourseCard";
 import AppliedCourseCard from "../components/AppliedCourseCard";
 import Slider from "react-slick";
 import AppliedJobCard from "../components/AppliedJobCard";
+import AppliedTestCard from "../components/AppliedTestCard";
+import JobCard from "../components/JobCard"
 function MyProfile() {
   const navigate = useNavigate();
   const { globalState, setGlobalState } = useGlobalState();
@@ -171,7 +173,9 @@ function MyProfile() {
           </div>
           <div className="col-8  ">
             <div className="ms-2  p-2 ">
-            <h4 className="text-center py-1 bgBlue text-light">Applied Jobs</h4>
+              <h4 className="text-center py-1 bgBlue text-light">
+                Applied Jobs
+              </h4>
               <div className="row">
                 <Slider {...settings}>
                   {userData?.applied_jobs?.map((v, i) => {
@@ -183,9 +187,17 @@ function MyProfile() {
                   })}
                 </Slider>
               </div>
-              <div className="d-flex justify-content-end mt-2 mb-5 me-4"><button className="btn btn-sm btn-outline-primary">View All</button></div>
-              
-              <h4 className="text-center py-1 bg-warning text-dark">Applied Courses</h4>
+              <div className="d-flex justify-content-end mt-2 mb-5 me-4">
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() => navigate("/applied-jobs")}
+                >
+                  View All
+                </button>
+              </div>
+              <h4 className="text-center py-1 bg-warning text-dark">
+                Applied Courses
+              </h4>
               <div className="row">
                 <Slider {...settings}>
                   {userData?.applied_courses?.map((v, i) => {
@@ -197,7 +209,58 @@ function MyProfile() {
                   })}
                 </Slider>
               </div>
-              <div className="d-flex justify-content-end mt-2 mb-5 me-4"><button className="btn btn-sm btn-outline-primary">View All</button></div>
+              <div className="d-flex justify-content-end mt-2 mb-5 me-4">
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() => navigate("/applied-courses")}
+                >
+                  View All
+                </button>
+              </div>
+              <h4 className="text-center py-1 bg-info text-light">
+                Applied Tests
+              </h4>
+              <div className="row">
+                <Slider {...settings}>
+                  {userData?.applied_trade_tests?.map((v, i) => {
+                    return (
+                      <div className="">
+                        <AppliedTestCard v={v} />
+                      </div>
+                    );
+                  })}
+                </Slider>
+              </div>
+              <div className="d-flex justify-content-end mt-2 mb-5 me-4">
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() => navigate("/applied-courses")}
+                >
+                  View All
+                </button>
+              </div>
+              <h4 className="text-center py-1 bg-primary text-light">
+              Favourite Jobs
+              </h4>
+              <div className="row">
+                <Slider {...settings}>
+                  {userData?.favourite_jobs?.map((v, i) => {
+                    return (
+                      <div className="">
+                        <JobCard value={v} />
+                      </div>
+                    );
+                  })}
+                </Slider>
+              </div>
+              <div className="d-flex justify-content-end mt-2 mb-5 me-4">
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() => navigate("/applied-courses")}
+                >
+                  View All
+                </button>
+              </div>
             </div>
           </div>
         </div>

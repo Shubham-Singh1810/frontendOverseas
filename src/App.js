@@ -8,7 +8,13 @@ import GuestRoutes from "./routes/GuestRoutes";
 import {GlobalStateProvider} from './GlobalProvider';
 import Header from "./components/Header";
 import AllRoutes from "./routes/AllRoutes";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 function App() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <GlobalStateProvider><AllRoutes/></GlobalStateProvider>  
   );
