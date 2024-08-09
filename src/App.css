@@ -168,7 +168,7 @@ body {
 .contactUsHeight {
   height: 100vh;
 }
-.customSliderHeight{
+.customSliderHeight {
   height: 100vh;
 }
 @media only screen and (max-width: 1200px) {
@@ -179,6 +179,14 @@ body {
 @media only screen and (max-width: 700px) {
   .contactUsHeight {
     height: 100%;
+  }
+  .filterDiv {
+    position: absolute;
+    z-index: 10000;
+    left: 0;
+    
+    overflow: auto;
+    top:0
   }
 }
 @media only screen and (max-width: 600px) {
@@ -199,7 +207,7 @@ body {
   .font10 {
     font-size: 10px;
   }
-  .customSliderHeight{
+  .customSliderHeight {
     height: 80vh;
   }
 }
@@ -257,30 +265,35 @@ body {
   box-shadow: 2px 2px 10px black;
 }
 .filterDiv{
-  height: 75vh;
+  height: 100vh;
+}
+.filterDiv::-webkit-scrollbar {
+  display: none;
+}
+.filterDiv-height {
+  height: 100vh;
   overflow: auto;
-  
 }
 
-.filterDiv::-webkit-scrollbar {
+.filterDiv-height::-webkit-scrollbar {
   width: 6px;
 }
 
-.filterDiv::-webkit-scrollbar-track {
+.filterDiv-height::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
 }
 
-.filterDiv::-webkit-scrollbar-thumb {
+.filterDiv-height::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
 
-.filterDiv::-webkit-scrollbar-thumb:hover {
+.filterDiv-height::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-.textDark{
-  color: black ;
+.textDark {
+  color: black;
 }
 
 .custom-myProfile-scrollbar {

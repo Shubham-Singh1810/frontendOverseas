@@ -1,32 +1,35 @@
 import React from "react";
 import { useNavigate, useNavigation } from "react-router-dom";
-import {applyJobApi} from "../services/job.service";
+import { applyJobApi } from "../services/job.service";
 import { useGlobalState } from "../GlobalProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function JobCard({ value }) {
   const { globalState, setGlobalState } = useGlobalState();
   const navigate = useNavigate();
-  const handleApplyJob = async(event)=>{
-    event.stopPropagation(); 
+  const handleApplyJob = async (event) => {
+    event.stopPropagation();
     let payload = {
       id: value?.id,
-      'apply-job': '',
+      "apply-job": "",
     };
     try {
-      let response = await applyJobApi(payload, globalState?.user?.access_token )
-      if(response?.data?.msg=="Job Applied Successfully"){
-        toast.success(response?.data?.msg)
-      }else{
-        toast.error(response?.data?.error)
+      let response = await applyJobApi(
+        payload,
+        globalState?.user?.access_token
+      );
+      if (response?.data?.msg == "Job Applied Successfully") {
+        toast.success(response?.data?.msg);
+      } else {
+        toast.error(response?.data?.error);
       }
     } catch (error) {
-      toast.error("Internal Server Error")
+      toast.error("Internal Server Error");
     }
-  }
+  };
   return (
     <div
-      className=" col-12 "
+      className=" col-12 p-0 p-md-2"
       onClick={() =>
         navigate(
           `/job/${value?.jobLocationCountry?.name
@@ -39,28 +42,35 @@ function JobCard({ value }) {
         )
       }
     >
-      <div className="mx-2 my-3 card p-3 shadow">
+      <div className="mx-2 my-3 card p-2 p-md-3 shadow">
         <h5>{value?.jobTitle}</h5>
-
-        <div className="d-flex justify-content-between mb-2">
-          <div className="d-block d-md-flex justify-content-between w-100">
-            <p className="mb-0 text-sm">
-              {value?.jobWages} {value?.jobLocationCountry?.currencyName} ={" "}
-              {Math.round(
-                value?.jobWages * value?.jobLocationCountry?.currencyValue
-              )}{" "}
-              INR
-            </p>
-            <p className="mb-0 text-sm">
-              <small class=" text-success">
-                Apply Before - {value?.jobDeadline}
-              </small>
-            </p>
+        <div className="row">
+          <div className="d-flex col-md-12 col-8 justify-content-between mb-md-2 my-auto">
+            <div className="d-block d-md-flex justify-content-between w-100">
+              <p className="mb-0 text-sm">
+                {value?.jobWages} {value?.jobLocationCountry?.currencyName} ={" "}
+                {Math.round(
+                  value?.jobWages * value?.jobLocationCountry?.currencyValue
+                )}{" "}
+                INR
+              </p>
+              <p className="mb-0 text-sm">
+                <small class=" text-success">
+                  Apply Before - {value?.jobDeadline}
+                </small>
+              </p>
+            </div>
+          </div>
+          <div className="d-md-none d-block  col-4">
+            <img
+              className="img-fluid rounded"
+              src={value?.jobPhoto}
+            />
           </div>
         </div>
 
         <div className="row d-flex justify-content-between align-items-center">
-          <div className="col-lg-8 col-md-8 col-8">
+          <div className="col-lg-8 col-md-8 col-9">
             <div className="d-flex align-items-center mb-2">
               <img
                 className="flagIcon"
@@ -76,7 +86,7 @@ function JobCard({ value }) {
             <p className="my-1">Passport Type : {value?.passportType}</p>
             <p className="my-1">Experience Type : {value?.jobExpTypeReq}</p>
           </div>
-          <div className="col-4  col-md-4">
+          <div className="d-md-block d-none  col-md-4">
             <img
               className="img-fluid rounded"
               src={value?.jobPhoto}
@@ -85,11 +95,15 @@ function JobCard({ value }) {
           </div>
         </div>
         <div className="d-flex justify-content-between align-items-center">
-          <button className="btn btn-primary bgBlue" onClick={handleApplyJob}>Apply Now</button>
-          <p className="mb-0 mt-4 text-primary" style={{cursor:"pointer"}}>Read Details</p>
+          <button className="btn btn-primary bgBlue" onClick={handleApplyJob}>
+            Apply Now
+          </button>
+          <p className="mb-0 mt-4 text-primary" style={{ cursor: "pointer" }}>
+            Read Details
+          </p>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }

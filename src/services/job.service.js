@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 // Define your API base URL
-const BASE_URL = 'https://overseas.ai/api/';
-// const BASE_URL = "https://test.overseas.ai/api/"; // test api
+// const BASE_URL = 'https://overseas.ai/api/';
+const BASE_URL = "https://test.overseas.ai/api/"; // test api
 
 // Function to get job list
-export const getJobList = async (data) => {
+export const getJobList = async (payload) => {
   try {
-    const response = await axios.post(BASE_URL + "filter-all-jobs", {
-      jobOccupation: data?.jobOccupation,
-      jobSkill: data?.jobSkill,
-      pageNo: data?.pageNo,
-      jobLocationCountry: data?.jobLocationCountry,
+    const response = await axios.post(BASE_URL + "filter-all-jobs", payload, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        
+      }
     });
     return response.data;
   } catch (error) {
