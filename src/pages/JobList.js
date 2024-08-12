@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
-import { getJobList } from "../services/job.service";
-import SearchComponent from "../components/SearchComponent";
-import { useParams } from "react-router-dom";
+import { getJobList, getJobListForSearch } from "../services/job.service";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import JobFilter from "../components/JobFilter";
-// import SearchForm from "../components/SearchForm";
+
 function JobList() {
   const params = useParams();
   const [jobArr, setJobArr] = useState([]);
-  
+  const location = useLocation();
+  const navigate = useNavigate();
   const [showLoader, setShowLoader] = useState(false);
-  
-  
+
   const [payload, setPayload] = useState({
     jobLocationCountry: [],
     jobOccupation: [],
@@ -21,77 +20,128 @@ function JobList() {
     jobExpTypeReq: "",
     sortBy: "",
   });
+
+  const [pageNo, setPageNo] = useState(1);
+  const [totalPage, setTotalPage] = useState([]);
+  const [showFilter, setShowFilter] = useState(window.innerWidth > 700);
+
   const getJob = async () => {
     setShowLoader(true);
     try {
-        // Create a new FormData object
-        const formData = new FormData();
-        
-        // Append payload values to the FormData object
-        for (const key in payload) {
-          if (Array.isArray(payload[key])) {
-              if (payload[key].length > 0) {
-                  // Convert non-empty arrays to JSON strings
-                  formData.append(key, JSON.stringify(payload[key]));
-              }
-          } else if (payload[key] !== "") {
-              formData.append(key, payload[key]);
-          }
+      const formData = new FormData();
+      for (const key in payload) {
+        if (Array.isArray(payload[key]) && payload[key].length > 0) {
+          formData.append(key, JSON.stringify(payload[key]));
+        } else if (payload[key] !== "") {
+          formData.append(key, payload[key]);
+        }
       }
-        formData.append("pageNo", pageNo)
-        // Send the FormData object in the request
-        let response = await getJobList(formData);
-        setJobArr(response?.jobs);
-        
-        pageNumber(response?.totalJobs);
-        setShowLoader(false);
+      formData.append("pageNo", pageNo);
+      let response = await getJobList(formData);
+      setJobArr(response?.jobs);
+      pageNumber(response?.totalJobs);
+      setShowLoader(false);
     } catch (error) {
-        console.error('Error fetching job list:', error);
-        setShowLoader(false);
+      console.error("Error fetching job list:", error);
+      setShowLoader(false);
     }
-};
-
-  const [pageNo, setPageNo] = useState(1);
-  useEffect(() => {
-    getJob();
-  }, [pageNo, payload]);
-  const [totalPage, setTotalPage] = useState([]);
-  const pageNumber = async (totalJobs) => {
-    try {
-      let totalPage = Math.ceil(totalJobs / 10);
-      let arr = [];
-      for (let i = 1; i <= totalPage; i++) {
-        arr[i - 1] = i;
-      }
-      setTotalPage(arr);
-    } catch (error) {}
   };
-  const [showFilter, setShowFilter] = useState(
-    window.innerWidth > 700 ? true : false
-  );
+
+  const getJobKey = async () => {
+    setShowLoader(true);
+    try {
+      let response = await getJobListForSearch({
+        searchKey: params.filter.replace(/-/g, " "),
+      });
+      setJobArr(response?.jobs);
+      pageNumber(response?.totalJobs);
+      setShowLoader(false);
+    } catch (error) {
+      console.error("Error fetching job list:", error);
+      setShowLoader(false);
+    }
+  };
+
+  useEffect(() => {
+    if (location.pathname === "/jobs") {
+      getJob();
+    } else {
+      if (
+        (payload.jobLocationCountry && payload.jobLocationCountry.length > 0) ||
+        (payload.jobOccupation && payload.jobOccupation.length > 0) ||
+        (payload.passportType && payload.passportType.trim() !== "") ||
+        (payload.languageRequired && payload.languageRequired.length > 0) ||
+        (payload.contractPeriod && payload.contractPeriod.trim() !== "") ||
+        (payload.jobExpTypeReq && payload.jobExpTypeReq.trim() !== "") ||
+        (payload.sortBy && payload.sortBy.trim() !== "")
+      ) {
+        if (params.filter) {
+          navigate('/jobs', { replace: true });
+        }
+        getJob();
+      } else {
+        getJobKey();
+      }
+    }
+  }, [pageNo, payload, params.filter]);
+
+  const pageNumber = (totalJobs) => {
+    const totalPages = Math.ceil(totalJobs / 10);
+    setTotalPage(Array.from({ length: totalPages }, (_, i) => i + 1));
+  };
+
+  const handlePageChange = (newPageNo) => {
+    if (newPageNo >= 1 && newPageNo <= totalPage.length) {
+      setPageNo(newPageNo);
+    }
+  };
+
+  const getPageRange = () => {
+    const rangeSize = 5; // Number of pages to show around the current page
+    const lastPage = totalPage.length;
+
+    let start = Math.max(1, pageNo - Math.floor(rangeSize / 2));
+    let end = start + rangeSize - 1;
+
+    if (end > lastPage) {
+      end = lastPage;
+      start = Math.max(1, end - rangeSize + 1);
+    }
+
+    return { start, end };
+  };
+
+  const { start, end } = getPageRange();
+
   return (
     <div className="container mt-md-5 pt-5">
       <div className="mt-5 pt-5 mx-0">
         <div className="row m-0 p-0">
           {showFilter && (
-            <JobFilter setShowFilter={setShowFilter} setPayload={setPayload} payload={payload} showFilter={showFilter} />
+            <JobFilter
+              setShowFilter={setShowFilter}
+              setPayload={setPayload}
+              payload={payload}
+              showFilter={showFilter}
+            />
           )}
 
           {showLoader ? (
             <div className="vh-100 row col-md-8 col-lg-6 col-12 justify-content-center align-items-center">
-              <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
               </div>
             </div>
           ) : (
-            <div className="row col-md-8 col-lg-6 col-12 m-0 p-0 ">
+            <div className="row col-md-8 col-lg-6 col-12 m-0 p-0">
               <div className="col-12 p-0 p-md-2">
-                <div className="d-flex align-items-center justify-content-between  border p-2 rounded">
+                <div className="d-flex align-items-center justify-content-between border p-2 rounded">
                   <input
                     style={{
                       border: "none",
                       width: "80%",
                       paddingLeft: "10px",
+                      outline: "none",
                     }}
                     placeholder="Search By Job Title"
                   />
@@ -103,9 +153,9 @@ function JobList() {
                   </h3>
                 </div>
               </div>
-              {jobArr?.map((v, i) => {
-                return <JobCard value={v} />;
-              })}
+              {jobArr?.map((v, i) => (
+                <JobCard key={i} value={v} />
+              ))}
             </div>
           )}
 
@@ -125,27 +175,42 @@ function JobList() {
           </div>
         </div>
 
-        <nav
-          aria-label="Page navigation example"
-          className=" d-flex justify-content-center my-5"
-        >
+        <nav aria-label="Page navigation example" className="d-flex justify-content-center my-5">
           <ul className="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#">
+            <li className={`page-item ${pageNo === 1 ? 'disabled' : ''}`}>
+              <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(pageNo - 1); }}>
                 Prev
               </a>
             </li>
-            {totalPage?.map((v, i) => {
-              return (
-                <li className="page-item" onClick={() => setPageNo(v)}>
-                  <a className="page-link" href="#">
-                    {v}
+            {start > 1 && (
+              <>
+                <li className="page-item">
+                  <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(1); }}>
+                    1
                   </a>
                 </li>
-              );
-            })}
-            <li class="page-item">
-              <a class="page-link" href="#">
+                {start > 2 && <li className="page-item disabled"><span className="page-link">...</span></li>}
+              </>
+            )}
+            {totalPage.slice(start - 1, end).map((v) => (
+              <li key={v} className={`page-item ${v === pageNo ? 'active' : ''}`}>
+                <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(v); }}>
+                  {v}
+                </a>
+              </li>
+            ))}
+            {end < totalPage.length && (
+              <>
+                {end < totalPage.length - 1 && <li className="page-item disabled"><span className="page-link">...</span></li>}
+                <li className="page-item">
+                  <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(totalPage.length); }}>
+                    {totalPage.length}
+                  </a>
+                </li>
+              </>
+            )}
+            <li className={`page-item ${pageNo === totalPage.length ? 'disabled' : ''}`}>
+              <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(pageNo + 1); }}>
                 Next
               </a>
             </li>

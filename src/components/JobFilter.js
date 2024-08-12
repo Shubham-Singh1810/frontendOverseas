@@ -184,12 +184,13 @@ function JobFilter({ setShowFilter, payload, setPayload }) {
               ) : null
             )}
           </div>
-          <button
+          {window.innerWidth<700 && <button
             className="btn btn-sm btn-outline-primary w-100"
             onClick={handleApplyFilters}
           >
             Apply
-          </button>
+          </button>}
+          
           <hr />
         </div>
       </div>

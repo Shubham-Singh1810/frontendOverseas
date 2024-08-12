@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getCountriesForJobs, getOccupations } from "../services/info.service";
 import { getSkill } from "../services/job.service";
-import {useGlobalState} from '../GlobalProvider';
+import { useGlobalState } from "../GlobalProvider";
 import { useNavigate } from "react-router-dom";
 function Navbar() {
-  const { globalState, setGlobalState} = useGlobalState();
-  const navigate = useNavigate()
+  const { globalState, setGlobalState } = useGlobalState();
+  const navigate = useNavigate();
   const location = useLocation();
   const [showDepartment, setShowDepartment] = useState(false);
-  const[showLangPopup, setShowLangPopup]=useState(false);
+  const [showLangPopup, setShowLangPopup] = useState(false);
   const [showCountry, setShowCountry] = useState(false);
   const [showSkill, setShowSkill] = useState(false);
   const navItem = [
-    
     {
       name: "Jobs",
       icon: "fa fa-suitcase",
@@ -55,11 +54,11 @@ function Navbar() {
         // },
         {
           name: "Skill Training",
-          path:"training-institute"
+          path: "training-institute",
         },
         {
           name: "Trade Testing",
-          path:"trade-testing-institute"
+          path: "trade-testing-institute",
         },
       ],
     },
@@ -78,14 +77,14 @@ function Navbar() {
         },
         {
           name: "Trade Test Centres",
-          path:"trade-test-center"
+          path: "trade-test-center",
         },
       ],
     },
     {
-      name:!globalState?.user? "Login/Register":"My Profile",
+      name: !globalState?.user ? "Login/Register" : "My Profile",
       icon: "fa fa-user",
-      path:!globalState?.user? "/login": "/my-profile",
+      path: !globalState?.user ? "/login" : "/my-profile",
     },
     // {
     //   name: "English",
@@ -120,7 +119,7 @@ function Navbar() {
       console.log(error);
     }
   };
-  const [filteredSkill, setFilteredSkill]=useState([])
+  const [filteredSkill, setFilteredSkill] = useState([]);
   const [skillList, setSkillList] = useState([]);
   const getSkillsFunc = async () => {
     try {
@@ -136,15 +135,15 @@ function Navbar() {
     getOccupationsListFunc();
     getSkillsFunc();
   }, []);
-  
+
   const handleSkillKey = (key) => {
     if (key.length != 0) {
-      let newSkillArr = skillList?.filter((v, i)=>{
-          return v.skill.toLowerCase().includes(key.toLowerCase());      
-      })
-      setFilteredSkill(newSkillArr)
+      let newSkillArr = skillList?.filter((v, i) => {
+        return v.skill.toLowerCase().includes(key.toLowerCase());
+      });
+      setFilteredSkill(newSkillArr);
     } else {
-      setFilteredSkill(skillList)
+      setFilteredSkill(skillList);
     }
   };
   const [searchKey, setSearchKey] = useState({
@@ -154,15 +153,37 @@ function Navbar() {
     countryName: "",
     departmentName: "",
   });
-  const filter = `job-name=${searchKey.jobName}&job-location-id=${searchKey.jobLocationCountry}&job-location-name=${searchKey.countryName}&job-departmemt=${searchKey.jobOccupation}&job-department-name=${searchKey.departmentName}`;
-  const navigatePage = ()=>{
-    navigate(`/jobs/${filter}`);
+  const navigatePage = () => {
+    const formatUrl = (name) => {
+      return name.toLowerCase().replace(/\s+/g, "-"); // Convert to lowercase and replace spaces with hyphens
+    };
+    if (searchKey?.jobOccupation) {
+      navigate(`/jobs/${formatUrl(searchKey.departmentName)}-all-jobs`);
+      setSearchKey({
+        jobName: "",
+        jobOccupation: "",
+        jobLocationCountry: "",
+        countryName: "",
+        departmentName: "",
+      });
+    }
+    if (searchKey?.jobLocationCountry) {
+      navigate(`/jobs/${formatUrl(searchKey.countryName)}-all-jobs`);
+      setSearchKey({
+        jobName: "",
+        jobOccupation: "",
+        jobLocationCountry: "",
+        countryName: "",
+        departmentName: "",
+      });
+    }
     setShowDepartment(false);
-    setShowCountry(false)
-  }
-  useEffect(()=>{
-    // navigatePage()
-  }, [searchKey])
+    setShowCountry(false);
+  };
+
+  useEffect(() => {
+    navigatePage();
+  }, [searchKey]);
   return (
     <>
       {showDepartment && (
@@ -183,11 +204,17 @@ function Navbar() {
                 <div className="modal-body row">
                   {departmentList?.map((v, i) => {
                     return (
-                      <div className="col-md-6 col-12" >
+                      <div className="col-md-6 col-12">
                         <div
                           className="dropDownItemHover mb-md-2 mb-1 p-2 d-flex align-items-center"
                           style={{ cursor: "pointer" }}
-                          onClick={()=>setSearchKey({...searchKey, departmentName:v?.label, jobOccupation:v?.value})}
+                          onClick={() =>
+                            setSearchKey({
+                              ...searchKey,
+                              departmentName: v?.label,
+                              jobOccupation: v?.value,
+                            })
+                          }
                         >
                           <img
                             src={v?.img}
@@ -234,7 +261,13 @@ function Navbar() {
                         <div
                           className="dropDownItemHover mb-md-2 mb-1 p-2 d-flex align-items-center"
                           style={{ cursor: "pointer" }}
-                          onClick={()=>setSearchKey({...searchKey, countryName:v?.name, jobLocationCountry:v?.id})}
+                          onClick={() =>
+                            setSearchKey({
+                              ...searchKey,
+                              countryName: v?.name,
+                              jobLocationCountry: v?.id,
+                            })
+                          }
                         >
                           <img
                             src={`https://overseas.ai/storage/uploads/countryFlag/${v?.countryFlag}`}
@@ -280,7 +313,7 @@ function Navbar() {
                     <input
                       placeholder="Search Skill"
                       className="form-control"
-                      onChange={(e)=>handleSkillKey(e.target.value)}
+                      onChange={(e) => handleSkillKey(e.target.value)}
                     />
                     <i
                       className="fa fa-search me-3"
@@ -297,7 +330,13 @@ function Navbar() {
                         <div
                           className="dropDownItemHover mb-md-2 mb-1 p-2 d-flex align-items-center"
                           style={{ cursor: "pointer" }}
-                          onClick={()=>setSearchKey({...searchKey, departmentName:v?.label, jobOccupation:v?.value})}
+                          onClick={() =>
+                            setSearchKey({
+                              ...searchKey,
+                              departmentName: v?.label,
+                              jobOccupation: v?.value,
+                            })
+                          }
                         >
                           <p className="mb-0" style={{ fontSize: "13px" }}>
                             {v?.skill}
@@ -330,7 +369,6 @@ function Navbar() {
                 </div>
 
                 <div className="modal-body row">
-                  
                   {["English", "Hindi", "Bengali"].map((v, i) => {
                     return (
                       <div className="col-12">
@@ -479,7 +517,10 @@ function Navbar() {
                       </a>
                     </button>
                     <h5 className="mb-0">
-                    <i className="fa fa-language bg-light textBlue rounded py-1 px-2 ms-3" onClick={()=>setShowLangPopup(true)}/>
+                      <i
+                        className="fa fa-language bg-light textBlue rounded py-1 px-2 ms-3"
+                        onClick={() => setShowLangPopup(true)}
+                      />
                     </h5>
                   </div>
                 </ul>

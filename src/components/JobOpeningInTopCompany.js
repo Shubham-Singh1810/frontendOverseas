@@ -85,7 +85,7 @@ function JobOpeningInTopCompany() {
                     {v?.cmpDescription?.substring(0, 100)}
                     {v?.cmpDescription?.length>100 && "..."}
                   </p> */}
-                  <button className="btn btn-outline-primary mt-4">
+                  <button className="btn btn-outline-primary mt-4" onClick={()=>navigate("/companies")}>
                     View More
                   </button>
                 </div>
