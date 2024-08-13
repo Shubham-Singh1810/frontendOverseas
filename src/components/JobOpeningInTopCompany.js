@@ -69,7 +69,7 @@ function JobOpeningInTopCompany() {
                 key={i}
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-                transition={{ duration: 1, delay: i * 0.2 }}
+                transition={{ duration: 1, delay: i * 0.02 }}
               >
                 <div className="bg-light px-4 my-3 mx-3 py-5 border shadow rounded">
                   <div className="col-5">

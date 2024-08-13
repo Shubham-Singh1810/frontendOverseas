@@ -260,10 +260,13 @@ function Footer() {
                       />
                     </div>
                     <div className="col-8 ">
+                      <a href="https://play.google.com/store/apps/details?id=ai.overseas"> 
                       <img
                         src="https://overseas.ai/newfrontend/image/google-play.png"
                         className="img-fluid px-2 py-1 rounded shadow bg-light"
                       />
+                      </a>
+                      
                     </div>
                   </div>
                   <hr />

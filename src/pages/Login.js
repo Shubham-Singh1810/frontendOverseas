@@ -1,63 +1,105 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup"; // Optional: For validation schema
+import * as Yup from "yup";
 import { useNavigate, Link } from "react-router-dom";
-import {loginUsingPassword} from "../services/user.service"
+import { loginUsingPassword, loginUsingOtp, verifyOtpForLogin } from "../services/user.service"; // Assuming sendOtp is defined in your service
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {useGlobalState} from '../GlobalProvider';
+import { useGlobalState } from '../GlobalProvider';
+
 function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const { globalState, setGlobalState} = useGlobalState();
+  const [isOtpLogin, setIsOtpLogin] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const { globalState, setGlobalState } = useGlobalState();
+
   const formik = useFormik({
     initialValues: {
       mobile: "",
       password: "",
     },
     validationSchema: Yup.object({
-      mobile: Yup.string().required("Mobile number is requird field"),
-      password: Yup.string().required("Password is required field"),
+      mobile: Yup.string()
+        .required("Mobile number is a required field")
+        .matches(/^\d{10}$/, "Mobile number must be 10 digits"),
+      password: !isOtpLogin && Yup.string().required("Password is a required field"),
     }),
-    onSubmit: async(values) => {
+    onSubmit: async (values) => {
       try {
-        let response = await loginUsingPassword({empPhone:values.mobile, password:values.password});
-        
-        if(response.data.access_token){
-          localStorage.setItem("loggedUser", JSON.stringify(response.data));
-          toast.success("User Logged in successfully")
-          setGlobalState({...globalState, user:response.data});
-          setTimeout(()=>{
-            navigate("/my-profile")
-          }, 1000)
-        }
-        else{
-          toast.error("Invalid Credientials")
+        if (isOtpLogin) {
+          try {
+            let response = await verifyOtpForLogin({
+              empPhone: values.mobile,
+              otp: otp,
+            })
+            if (response.data.access_token) {
+              localStorage.setItem("loggedUser", JSON.stringify(response.data));
+              toast.success("User Logged in successfully");
+              setGlobalState({ ...globalState, user: response.data });
+              setTimeout(() => {
+                navigate("/my-profile");
+              }, 1000);
+            } else {
+              toast.error(response?.data?.error);
+            }
+          } catch (error) {
+            toast.error("Internal Server Error");
+          }
+        } else {
+          let response = await loginUsingPassword({
+            empPhone: values.mobile,
+            password: values.password,
+          });
+
+          if (response.data.access_token) {
+            localStorage.setItem("loggedUser", JSON.stringify(response.data));
+            toast.success("User Logged in successfully");
+            setGlobalState({ ...globalState, user: response.data });
+            setTimeout(() => {
+              navigate("/my-profile");
+            }, 1000);
+          } else {
+            toast.error("Invalid Credentials");
+          }
         }
       } catch (error) {
-        toast.error("Internal Server Error")
+        toast.error("Internal Server Error");
       }
     },
   });
 
+  const handleSendOtp = async () => {
+    if (!formik.values.mobile || formik.errors.mobile) {
+      toast.error("Please enter a valid 10-digit mobile number");
+      return;
+    }
+
+    try {
+      let response =  await loginUsingOtp({ empPhone: formik.values.mobile });
+      if(response?.data?.msg=='Otp Sent Succefully.'){
+        setIsOtpSent(true);
+        setIsOtpLogin(true);
+        toast.success("OTP sent successfully");
+      }else if(response?.data?.error=='Mobile number is not registered !'){
+        toast.error('Mobile number is not registered !')
+      }
+    } catch (error) {
+      toast.error("Failed to send OTP");
+    }
+  };
+
   return (
     <div className="vh-100 d-flex justify-content-center align-items-center" style={{background:"url(https://www.bacancytechnology.com/main/img/job-recruitment-portal-development/banner.jpg?v-1)",backgroundSize:"100% 100%", backgroundRepeat:"no-repeat"}}>
       <div className="shadow-lg bg-light  p-5 ">
-      <div
+        <div
           className="d-flex justify-content-end"
           onClick={() => navigate("/")}
           style={{ cursor: "pointer", position:"relative", top:"-30px", left:"20px" }}
         >
           <i className="fa fa-close text-danger  bg-light border p-1 rounded"></i>
         </div>
-        {/* <div
-          className="bgBlue justify-content-end badge mb-4 "
-          onClick={() => navigate("/")}
-          style={{ cursor: "pointer" }}
-        >
-          <i className="fa fa-arrow-left me-1"></i> <span to="/">Home</span>
-        </div> */}
-        
         <div className="text-center">
           <img src="https://overseas.ai/frontend/logo/logo_en.gif" alt="Logo" />
         </div>
@@ -67,9 +109,8 @@ function Login() {
             <label>Phone</label>
             <div className="d-flex mb-3 mt-1">
               <select
-                class="customSelect text-secondary form-control   "
+                className="customSelect text-secondary form-control"
                 aria-label="Default select example"
-                // style={{ borderRadius: "35px", padding: "12px" }}
                 style={{
                   width: "20%",
                   borderRight: "none",
@@ -78,9 +119,6 @@ function Login() {
                 }}
               >
                 <option value="">+91</option>
-                {[1, 2, 2]?.map((v, i) => {
-                  return <option value="">+91</option>;
-                })}
               </select>
               <input
                 className="form-control "
@@ -109,54 +147,83 @@ function Login() {
               </div>
             ) : null}
           </div>
-          <div>
-            <div className="d-flex justify-content-between align-items-center">
-              <label>Password</label>
-              <i
-                onClick={() => setShowPassword(!showPassword)}
-                className={showPassword ? "fa fa-eye-slash" : " fa fa-eye"}
-                style={{ position: "relative", top: "3px" }}
-              ></i>
+          {isOtpLogin ? (
+            <div>
+              <label>OTP</label>
+              <input
+                className="form-control mb-3 mt-1"
+                type="text"
+                placeholder="Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
             </div>
-
-            <input
-              className="form-control mb-3 mt-1"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Type your password"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-            />
-
-            {formik.touched.password && formik.errors.password ? (
-              <div
-                className="text-danger"
-                style={{
-                  fontSize: "12px",
-                  marginTop: "-15px",
-                  marginBottom: "10px",
-                }}
-              >
-                {formik.errors.password}
+          ) : (
+            <div>
+              <div className="d-flex justify-content-between align-items-center">
+                <label>Password</label>
+                <i
+                  onClick={() => setShowPassword(!showPassword)}
+                  className={showPassword ? "fa fa-eye-slash" : " fa fa-eye"}
+                  style={{ position: "relative", top: "3px" }}
+                ></i>
               </div>
-            ) : null}
-          </div>
-          <p className="mt-2  " style={{ cursor: "pointer" }}>
-            <b className="">Login Via OTP Verification</b>
-          </p>
+
+              <input
+                className="form-control mb-3 mt-1"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Type your password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+
+              {formik.touched.password && formik.errors.password ? (
+                <div
+                  className="text-danger"
+                  style={{
+                    fontSize: "12px",
+                    marginTop: "-15px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {formik.errors.password}
+                </div>
+              ) : null}
+            </div>
+          )}
+          {!isOtpSent ? (
+            <p
+              className="mt-2"
+              style={{ cursor: "pointer" }}
+              onClick={handleSendOtp}
+            >
+              <b>Login Via OTP Verification</b>
+            </p>
+          ) : null}
+          {isOtpSent ? (
+            <p
+              className="mt-2 badge bg-success "
+              style={{ cursor: "pointer" }}
+              onClick={handleSendOtp}
+            >
+              <b>Resend OTP</b>
+            </p>
+          ) : null}
           <button type="submit" className="btn btn-primary w-100 mt-3">
-            Login
+            {isOtpLogin ? "Verify OTP" : "Login"}
           </button>
+          
           <p
             className="mt-5 mb-0 text-center"
             style={{ fontSize: "14px", fontWeight: "400" }}
           >
-            Don't have any account ? <br /> <Link to="/candidate-register" >Create New</Link>
+            Don't have any account ? <br /> <Link to="/candidate-register">Create New</Link>
           </p>
         </form>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }

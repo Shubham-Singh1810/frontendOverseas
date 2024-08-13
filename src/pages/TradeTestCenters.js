@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import { getInstituteRegistrationOtp, registerInstitute } from "../services/institute.service";
-
+import {
+  getInstituteRegistrationOtp,
+  registerInstitute,
+  getTradeList,
+} from "../services/institute.service";
+import { useNavigate } from "react-router-dom";
 const validationSchema = Yup.object({
   instituteName: Yup.string().required("Required"),
   insPhone: Yup.string().required("Required"),
@@ -14,10 +18,12 @@ const validationSchema = Yup.object({
   insSince: Yup.date().nullable(),
   websiteLink: Yup.string().url("Invalid URL").nullable(),
   source: Yup.string().required("Required"),
-  profileImage: Yup.mixed().required('Required'),
-  instituteRegCert: Yup.mixed().required('Required'),
+  profileImage: Yup.mixed().required("Required"),
+  instituteRegCert: Yup.mixed().required("Required"),
   instituteAddress: Yup.string().required("Required"),
-  isTradeCenter: Yup.string().oneOf(["Yes", "No"], "Required").required("Required"),
+  isTradeCenter: Yup.string()
+    .oneOf(["Yes", "No"], "Required")
+    .required("Required"),
   abroadAuthName: Yup.string(),
   indianAuthName: Yup.string(),
 });
@@ -41,11 +47,15 @@ const initialValues = {
 };
 
 function TradeTestCenter() {
+  const navigate = useNavigate()
   const [showBtn, setShowBtn] = useState(false);
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [mobOtp, setMobOtp] = useState("");
   const [insPassworrd, setInsPassword] = useState("");
-
+  const [filteredArray, setFilteredArray] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
+  const employerRegisterRef = useRef(null);
+  const [instituteList, setInstituteList] = useState([]);
   const handleInstituteRegister = async (values) => {
     try {
       const formData = new FormData();
@@ -57,22 +67,192 @@ function TradeTestCenter() {
       formData.append("mobOtp", mobOtp);
       formData.append("insPassword", insPassworrd);
       let response = await registerInstitute(formData);
-      if(response?.data?.message=="Account Registered Successfully!"){
-        toast.success("Account Registered Successfully!")
-      }else{
-        toast.error(response.errors[0])
+      if (response?.data?.message == "Account Registered Successfully!") {
+        toast.success("Account Registered Successfully!");
+      } else {
+        toast.error(response.errors[0]);
       }
     } catch (error) {
-      console.log(error)
-      toast.error("Internal Server Error")
+      console.log(error);
+      toast.error("Internal Server Error");
+    }
+  };
+  const handleScrollToRegister = () => {
+    if (employerRegisterRef.current) {
+      const offsetTop =
+        employerRegisterRef.current.getBoundingClientRect().top +
+        window.pageYOffset -
+        200; // Adjust the offset as needed
+      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    }
+  };
+  const searchResultFunc = (key) => {
+    if (key.length !== 0) {
+      setFilteredArray(
+        instituteList.filter((item) =>
+          item?.instituteName.toLowerCase().includes(key.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredArray(instituteList);
     }
   };
 
+  const sortByName = (order) => {
+    if (order === "asc") {
+      setFilteredArray(
+        [...filteredArray].sort((a, b) =>
+          a.instituteName.localeCompare(b.cmpName)
+        )
+      );
+    } else if (order === "desc") {
+      setFilteredArray(
+        [...filteredArray].sort((a, b) =>
+          b.instituteName.localeCompare(a.cmpName)
+        )
+      );
+    }
+  };
+  const sortByCreatedAt = (order) => {
+    if (order === "asc") {
+      setFilteredArray(
+        [...filteredArray].sort(
+          (a, b) => new Date(a.created_at) - new Date(b.created_at)
+        )
+      );
+    } else if (order === "desc") {
+      setFilteredArray(
+        [...filteredArray].sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        )
+      );
+    }
+  };
+  const getInstituteListFunc = async () => {
+    try {
+      let response = await getTradeList();
+      setInstituteList(response?.data);
+      setFilteredArray(response?.data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getInstituteListFunc();
+  }, []);
   return (
     <div className="mt-5 pt-5">
       <div className="mt-5 pt-5 container">
-        <div className="row mb-5 mt-3">
-          
+        <div className="d-md-flex justify-content-between my-3 mx-4 pb-3">
+          <h5
+            className="textBlue"
+            style={{ fontFamily: "Inter, sans-serif", fontWeight: "600" }}
+          >
+            OUR TRADE TEST CENTER
+          </h5>
+          <button
+            className="btn btn-outline-primary"
+            onClick={handleScrollToRegister}
+          >
+            Register As Trade test center
+          </button>
+        </div>
+        <div className="row mx-3 mb-4">
+          <div className="col-6">
+            <input
+              className="form-control"
+              placeholder="Search By Name"
+              value={searchKey}
+              onChange={(e) => {
+                searchResultFunc(e.target.value);
+                setSearchKey(e.target.value);
+              }}
+            />
+          </div>
+          <div className="col-3">
+            <select
+              className="customSelect text-secondary form-control"
+              aria-label="Default select example"
+              onChange={(e) => {
+                sortByName(e.target.value);
+              }}
+            >
+              <option value="">Sort By Name</option>
+              <option value="asc">Name: A to Z</option>
+              <option value="desc">Name: Z to A</option>
+            </select>
+          </div>
+          <div className="col-3">
+            <select
+              className="customSelect text-secondary form-control"
+              aria-label="Default select example"
+              onChange={(e) => {
+                sortByCreatedAt(e.target.value);
+              }}
+            >
+              <option value="">Created At</option>
+              <option value="asc">Latest</option>
+              <option value="desc">Oldest</option>
+            </select>
+          </div>
+        </div>
+        <div className="row m-0 p-0">
+          {filteredArray?.map((v, i) => (
+            <div
+              key={i}
+              className="col-12 col-md-6"
+              onClick={() => navigate(`/trade-test-center-details/${v?.id}`)}
+            >
+              <div className="p-4 m-3 shadow rounded">
+                <div className="row">
+                  <div className="col-md-4 col-12 d-flex align-items-center justify-content-center">
+                    <img
+                      src={
+                        v.profileImageUrl ==
+                        "https://overseas.ai/placeholder/institute.jpg"
+                          ? "/images/institute.png"
+                          : v.profileImageUrl
+                      }
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div className="col-md-8 col-12 mt-3 mt-md-0">
+                    <p style={{ fontWeight: "500" }}>{v?.instituteName}</p>
+                    <p>
+                      <span style={{ fontWeight: "500" }}>Since : </span>
+                      {v?.insSince}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: "500" }}>Register No : </span>
+                      {v?.insRegNo}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: "500" }}>Affilated By : </span>{" "}
+                      {v?.affilatedBy}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: "500" }}>Email : </span>
+                      {v?.email}
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <span style={{ fontWeight: "500" }}>Address : </span>
+                      {v?.insAddress}
+                    </p>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <p className="mb-0 badge bg-secondary mb-0">
+                        {v?.test_count} Tests
+                      </p>
+                      <button className="btn btn-sm btn-primary">
+                        View More
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="row mb-5 mt-3" ref={employerRegisterRef}>
           <div className="col-md-8 col-12 my-auto ">
             <div className="shadow rounded bg-light p-md-4 p-3 m-md-3 m-0">
               <h3 className="mb-4">
@@ -87,7 +267,10 @@ function TradeTestCenter() {
                     if (response?.message === "OTP sent successfully") {
                       toast.success("OTP sent successfully");
                       setShowOtpInput(true);
-                      sessionStorage.setItem("registerFormData", JSON.stringify(values));
+                      sessionStorage.setItem(
+                        "registerFormData",
+                        JSON.stringify(values)
+                      );
                     } else {
                       toast.error(response?.message);
                     }
@@ -219,7 +402,9 @@ function TradeTestCenter() {
                           name="profileImage"
                           type="file"
                           className="form-control"
-                          onChange={(e) => setFieldValue("profileImage", e.target.files[0])}
+                          onChange={(e) =>
+                            setFieldValue("profileImage", e.target.files[0])
+                          }
                         />
                         <ErrorMessage
                           name="profileImage"
@@ -234,7 +419,9 @@ function TradeTestCenter() {
                           name="instituteRegCert"
                           type="file"
                           className="form-control"
-                          onChange={(e) => setFieldValue("instituteRegCert", e.target.files[0])}
+                          onChange={(e) =>
+                            setFieldValue("instituteRegCert", e.target.files[0])
+                          }
                         />
                         <ErrorMessage
                           name="instituteRegCert"
@@ -271,8 +458,12 @@ function TradeTestCenter() {
                               className="form-control"
                             >
                               <option value="">Select</option>
-                              <option value="Takomal Holding">Takomal Holding</option>
-                              <option value="Americal welding society">Americal welding society</option>
+                              <option value="Takomal Holding">
+                                Takomal Holding
+                              </option>
+                              <option value="Americal welding society">
+                                Americal welding society
+                              </option>
                               <option value="Other">Other</option>
                             </Field>
                             <br />
@@ -308,22 +499,22 @@ function TradeTestCenter() {
                       </div>
                       {showOtpInput && (
                         <>
-                        <div className="col-12">
-                          <input
-                            placeholder="Enter OTP"
-                            onChange={(e) => setMobOtp(e.target.value)}
-                            className="form-control mb-4"
-                          />
-                        </div>
-                        <div className="col-12">
-                        <input
-                          placeholder="Enter Password"
-                          onChange={(e) => setInsPassword(e.target.value)}
-                          className="form-control mb-4"
-                          type="password"
-                        />
-                      </div>
-                      </>
+                          <div className="col-12">
+                            <input
+                              placeholder="Enter OTP"
+                              onChange={(e) => setMobOtp(e.target.value)}
+                              className="form-control mb-4"
+                            />
+                          </div>
+                          <div className="col-12">
+                            <input
+                              placeholder="Enter Password"
+                              onChange={(e) => setInsPassword(e.target.value)}
+                              className="form-control mb-4"
+                              type="password"
+                            />
+                          </div>
+                        </>
                       )}
                       <div className="col-12">
                         <div className="align-items-center d-flex mb-3 justify-content-center">
@@ -347,14 +538,19 @@ function TradeTestCenter() {
                         {showOtpInput ? (
                           <button
                             type="button"
-                            className={"btn btn-primary btn-md w-100"+ ((mobOtp && insPassworrd ) ? " ":" disabled" )}
+                            className={
+                              "btn btn-primary btn-md w-100" +
+                              (mobOtp && insPassworrd ? " " : " disabled")
+                            }
                             onClick={() => handleInstituteRegister(values)}
                           >
                             Register
                           </button>
                         ) : (
                           <button
-                            className={`btn btn-primary btn-md w-100 ${showBtn ? "" : "disabled"}`}
+                            className={`btn btn-primary btn-md w-100 ${
+                              showBtn ? "" : "disabled"
+                            }`}
                             type="submit"
                           >
                             Send OTP
@@ -367,7 +563,7 @@ function TradeTestCenter() {
               </Formik>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 d-none d-md-block">
             <img src="/images/fullMobileNew.png" alt="Institute" />
           </div>
         </div>

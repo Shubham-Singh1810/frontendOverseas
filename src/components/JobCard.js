@@ -9,6 +9,14 @@ function JobCard({ value }) {
   const navigate = useNavigate();
   const handleApplyJob = async (event) => {
     event.stopPropagation();
+    if(!globalState?.user){
+toast.warning("Please login to apply");
+setTimeout(()=>{
+  navigate("/login")
+
+}, 1000)
+return
+    }
     let payload = {
       id: value?.id,
       "apply-job": "",
@@ -21,7 +29,7 @@ function JobCard({ value }) {
       if (response?.data?.msg == "Job Applied Successfully") {
         toast.success(response?.data?.msg);
       } else {
-        toast.error(response?.data?.error);
+        toast.error("Something went wrong");
       }
     } catch (error) {
       toast.error("Internal Server Error");

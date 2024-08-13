@@ -20,8 +20,7 @@ function CourseDetails() {
   const [courseList, setCourseList] = useState([]);
   const getCourseByInsListFunc = async (id) => {
     try {
-      let response = await getCourseByInstitute(id);
-      console.log(response.data);
+      let response = await getCourseByInstitute({instId:id});
       setCourseList(response.data);
     } catch (error) {}
   };

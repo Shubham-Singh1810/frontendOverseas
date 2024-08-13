@@ -80,7 +80,7 @@ function Header() {
         </div>
       </div>
       <Navbar />
-      <div className="bgBlue w-100  py-2 text-dark justify-content-between px-3">
+      {/* <div className="bgBlue w-100  py-2 text-dark justify-content-between px-3">
         <Slider {...settings}>
         {[1, 2, 3, 4, 5].map((v, i)=>{
           return(
@@ -88,7 +88,7 @@ function Header() {
           )
         })}
         </Slider>
-      </div>
+      </div> */}
       {showLangPopup && (
         <>
           <div className="modal show d-block" tabIndex="-1">

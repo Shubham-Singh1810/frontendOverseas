@@ -28,6 +28,8 @@ import JobApplied from '../pages/JobApplied'
 import MyDocuments from '../pages/MyDocuments'
 import SavedJobs from '../pages/SavedJobs'
 import Notifications from '../pages/Notifications'
+import InstituteDetails from '../pages/InstituteDetails'
+import TradeTestCenterDetails from '../pages/TradeTestCenterDetails'
 function UserRoutes() {
   return (
     <Routes>
@@ -40,7 +42,9 @@ function UserRoutes() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/companies" element={<Companies/>}/>
         <Route path="/institutes" element={<Institutes/>}/>
+        <Route path="/institute-details/:id" element={<InstituteDetails/>}/>
         <Route path="/trade-test-center" element={<TradeTestCenters/>}/>
+        <Route path="/trade-test-center-details/:id" element={<TradeTestCenterDetails/>}/>
         <Route path="/company/:id" element={<CampanyDetails/>}/>
         <Route path="/candidate-register-step2" element={<CandidateRegister/>}/>
         <Route path="/candidate-register" element={<CandidateSignUp/>}/>

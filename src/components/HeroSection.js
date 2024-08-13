@@ -23,7 +23,7 @@ function HeroSection({data}) {
               className="heading text-center mb-5 px-2 pt-5  text-light  p-md-0"
             >
              
-              A Video Based <span className="textBlue" style={{textShadow:"1px 1px 2px white"}}>Job Portal</span> for Migrants Who Wants to Make Career in Abroad
+              A Video Based <span className="text-light" style={{textShadow:"1px 1px 2px blue"}}>Job Portal</span> for Migrants Who Wants to Make Career in Abroad
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 100 }}

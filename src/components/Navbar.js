@@ -152,6 +152,8 @@ function Navbar() {
     jobLocationCountry: "",
     countryName: "",
     departmentName: "",
+    skillId:"",
+    skillName:""
   });
   const navigatePage = () => {
     const formatUrl = (name) => {
@@ -177,6 +179,17 @@ function Navbar() {
         departmentName: "",
       });
     }
+    if (searchKey?.skillId) {
+      navigate(`/jobs/${formatUrl(searchKey.skillName)}-all-jobs`);
+      setSearchKey({
+        jobName: "",
+        jobOccupation: "",
+        jobLocationCountry: "",
+        countryName: "",
+        departmentName: "",
+      });
+    }
+    setShowSkill(false)
     setShowDepartment(false);
     setShowCountry(false);
   };
@@ -333,8 +346,8 @@ function Navbar() {
                           onClick={() =>
                             setSearchKey({
                               ...searchKey,
-                              departmentName: v?.label,
-                              jobOccupation: v?.value,
+                              skillName: v?.skill,
+                              skillId: v?.skill,
                             })
                           }
                         >

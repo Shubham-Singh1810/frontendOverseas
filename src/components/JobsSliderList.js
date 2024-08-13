@@ -12,6 +12,7 @@ function JobsSliderList({ title, backgroundColor, rounded, data }) {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 1500,
+    cssEase: 'linear', 
     responsive: [
       {
         breakpoint: 1024, // screen width up to 1024px (tablet)
@@ -58,7 +59,7 @@ function JobsSliderList({ title, backgroundColor, rounded, data }) {
                     }}
                     transition={{
                       duration: 1,
-                      delay: i * 0.2,
+                      delay: i * 0.08,
                     }}
                     className=""
                   >

@@ -20,6 +20,8 @@ import TrainingInstitute from '../pages/TrainingInstitute'
 import TradeTestingList from '../pages/TradeTestingList'
 import CourseDetails from '../pages/CourseDetails'
 import TradeTestCourseDetails from '../pages/TradeTestCourseDetails'
+import InstituteDetails from '../pages/InstituteDetails'
+import TradeTestCenterDetails from '../pages/TradeTestCenterDetails'
 function GuestRoutes() {
   const location = useLocation()
   
@@ -32,7 +34,9 @@ function GuestRoutes() {
         <Route path="/resume-building" element={<ResumeBuilding/>}/>
         <Route path="/contact-us" element={<Contactus/>}/>
         <Route path="/institutes" element={<Institutes/>}/>
+        <Route path="/institute-details/:id" element={<InstituteDetails/>}/>
         <Route path="/trade-test-center" element={<TradeTestCenters/>}/>
+        <Route path="/trade-test-center-details/:id" element={<TradeTestCenterDetails/>}/>
         <Route path="/job/:location/:title/:id" element={<JobDiscription/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/companies" element={<Companies/>}/>
@@ -44,6 +48,7 @@ function GuestRoutes() {
         <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
         <Route path="/course-details/:id" element={<CourseDetails/>}/>
         <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>
+        
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

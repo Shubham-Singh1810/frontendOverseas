@@ -58,7 +58,7 @@ export const getCourseByInstitute = async params => {
   try {
     const response = await axios.post(
       BASE_URL + 'courses-by-institute',
-      {instId: params},
+       params,
       {
         headers: {
           Authorization: `Bearer ${params.access_token}`,
@@ -75,7 +75,7 @@ export const getTestByInstitute = async params => {
   try {
     const response = await axios.post(
       BASE_URL + 'tests-by-institute',
-      {instId: params},
+       params,
       {
         headers: {
           Authorization: `Bearer ${params.access_token}`,
