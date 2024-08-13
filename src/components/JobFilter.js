@@ -348,7 +348,7 @@ function JobFilter({ setShowFilter, payload, setPayload }) {
         <div className="ms-2 mt-3">
           <h6>Experience Type</h6>
           <div className="mt-2">
-            {["No", "national", "international", "Any"].map((type) => (
+            {["No", "National", "International", "Any"].map((type) => (
               <div key={type} className="d-flex mb-2 align-items-center">
                 <input
                   type="radio"

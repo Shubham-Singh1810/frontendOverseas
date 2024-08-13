@@ -1,38 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCountriesForJobs, getOccupations } from "../services/info.service";
 import { getSkill } from "../services/job.service";
+
 function Footer() {
+  const navigate = useNavigate();
+
   const quickLinks = [
     {
       name: "Home",
-      link: "",
+      link: "/",
     },
     {
       name: "About Us",
-      link: "",
+      link: "/about-us",
     },
     {
       name: "Our Partners",
-      link: "",
+      link: "/",
     },
     {
       name: "Contact Us",
-      link: "contact-us",
+      link: "/contact-us",
     },
     {
       name: "Labour Law",
-      link: "",
+      link: "/",
     },
     {
       name: "Privacy Policy",
-      link: "",
+      link: "/",
     },
     {
       name: "Terms & Conditions",
-      link: "",
+      link: "/",
     },
   ];
+
   const socialLinks = [
     {
       link: "https://www.linkedin.com/company/findoverseasjobs?originalSubdomain=in",
@@ -55,7 +59,16 @@ function Footer() {
       icon: "fa fa-instagram",
     },
   ];
+
+  // States
   const [departmentList, setDepartmentList] = useState([]);
+  const [countryList, setCountryList] = useState([]);
+  const [skillList, setSkillList] = useState([]);
+  const [filteredSkill, setFilteredSkill] = useState([]);
+  const [showFullDepartmentList, setShowFullDetartmentList] = useState(false);
+  const [showFullSkillList, setShowFullSkillList] = useState(false); // New state for skills
+
+  // Fetch Occupations
   const getOccupationsListFunc = async () => {
     try {
       let response = await getOccupations();
@@ -73,7 +86,8 @@ function Footer() {
       console.log(error);
     }
   };
-  const [countryList, setCountryList] = useState([]);
+
+  // Fetch Countries
   const getCountriesForJobsFunc = async () => {
     try {
       let response = await getCountriesForJobs();
@@ -82,8 +96,8 @@ function Footer() {
       console.log(error);
     }
   };
-  const [filteredSkill, setFilteredSkill] = useState([]);
-  const [skillList, setSkillList] = useState([]);
+
+  // Fetch Skills
   const getSkillsFunc = async () => {
     try {
       let response = await getSkill();
@@ -93,153 +107,228 @@ function Footer() {
       console.log(error);
     }
   };
+
+  // Fetch Data on Component Mount
   useEffect(() => {
     getCountriesForJobsFunc();
     getOccupationsListFunc();
     getSkillsFunc();
   }, []);
+
   return (
     <>
-      <div
-        className=" p-lg-5 px-0 py-5"
-        style={{
-          background: "linear-gradient(to right, #17487f, #17487f, #17487f)",
-        }}
-      >
-        <div className="px-lg-5 text-light">
-          <div className="row m-0">
-            <div className="col-lg-3">
-              <div className="mx-3">
-                <div className="">
-                  <h3 className="">Contact Us</h3>
-                  <img
-                    src="https://overseas.ai/frontend/logo/logo_en.gif"
-                    className="img-fluid rounded mt-2 mb-3"
-                    style={{ height: "50px" }}
-                  />
-                  <div>
-                    <div className="mb-1 d-flex">
-                      {" "}
-                      <i className="fa fa-address-card mt-1 me-2"></i>
-                      <span>
-                        CA 191, CA Block, Sector 1, Saltlake, Kolkata, West
-                        Bengal 700064
-                      </span>
-                    </div>
-                    <div className="mb-1">
-                      <a
-                        className="text-light text-decoration-none"
-                        href="tel:+91 1800 890 4788"
-                      >
-                        {" "}
-                        <i className="fa fa-phone me-2"></i>1800 890 4788
-                      </a>
-                    </div>
-                    <div className="mb-1">
-                      <a
-                        className="text-light text-decoration-none"
-                        href="https://wa.me/9534404400"
-                        target="_blank"
-                      >
-                        <i className="fa me-2 fa-whatsapp"></i>+91 8100929525
-                      </a>
-                    </div>
-                    <div className="mb-1">
-                      <a
-                        className="text-light text-decoration-none"
-                        href="mailto:contact@overseas.ai"
-                      >
-                        {" "}
-                        <i className="fa fa-envelope me-2"></i>{" "}
-                        contact@overseas.ai
-                      </a>
-                    </div>
-                  </div>
-                </div>
+      <div className="text-light">
+        <div className=" p-5 " style={{ background: "#437DAA" }}>
+          <div className="row px-md-4">
+            {/* Find Jobs By Countries */}
+            <div className="col-lg-4 p-0 m-0">
+              <h5
+                className="mb-0 p-0 mb-3 mt-3 mt-lg-0 "
+                style={{ color: "wheat" }}
+              >
+                Find Jobs By Countries
+              </h5>
+              <div className="row m-0 p-0">
+                {countryList?.map((v, i) => (
+                  <small className="mb-0 p-0 col-12" key={i}>
+                    <Link
+                      className="text-light"
+                      style={{ textDecoration: "none" }}
+                      to={`/jobs/${v?.name}`}
+                    >
+                      Jobs in {v?.name}
+                    </Link>
+                  </small>
+                ))}
               </div>
             </div>
 
-            <div className="col-lg-6">
-              <div className="mx-3 my-lg-0 my-3">
-                <h3 className="">Quick Links</h3>
-                {/* <div className="row m-0">
-                  {quickLinks?.map((v, i) => {
-                    return (
-                      <p className="mb-0 p-0 col-6">
-                        <Link
-                          className="text-light"
-                          style={{ textDecoration: "none" }}
-                          to={v.link}
-                        >
-                          {v?.name}
-                        </Link>
-                      </p>
-                    );
-                  })}
-                </div> */}
-                <div className="row mt-4">
-                  <div className="col-lg-4">
-                    <h5 className="mb-0 p-0 mb-3 mt-3 mt-lg-0" style={{ color: "wheat" }}>
-                      Find Jobs By Countries
-                    </h5>
-                    {countryList?.map((v, i) => {
-                      return (
-                        <p className="mb-0 p-0 ">
-                          <Link
-                            className="text-light"
-                            style={{ textDecoration: "none" }}
-                            to={`/jobs/`+v?.name}
-                          >
-                            Jobs in {v?.name}
-                          </Link>
-                        </p>
-                      );
-                    })}
-                  </div>
-                  <div className="col-lg-4">
-                    <h5 className="mb-0 p-0 mb-3 mt-3 mt-lg-0" style={{ color: "wheat" }}>
-                      Find Jobs By Department
-                    </h5>
-                    {departmentList?.map((v, i) => {
-                      return (
-                        <p className="mb-0 p-0">
-                          <Link
-                            className="text-light"
-                            style={{ textDecoration: "none" }}
-                            to={`/jobs/`+v?.label}
-                          >
-                            Jobs for {v?.label}
-                          </Link>
-                        </p>
-                      );
-                    })}
-                  </div>
-                  <div className="col-lg-4">
-                    <h5 className="mb-0 p-0 mb-3 mt-3 mt-lg-0" style={{ color: "wheat" }}>
-                      Find Jobs By Skill
-                    </h5>
-                    {skillList?.slice(0, 15).map((v, i) => {
-                      return (
-                        <p className="mb-0 p-0 ">
-                          <Link
-                            className="text-light"
-                            style={{ textDecoration: "none" }}
-                            to={`/jobs/`+v?.skill.replace(/\s+/g, "-")}
-                          >
-                            Jobs For {v?.skill}
-                          </Link>
-                        </p>
-                      );
-                    })}
-                  </div>
+            <hr className="d-md-none d-block mt-3" />
+
+            {/* Find Jobs By Department */}
+            <div className="col-lg-4 p-0">
+              <h5
+                className="mb-0 p-0 mb-3 mt-3 mt-lg-0"
+                style={{ color: "wheat" }}
+              >
+                Find Jobs By Department
+              </h5>
+              <div className="row m-0 p-0">
+                {departmentList
+                  ?.slice(0, showFullDepartmentList ? departmentList.length : 4)
+                  .map((v, i) => (
+                    <small className="mb-0 p-0 col-12" key={i}>
+                      <Link
+                        className="text-light"
+                        style={{ textDecoration: "none" }}
+                        to={`/jobs/${v?.label}`}
+                      >
+                        Jobs for {v?.label}
+                      </Link>
+                    </small>
+                  ))}
+
+                {departmentList.length > 4 && (
+                  <small
+                    className="mb-0 p-0 col-12 text-dark"
+                    style={{ cursor: "pointer" }}
+                    onClick={() =>
+                      setShowFullDetartmentList(!showFullDepartmentList)
+                    }
+                  >
+                    <b>{showFullDepartmentList ? "Show Less" : "Show More"}</b>{" "}
+                    <i
+                      className={
+                        "fa " +
+                        (showFullDepartmentList
+                          ? "fa-caret-up"
+                          : "fa-caret-down")
+                      }
+                    ></i>
+                  </small>
+                )}
+              </div>
+            </div>
+
+            <hr className="d-md-none d-block mt-3" />
+
+            {/* Find Jobs By Skill */}
+            <div className="col-lg-4 p-0">
+              <h5
+                className="mb-0 p-0 mb-3 mt-3 mt-lg-0"
+                style={{ color: "wheat" }}
+              >
+                Find Jobs By Skill
+              </h5>
+              <div className="row m-0 p-0">
+                {skillList
+                  ?.slice(0, showFullSkillList ? skillList.length : 4)
+                  .map((v, i) => (
+                    <small className="mb-0 p-0 col-12" key={i}>
+                      <Link
+                        className="text-light"
+                        style={{ textDecoration: "none" }}
+                        to={`/jobs/${v?.skill.replace(/\s+/g, "-")}`}
+                      >
+                        Jobs for {v?.skill}
+                      </Link>
+                    </small>
+                  ))}
+
+                {skillList.length > 4 && (
+                  <small
+                    className="mb-0 p-0 col-12 text-dark"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setShowFullSkillList(!showFullSkillList)}
+                  >
+                    <b>{showFullSkillList ? "Show Less" : "Show More"}</b>{" "}
+                    <i
+                      className={
+                        "fa " +
+                        (showFullSkillList ? "fa-caret-up" : "fa-caret-down")
+                      }
+                    ></i>
+                  </small>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr className="m-0" />
+        <div
+          className="row p-lg-5 p-md-3 p-3"
+          style={{
+            background: "linear-gradient(to right, #17487f, #17487f, #17487f)",
+          }}
+        >
+          <div className="col-lg-3">
+            <div className="mx-3">
+              <div className="">
+                <img
+                  src="https://overseas.ai/frontend/logo/logo_en.gif"
+                  className="img-fluid rounded mt-2 mb-3"
+                  style={{ height: "50px" }}
+                />
+                <p>
+                  Overseas.ai links skilled individuals with employers globally,
+                  emphasizing practical expertise over academic qualifications.
+                  It uses technology to capture and organize videos of new
+                  skills, creating trustworthy video profiles. This approach
+                  allows employers to assess candidates' hands-on abilities
+                  before hiring.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-lg-3">
+            <div className="mx-3">
+              <h3>Contact Us</h3>
+              <div>
+                <div className="mb-1 d-flex">
+                  {" "}
+                  <i className="fa fa-address-card mt-1 me-2"></i>
+                  <span>
+                    CA 191, CA Block, Sector 1, Saltlake, Kolkata, West Bengal
+                    700064
+                  </span>
+                </div>
+                <div className="mb-1">
+                  <a
+                    className="text-light text-decoration-none"
+                    href="tel:+91 1800 890 4788"
+                  >
+                    {" "}
+                    <i className="fa fa-phone me-2"></i>1800 890 4788
+                  </a>
+                </div>
+                <div className="mb-1">
+                  <a
+                    className="text-light text-decoration-none"
+                    href="https://wa.me/9534404400"
+                    target="_blank"
+                  >
+                    <i className="fa me-2 fa-whatsapp"></i>+91 8100929525
+                  </a>
+                </div>
+                <div className="mb-1">
+                  <a
+                    className="text-light text-decoration-none"
+                    href="mailto:contact@overseas.ai"
+                  >
+                    {" "}
+                    <i className="fa fa-envelope me-2"></i> contact@overseas.ai
+                  </a>
                 </div>
               </div>
             </div>
-            <div className="col-lg-3">
-              <div className="mx-md-3 mx-0 my-lg-0 my-3">
-                <div className=" px-2 rounded">
-                  <h3 className="mb-1">Download Our App Now</h3>
-                  {/* <div className=" d-flex justify-content-center my-3">
+          </div>
+          <div className="col-lg-3">
+            <div className="mx-3">
+              <div className=" rounded">
+                <h3 className="mb-1">Quick Links</h3>
+                <div className="row m-0 p-0">
+                  {quickLinks?.map((v, i) => {
+                    return (
+                      <p
+                        className="mb-0 p-0 col-6"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => navigate(v?.link)}
+                      >
+                        {v?.name}
+                      </p>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-3">
+            <div className="mx-3">
+              <div className="  rounded">
+                <h3 className="mb-1">Download Our App Now</h3>
+                {/* <div className=" d-flex justify-content-center my-3">
                     <div style={{ height: "150px", width: "150px" }}>
                       <img src="/images/appQR.png" className="img-fluid" />
                     </div>
@@ -252,37 +341,36 @@ function Footer() {
                       />
                     </div>
                   </div> */}
-                  <div className="row justify-content-center mt-3">
-                    <div className="col-4">
-                      <img
-                        src="/images/appQR.png"
-                        className="img-fluid rounded shadow"
-                      />
-                    </div>
-                    <div className="col-8 ">
-                      <a href="https://play.google.com/store/apps/details?id=ai.overseas"> 
+                <div className="row justify-content-center mt-3">
+                  <div className="col-4">
+                    <img
+                      src="/images/appQR.png"
+                      className="img-fluid rounded shadow"
+                    />
+                  </div>
+                  <div className="col-8 ">
+                    <a href="https://play.google.com/store/apps/details?id=ai.overseas">
                       <img
                         src="https://overseas.ai/newfrontend/image/google-play.png"
                         className="img-fluid px-2 py-1 rounded shadow bg-light"
                       />
-                      </a>
-                      
-                    </div>
+                    </a>
                   </div>
-                  <hr />
-                  <h3 className="">Join Our Social Network</h3>
-                  <div className="m-0 d-flex">
-                    {socialLinks?.map((v, i) => {
-                      return (
-                        <h3>
-                          <a target="blank" href={v?.link}>
-                            <i className={`me-3 text-light  ${v?.icon}`}></i>
-                          </a>
-                        </h3>
-                      );
-                    })}
+                </div>
+                <hr />
+                <h3 className="">Join Our Social Network</h3>
+                <div className="m-0 d-flex">
+                  {socialLinks?.map((v, i) => {
+                    return (
+                      <h3>
+                        <a target="blank" href={v?.link}>
+                          <i className={`me-3 text-light  ${v?.icon}`}></i>
+                        </a>
+                      </h3>
+                    );
+                  })}
 
-                    {/* <h3>
+                  {/* <h3>
                     <a
                       className="text-secondary"
                       href="https://www.facebook.com/4400manish?mibextid=ZbWKwL"
@@ -296,7 +384,6 @@ function Footer() {
                       <i className="fa me-3 fa-whatsapp"></i>
                     </a>
                   </h3> */}
-                  </div>
                 </div>
               </div>
             </div>
