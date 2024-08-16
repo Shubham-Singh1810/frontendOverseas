@@ -36,7 +36,7 @@ function Navbar() {
         },
         {
           name: "Jobs Of the week",
-          path: "",
+          path: "/jobs/last-week",
         },
       ],
     },

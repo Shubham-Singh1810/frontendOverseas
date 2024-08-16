@@ -34,6 +34,21 @@ export const getJobListForSearch = async (payload) => {
     throw error;
   }
 };
+// Function to get job list
+export const getThisWeekJob = async (payload) => {
+  try {
+    const response = await axios.post(BASE_URL + "last-week-jobs", payload, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error posting data:", error);
+    throw error;
+  }
+};
 // Function to get job occupation list
 export const getOccupations = async data => {
   try {

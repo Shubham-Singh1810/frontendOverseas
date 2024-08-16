@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
-import { getJobList, getJobListForSearch } from "../services/job.service";
+import { getJobList,getThisWeekJob, getJobListForSearch } from "../services/job.service";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import JobFilter from "../components/JobFilter";
-
 function JobList() {
   const params = useParams();
   const [jobArr, setJobArr] = useState([]);
@@ -61,8 +60,26 @@ function JobList() {
       setShowLoader(false);
     }
   };
-
+  const getJobsOfTheWeek = async () => {
+    setShowLoader(true);
+    try {
+      const formData = new FormData();
+      
+      formData.append("pageNo", pageNo);
+      let response = await getThisWeekJob(formData);
+      setJobArr(response?.jobs);
+      pageNumber(response?.totalJobs);
+      setShowLoader(false);
+    } catch (error) {
+      console.error("Error fetching job list:", error);
+      setShowLoader(false);
+    }
+  };
   useEffect(() => {
+    if(location.pathname=="/jobs/last-week"){
+      getJobsOfTheWeek();
+      return
+    }
     if (location.pathname === "/jobs") {
       getJob();
     } else {
