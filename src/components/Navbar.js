@@ -82,14 +82,29 @@ function Navbar() {
       ],
     },
     {
-      name: !globalState?.user ? "Login/Register" : "My Profile",
-      icon: "fa fa-user",
-      path: !globalState?.user ? "/login" : "/my-profile",
+      name: !globalState?.user
+        ? "Login/Register"
+        : globalState?.user?.user?.type === "person"
+        ? "My Profile"
+        : globalState?.user?.user?.type === "company"
+        ? "Dashboard"
+        : "Login/Register",
+      icon: !globalState?.user
+        ? "fa fa-user"
+        : globalState?.user?.user?.type === "person"
+        ? "fa fa-user"
+        : globalState?.user?.user?.type === "company"
+        ? "fa fa-tachometer" // Dashboard icon
+        : "fa fa-user",
+      path: !globalState?.user
+        ? "/login"
+        : globalState?.user?.user?.type === "person"
+        ? "/my-profile"
+        : globalState?.user?.user?.type === "company"
+        ? "/hra-dashboard"
+        : "/login",
     },
-    // {
-    //   name: "English",
-    //   icon: "fa fa-language",
-    // },
+    
   ];
 
   const [departmentList, setDepartmentList] = useState([]);
