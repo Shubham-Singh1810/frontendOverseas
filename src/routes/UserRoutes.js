@@ -30,6 +30,7 @@ import SavedJobs from '../pages/SavedJobs'
 import Notifications from '../pages/Notifications'
 import InstituteDetails from '../pages/InstituteDetails'
 import TradeTestCenterDetails from '../pages/TradeTestCenterDetails'
+import AboutResumeBuilding from '../pages/AboutResumeBuilding'
 function UserRoutes() {
   return (
     <Routes>
@@ -51,6 +52,7 @@ function UserRoutes() {
         <Route path="/otp-verification" element={<OtpVerification/>}/>
         <Route path="/my-profile" element={<MyProfile/>}/>
         <Route path="/resume-building" element={<ResumeBuilding/>}/>
+        <Route path="/about-resume-building" element={<AboutResumeBuilding/>}/>
         <Route path="/training-institute" element={<TrainingInstitute/>}/>
         <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
         <Route path="/course-details/:id" element={<CourseDetails/>}/>

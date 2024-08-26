@@ -22,6 +22,7 @@ import CourseDetails from '../pages/CourseDetails'
 import TradeTestCourseDetails from '../pages/TradeTestCourseDetails'
 import InstituteDetails from '../pages/InstituteDetails'
 import TradeTestCenterDetails from '../pages/TradeTestCenterDetails'
+import AboutResumeBuilding from '../pages/AboutResumeBuilding'
 function GuestRoutes() {
   const location = useLocation()
   
@@ -48,7 +49,7 @@ function GuestRoutes() {
         <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
         <Route path="/course-details/:id" element={<CourseDetails/>}/>
         <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>
-        
+        <Route path="/about-resume-building" element={<AboutResumeBuilding/>}/>
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

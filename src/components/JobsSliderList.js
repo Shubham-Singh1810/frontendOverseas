@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 function JobsSliderList({ title, backgroundColor, rounded, data }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   var settings = {
     dots: false,
     infinite: true,
@@ -12,7 +12,7 @@ function JobsSliderList({ title, backgroundColor, rounded, data }) {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 1500,
-    cssEase: 'linear', 
+    cssEase: "linear",
     responsive: [
       {
         breakpoint: 1024, // screen width up to 1024px (tablet)
@@ -32,8 +32,19 @@ function JobsSliderList({ title, backgroundColor, rounded, data }) {
   };
   const container = useRef(null);
   const isInView = useInView(container);
+  const navigatePage = (name) => {
+    const formatUrl = (name) => {
+      return name.toLowerCase().replace(/\s+/g, "-"); // Convert to lowercase and replace spaces with hyphens
+    };
+    
+    navigate(`/jobs/${formatUrl(name)}-all-jobs`);
+  };
   return (
-    <div className="customSliderHeight d-flex justify-content-center align-items-center" style={{ background: backgroundColor }} ref={container}>
+    <div
+      className="customSliderHeight d-flex justify-content-center align-items-center"
+      style={{ background: backgroundColor }}
+      ref={container}
+    >
       <div className="container">
         <div className="">
           <motion.h1
@@ -52,6 +63,7 @@ function JobsSliderList({ title, backgroundColor, rounded, data }) {
               {data?.map((v, i) => {
                 return (
                   <motion.div
+                  onClick={()=>navigatePage(v?.label)}
                     initial={{ opacity: 0, y: 100 }}
                     animate={{
                       opacity: isInView ? 1 : 0,
@@ -66,26 +78,31 @@ function JobsSliderList({ title, backgroundColor, rounded, data }) {
                     <div className="mx-2 d-flex justify-content-center">
                       <img
                         src={v?.img}
-                        
                         className=" "
                         style={{
                           height: "230px",
                           width: "230px",
-                          borderRadius:rounded? "50%":"0px",
+                          borderRadius: rounded ? "50%" : "0px",
                         }}
                       />
                     </div>
-                    <p className="text-center my-3"><b>{v?.label}</b></p>
+                    <p className="text-center my-3">
+                      <b>{v?.label}</b>
+                    </p>
                   </motion.div>
                 );
               })}
             </Slider>
           </div>
           <div className="d-flex justify-content-center ">
-          <button className="btn btn-outline-primary " style={{ width: "200px" }} onClick={()=>navigate("/jobs")}>
-            View All
-          </button>
-        </div>
+            <button
+              className="btn btn-outline-primary "
+              style={{ width: "200px" }}
+              onClick={() => navigate("/jobs")}
+            >
+              View All
+            </button>
+          </div>
         </div>
       </div>
     </div>

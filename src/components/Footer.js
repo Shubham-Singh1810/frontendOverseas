@@ -201,19 +201,17 @@ function Footer() {
                 Find Jobs By Skill
               </h5>
               <div className="row m-0 p-0">
-                {skillList
-                  ?.slice(0, showFullSkillList ? skillList.length : 4)
-                  .map((v, i) => (
-                    <small className="mb-0 p-0 col-12" key={i}>
-                      <Link
-                        className="text-light"
-                        style={{ textDecoration: "none" }}
-                        to={`/jobs/${v?.skill.replace(/\s+/g, "-")}`}
-                      >
-                        Jobs for {v?.skill}
-                      </Link>
-                    </small>
-                  ))}
+                {skillList?.slice(0, 4).map((v, i) => (
+                  <small className="mb-0 p-0 col-12" key={i}>
+                    <Link
+                      className="text-light"
+                      style={{ textDecoration: "none" }}
+                      to={`/jobs/${v?.skill.replace(/\s+/g, "-")}`}
+                    >
+                      Jobs for {v?.skill}
+                    </Link>
+                  </small>
+                ))}
 
                 {skillList.length > 4 && (
                   <small
@@ -234,7 +232,27 @@ function Footer() {
             </div>
           </div>
         </div>
-
+        {showFullSkillList && (
+          <div className="pt-0 p-5 " style={{ background: "#437DAA" }}>
+            <div
+              className="row p-md-4 mb-3 rounded custom-scrollbar   shadow"
+              style={{ height: "300px", background: "rgba(0, 0, 0, 0.1)" }}
+            >
+              {skillList?.map((v, i) => (
+                <small className="mb-0 p-0 col-lg-4 col-md-4 col-12" key={i}>
+                  <Link
+                    className="text-light"
+                    style={{ textDecoration: "none" }}
+                    to={`/jobs/${v?.skill.replace(/\s+/g, "-")}`}
+                  >
+                    Jobs for {v?.skill}
+                  </Link>
+                </small>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="pt-0 p-5 " style={{ background: "#437DAA" }}></div>
         <hr className="m-0" />
         <div
           className="row p-lg-5 p-md-3 p-3"
@@ -369,21 +387,6 @@ function Footer() {
                       </h3>
                     );
                   })}
-
-                  {/* <h3>
-                    <a
-                      className="text-secondary"
-                      href="https://www.facebook.com/4400manish?mibextid=ZbWKwL"
-                      target="blank"
-                    >
-                      <i className="fa me-3 fa-facebook"></i>
-                    </a>
-                  </h3>
-                  <h3>
-                    <a className="text-secondary" href="https://wa.me/9534404400" target="_blank">
-                      <i className="fa me-3 fa-whatsapp"></i>
-                    </a>
-                  </h3> */}
                 </div>
               </div>
             </div>

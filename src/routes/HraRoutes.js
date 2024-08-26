@@ -31,6 +31,7 @@ import Notifications from '../pages/Notifications'
 import InstituteDetails from '../pages/InstituteDetails'
 import TradeTestCenterDetails from '../pages/TradeTestCenterDetails'
 import HraDashboard from '../pages/HraPages/HraDashboard'
+import AboutResumeBuilding from '../pages/AboutResumeBuilding'
 function HraRoutes() {
   return (
     <Routes>
@@ -62,7 +63,7 @@ function HraRoutes() {
         <Route path="/saved-jobs" element={<SavedJobs/>}/>
         <Route path="/notifications" element={<Notifications/>}/>
         <Route path="/hra-dashboard" element={<HraDashboard/>}/>
-
+        <Route path="/about-resume-building" element={<AboutResumeBuilding/>}/>
         
         {/* <Route path="*" element={<PageNotFound/>}/> */}
     </Routes>

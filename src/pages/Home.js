@@ -60,7 +60,7 @@ function Home() {
   return (
     <>
     <HeroSection data={departmentList}/>
-    <JobsSliderList title="Job Opening In Top Countries" rounded={true} backgroundColor="#fff" data={countryList}/>
+    <JobsSliderList title="Job Opening In Top Countries" rounded={true} backgroundColor="#fff" data={countryList} />
     <JobsSliderList title="Find Jobs By Department" rounded={true} backgroundColor="#F8F9FA" data={departmentList}/>
     <JobOpeningInTopCompany/>
     <JobsSliderList title="Meet Our Institutes"  rounded={false} backgroundColor="#F8F9FA" data={instituteList}/>

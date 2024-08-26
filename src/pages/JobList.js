@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
-import { getJobList,getThisWeekJob, getJobListForSearch } from "../services/job.service";
+import {
+  getJobList,
+  getThisWeekJob,
+  getJobListForSearch,
+} from "../services/job.service";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import JobFilter from "../components/JobFilter";
 function JobList() {
@@ -64,7 +68,7 @@ function JobList() {
     setShowLoader(true);
     try {
       const formData = new FormData();
-      
+
       formData.append("pageNo", pageNo);
       let response = await getThisWeekJob(formData);
       setJobArr(response?.jobs);
@@ -76,9 +80,9 @@ function JobList() {
     }
   };
   useEffect(() => {
-    if(location.pathname=="/jobs/last-week"){
+    if (location.pathname == "/jobs/last-week") {
       getJobsOfTheWeek();
-      return
+      return;
     }
     if (location.pathname === "/jobs") {
       getJob();
@@ -93,7 +97,7 @@ function JobList() {
         (payload.sortBy && payload.sortBy.trim() !== "")
       ) {
         if (params.filter) {
-          navigate('/jobs', { replace: true });
+          navigate("/jobs", { replace: true });
         }
         getJob();
       } else {
@@ -129,10 +133,42 @@ function JobList() {
   };
 
   const { start, end } = getPageRange();
-
+  const [searchJobsArr, setSearchJobsArr] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
+  const handleSearch = (key) => {
+    const filteredArr = jobArr?.filter((v) => {
+      return v?.jobTitle?.toLowerCase().includes(key.toLowerCase());
+    });
+    console.log(filteredArr);
+    setSearchJobsArr(filteredArr);
+    setSearchKey(key);
+  };
   return (
     <div className="container mt-md-5 pt-5">
       <div className="mt-5 pt-5 mx-0">
+        <div className="row justify-content-center ">
+          <div
+            className="col-lg-5 col-md-6 col-11 mb-2 d-flex align-items-center justify-content-between  border p-2 rounded"
+            style={{ height: "46.5px" }}
+          >
+            <input
+              style={{
+                border: "none",
+                width: "80%",
+                paddingLeft: "10px",
+                outline: "none",
+              }}
+              placeholder="Search By Job Title"
+              onChange={(e) => handleSearch(e.target.value)}
+            />
+            <h4 className="mb-0 text-secondary">
+              <i
+                className={"fa " + (!showFilter ? "fa-filter" : "fa-search")}
+                onClick={() => setShowFilter(true)}
+              ></i>
+            </h4>
+          </div>
+        </div>
         <div className="row m-0 p-0">
           {showFilter && (
             <JobFilter
@@ -151,28 +187,9 @@ function JobList() {
             </div>
           ) : (
             <div className="row col-md-8 col-lg-6 col-12 m-0 p-0">
-              <div className="col-12 p-0 p-md-2">
-                <div className="d-flex align-items-center justify-content-between border p-2 rounded">
-                  <input
-                    style={{
-                      border: "none",
-                      width: "80%",
-                      paddingLeft: "10px",
-                      outline: "none",
-                    }}
-                    placeholder="Search By Job Title"
-                  />
-                  <h3 className="mb-0">
-                    <i
-                      className="fa fa-filter"
-                      onClick={() => setShowFilter(true)}
-                    ></i>
-                  </h3>
-                </div>
-              </div>
-              {jobArr?.map((v, i) => (
-                <JobCard key={i} value={v} />
-              ))}
+              {searchKey.length > 0
+                ? searchJobsArr?.map((v, i) => <JobCard key={i} value={v} />)
+                : jobArr?.map((v, i) => <JobCard key={i} value={v} />)}
             </div>
           )}
 
@@ -192,42 +209,95 @@ function JobList() {
           </div>
         </div>
 
-        <nav aria-label="Page navigation example" className="d-flex justify-content-center my-5">
+        <nav
+          aria-label="Page navigation example"
+          className="d-flex justify-content-center my-5"
+        >
           <ul className="pagination">
-            <li className={`page-item ${pageNo === 1 ? 'disabled' : ''}`}>
-              <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(pageNo - 1); }}>
+            <li className={`page-item ${pageNo === 1 ? "disabled" : ""}`}>
+              <a
+                className="page-link"
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(pageNo - 1);
+                }}
+              >
                 Prev
               </a>
             </li>
             {start > 1 && (
               <>
                 <li className="page-item">
-                  <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(1); }}>
+                  <a
+                    className="page-link"
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePageChange(1);
+                    }}
+                  >
                     1
                   </a>
                 </li>
-                {start > 2 && <li className="page-item disabled"><span className="page-link">...</span></li>}
+                {start > 2 && (
+                  <li className="page-item disabled">
+                    <span className="page-link">...</span>
+                  </li>
+                )}
               </>
             )}
             {totalPage.slice(start - 1, end).map((v) => (
-              <li key={v} className={`page-item ${v === pageNo ? 'active' : ''}`}>
-                <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(v); }}>
+              <li
+                key={v}
+                className={`page-item ${v === pageNo ? "active" : ""}`}
+              >
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handlePageChange(v);
+                  }}
+                >
                   {v}
                 </a>
               </li>
             ))}
             {end < totalPage.length && (
               <>
-                {end < totalPage.length - 1 && <li className="page-item disabled"><span className="page-link">...</span></li>}
+                {end < totalPage.length - 1 && (
+                  <li className="page-item disabled">
+                    <span className="page-link">...</span>
+                  </li>
+                )}
                 <li className="page-item">
-                  <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(totalPage.length); }}>
+                  <a
+                    className="page-link"
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePageChange(totalPage.length);
+                    }}
+                  >
                     {totalPage.length}
                   </a>
                 </li>
               </>
             )}
-            <li className={`page-item ${pageNo === totalPage.length ? 'disabled' : ''}`}>
-              <a className="page-link" href="#" onClick={(e) => { e.preventDefault(); handlePageChange(pageNo + 1); }}>
+            <li
+              className={`page-item ${
+                pageNo === totalPage.length ? "disabled" : ""
+              }`}
+            >
+              <a
+                className="page-link"
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(pageNo + 1);
+                }}
+              >
                 Next
               </a>
             </li>

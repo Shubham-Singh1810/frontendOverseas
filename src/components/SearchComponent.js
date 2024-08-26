@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { getCountriesForJobs, getOccupations } from "../services/info.service";
 import { useNavigate } from "react-router-dom";
-import { ReactTyped } from "react-typed";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 function SearchComponent({ fullWidth }) {
+
   const [searchKey, setSearchKey] = useState("");
   const navigate = useNavigate();
+  const handleSearchNavigate = () => {
+    const formattedSearchKey = searchKey.trim().replace(/\s+/g, "-");
+    navigate("/jobs/" + formattedSearchKey);
+  };
   const {
     transcript,
     listening,
     resetTranscript,
-    browserSupportsSpeechRecognition,
+    browserSupportsSpeechRecognition
   } = useSpeechRecognition();
-  const startListening = () =>
-    SpeechRecognition.startListening({ continuous: true });
-  const stopListening = () => SpeechRecognition.stopListening();
 
   if (!browserSupportsSpeechRecognition) {
-    return <div>Your browser does not support speech recognition.</div>;
+    return <span>Browser doesn't support speech recognition.</span>;
   }
-
-  const handleSearchNavigate = () => {
-    const formattedSearchKey = searchKey.trim().replace(/\s+/g, "-");
-    console.log(formattedSearchKey);
-    navigate("/jobs/" + formattedSearchKey);
-  };
-
+  return (
+    <div>
+      <p>Microphone: {listening ? 'on' : 'off'}</p>
+      <button onClick={SpeechRecognition.startListening}>Start</button>
+      <button onClick={SpeechRecognition.stopListening}>Stop</button>
+      <button onClick={resetTranscript}>Reset</button>
+      <p>{transcript}</p>
+    </div>
+  );
   return (
     <div className="row justify-content-center">
       <div
@@ -41,6 +41,7 @@ function SearchComponent({ fullWidth }) {
           className="ms-2 bg-light"
           placeholder="Search jobs"
           style={{ width: "70%", border: "none", outline: "none" }}
+          value={searchKey}
           onChange={(e) => setSearchKey(e.target.value)}
         />
 
@@ -48,8 +49,7 @@ function SearchComponent({ fullWidth }) {
           <button
             className="btn btn-primary bgBlue"
             style={{ border: "none" }}
-            onClick={() => handleSearchNavigate()}
-            value={transcript}
+            onClick={handleSearchNavigate}
           >
             Search
           </button>
@@ -66,15 +66,16 @@ function SearchComponent({ fullWidth }) {
               alignItems: "center",
               justifyContent: "center",
             }}
-            onClick={listening ? stopListening : startListening}
+            
           >
             <img
               src={
-                listening
+                false
                   ? "https://cdn-icons-png.flaticon.com/128/59/59120.png"
                   : "https://tse4.mm.bing.net/th?id=OIP.lFtxYRQ6fiHaesf9Hg0XjQAAAA&pid=Api&P=0&h=180"
               }
               style={{ height: "30px" }}
+              alt="mic-icon"
             />
           </div>
         </div>

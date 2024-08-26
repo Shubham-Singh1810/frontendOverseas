@@ -58,12 +58,7 @@ function NewsSlider() {
                     className="d-block w-100 vh50"
                     alt="..."
                   />
-                  <div className="carousel-caption d-none d-md-block  p-3" >
-                    <h5>{newsArr[0]?.ArticleTitle}</h5>
-                    <p>
-                      {newsArr[0]?.summary}
-                    </p>
-                  </div>
+                 
                 </div>
                 <div className="carousel-item">
                   <img
@@ -71,12 +66,7 @@ function NewsSlider() {
                     className="d-block w-100 vh50"
                     alt="..."
                   />
-                  <div className="carousel-caption d-none d-md-block  p-3">
-                    <h5>{newsArr[1]?.ArticleTitle}</h5>
-                    <p>
-                      {newsArr[1]?.summary}
-                    </p>
-                  </div>
+                  
                 </div>
                 <div className="carousel-item">
                   <img
@@ -84,12 +74,7 @@ function NewsSlider() {
                     className="d-block w-100 vh50"
                     alt="..."
                   />
-                  <div className="carousel-caption d-none d-md-block p-3">
-                    <h5>{newsArr[2]?.ArticleTitle}</h5>
-                    <p>
-                    {newsArr[2]?.summary}
-                    </p>
-                  </div>
+                  
                 </div>
               </div>
               <button

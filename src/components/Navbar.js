@@ -46,7 +46,7 @@ function Navbar() {
       subMenu: [
         {
           name: "Resume Building",
-          path: "resume-building",
+          path: "about-resume-building",
         },
         // {
         //   name: "Language Training",

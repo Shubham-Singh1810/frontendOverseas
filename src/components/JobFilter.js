@@ -120,7 +120,7 @@ function JobFilter({ setShowFilter, payload, setPayload }) {
 
   return (
     <div
-      className="col-lg-3 col-md-4 col-12 rounded filterDiv"
+      className="col-lg-3 col-md-4 col-12 mt-4 rounded filterDiv"
       style={{ background: "whitesmoke", overflow: "auto" }}
     >
       <div>
