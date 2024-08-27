@@ -1,38 +1,66 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-function SearchComponent({ fullWidth }) {
 
+function SearchComponent({ fullWidth }) {
   const [searchKey, setSearchKey] = useState("");
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.lang = "en-US";
+
+      recognition.onresult = (event) => {
+        let transcript = "";
+        for (let i = 0; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        setSearchKey(transcript);
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = recognition;
+    } else {
+      console.error("Sorry, your browser does not support the Web Speech API.");
+    }
+  }, []);
+
   const handleSearchNavigate = () => {
     const formattedSearchKey = searchKey.trim().replace(/\s+/g, "-");
     navigate("/jobs/" + formattedSearchKey);
   };
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition
-  } = useSpeechRecognition();
 
-  if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
-  }
-  return (
-    <div>
-      <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <button onClick={SpeechRecognition.startListening}>Start</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      <button onClick={resetTranscript}>Reset</button>
-      <p>{transcript}</p>
-    </div>
-  );
+  const handleMicClick = () => {
+    if (recognitionRef.current) {
+      if (isListening) {
+        recognitionRef.current.stop();
+        setIsListening(false);
+      } else {
+        recognitionRef.current.start();
+        setIsListening(true);
+      }
+    }
+  };
+
   return (
     <div className="row justify-content-center">
       <div
         className={
-          " col-10  d-flex justify-content-between p-2 bg-light " +
+          "col-10 d-flex justify-content-between p-2 bg-light " +
           (fullWidth ? "col-md-10" : "col-md-8")
         }
         style={{ borderRadius: "30px" }}
@@ -65,18 +93,13 @@ function SearchComponent({ fullWidth }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              cursor: "pointer",
             }}
-            
+            onClick={handleMicClick}
           >
-            <img
-              src={
-                false
-                  ? "https://cdn-icons-png.flaticon.com/128/59/59120.png"
-                  : "https://tse4.mm.bing.net/th?id=OIP.lFtxYRQ6fiHaesf9Hg0XjQAAAA&pid=Api&P=0&h=180"
-              }
-              style={{ height: "30px" }}
-              alt="mic-icon"
-            />
+            <h2 className="mb-0">
+              <i className={`fa fa-microphone${isListening ? "-slash" : ""}`}></i>
+            </h2>
           </div>
         </div>
       </div>

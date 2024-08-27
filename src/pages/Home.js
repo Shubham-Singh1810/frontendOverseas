@@ -63,7 +63,7 @@ function Home() {
     <JobsSliderList title="Job Opening In Top Countries" rounded={true} backgroundColor="#fff" data={countryList} />
     <JobsSliderList title="Find Jobs By Department" rounded={true} backgroundColor="#F8F9FA" data={departmentList}/>
     <JobOpeningInTopCompany/>
-    <JobsSliderList title="Meet Our Institutes"  rounded={false} backgroundColor="#F8F9FA" data={instituteList}/>
+    <JobsSliderList title="Meet Our Institutes"  rounded={false} backgroundColor="#F8F9FA" data={instituteList}  institute={true}/>
     <AppPromationSection/>
     {/* <JobsSliderList title="Job Openings In Top Companies" backgroundColor="#F4FAFD" /> */}
     <SuccessfulPlacedCandidateList title="Find Jobs By Department" rounded={true} backgroundColor="#F4FAFD" />
