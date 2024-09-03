@@ -45,7 +45,7 @@ function HraDashboard() {
     {
       name: "Create Job",
       icon: "fa fa-suitcase",
-      path: "/applied-courses",
+      path: "/create-jobs",
     },
     {
       name: "Bulk Hire",

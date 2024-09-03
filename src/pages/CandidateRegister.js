@@ -208,8 +208,8 @@ const CandidateRegister = () => {
       setSkillList(skills);
     } catch (error) {}
   };
-  const [stateList, setStateList] = useState([]);
   const [stateListforPref, setStateListforPref] = useState([]);
+  const [stateList, setStateList] = useState([]);
   const getStateList = async () => {
     try {
       let response = await getState();

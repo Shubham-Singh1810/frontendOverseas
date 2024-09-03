@@ -22,6 +22,10 @@ function JobDiscription() {
   }, [params?.id]);
   const handleApplyJob = async(event)=>{
     event.stopPropagation(); 
+    if(!globalState?.user){
+      toast.warning("Please login to apply");
+      return
+      }
     let payload = {
       id: jobDetails?.id,
       'apply-job': '',

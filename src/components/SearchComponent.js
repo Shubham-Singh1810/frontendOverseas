@@ -41,7 +41,10 @@ function SearchComponent({ fullWidth }) {
 
   const handleSearchNavigate = () => {
     const formattedSearchKey = searchKey.trim().replace(/\s+/g, "-");
-    navigate("/jobs/" + formattedSearchKey);
+    if(formattedSearchKey.length>0){
+
+      navigate("/jobs/" + formattedSearchKey);
+    }
   };
 
   const handleMicClick = () => {
@@ -75,7 +78,7 @@ function SearchComponent({ fullWidth }) {
 
         <div className="d-flex align-items-center">
           <button
-            className="btn btn-primary bgBlue"
+            className={"btn btn-primary bgBlue "+( searchKey.length==0 && " disabled")}
             style={{ border: "none" }}
             onClick={handleSearchNavigate}
           >
