@@ -15,7 +15,7 @@ function JobFilter({ setShowFilter, payload, setPayload }) {
         label: item.occupation,
         value: item.id,
         img:
-          "https://overseas.ai/storage/uploads/occupationImage/" +
+          "https://backend.overseas.ai/storage/uploads/occupationImage/" +
           item.id +
           "/" +
           item.occuLgIcon,

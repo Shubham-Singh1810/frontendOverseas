@@ -14,7 +14,7 @@ function SelectUserType() {
       <div className="col-6 " >
         <div className="my-1 shadow bg-light p-1 rounded text-center" onClick={()=>navigate("/candidate-register")} style={{cursor:"pointer"}}> 
           <img
-            src="https://overseas.ai/newfrontend/image/employee-icon.png"
+            src="https://backend.overseas.ai/newfrontend/image/employee-icon.png"
             className="img-fluid"
           />
           <p>
@@ -33,7 +33,7 @@ function SelectUserType() {
       <div className="col-6 " >
         <div className="my-1 shadow bg-light p-1 rounded text-center" onClick={()=>navigate("/employer-register")} style={{cursor:"pointer"}}>
           <img
-            src="https://overseas.ai/newfrontend/image/employer-icon.png"
+            src="https://backend.overseas.ai/newfrontend/image/employer-icon.png"
             className="img-fluid"
           />
           <p>
@@ -52,7 +52,7 @@ function SelectUserType() {
       <div className="col-6 " >
         <div className="my-1 shadow bg-light p-1 rounded text-center" onClick={()=>navigate("/institute-register")} style={{cursor:"pointer"}}>
           <img
-            src="https://overseas.ai/newfrontend/image/training_home.png"
+            src="https://backend.overseas.ai/newfrontend/image/training_home.png"
             className="img-fluid"
           />
           <p>
@@ -71,7 +71,7 @@ function SelectUserType() {
       <div className="col-6 " >
         <div className="my-1 shadow bg-light p-1 rounded text-center" onClick={()=>navigate("/partner-register")} style={{cursor:"pointer"}}>
           <img
-            src="https://overseas.ai/newfrontend/image/partner_home.png"
+            src="https://backend.overseas.ai/newfrontend/image/partner_home.png"
             className="img-fluid"
           />
           <p>

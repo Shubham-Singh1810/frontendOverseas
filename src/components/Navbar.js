@@ -115,7 +115,7 @@ function Navbar() {
         label: item.occupation,
         value: item.id,
         img:
-          "https://overseas.ai/storage/uploads/occupationImage/" +
+          "https://backend.overseas.ai/storage/uploads/occupationImage/" +
           item.id +
           "/" +
           item.occuLgIcon,
@@ -298,7 +298,7 @@ function Navbar() {
                           }
                         >
                           <img
-                            src={`https://overseas.ai/storage/uploads/countryFlag/${v?.countryFlag}`}
+                            src={`https://backend.overseas.ai/storage/uploads/countryFlag/${v?.countryFlag}`}
                             className="img-fluid me-2"
                             style={{
                               height: "35px",
@@ -427,7 +427,7 @@ function Navbar() {
             <div className="container-fluid ">
               <Link className="navbar-brand" to="/">
                 <img
-                  src="https://overseas.ai/frontend/logo/logo_en.gif"
+                  src="https://backend.overseas.ai/frontend/logo/logo_en.gif"
                   style={{ height: 50, width: 160 }}
                   alt="logo"
                 />

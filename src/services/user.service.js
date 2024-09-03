@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // Define your API base URL
-// const BASE_URL = "https://overseas.ai/api/";
-const BASE_URL = "https://test.overseas.ai/api/"; // test api
+const BASE_URL = 'https://backend.overseas.ai/api/';
+// const BASE_URL = "https://test.overseas.ai/api/"; // test api
 
 // Function to make a GET request
 export const loginUsingPassword = async (formData) => {
@@ -164,12 +164,11 @@ export const uploadWorkVideo = async (formData, access_token) => {
   }
 };
 
-export const submitContactQuery = async (params) => {
+export const submitContactQuery = async (formData) => {
   try {
-    const response = await axios.post(BASE_URL+"need-help" , params?.formData, {
+    const response = await axios.post(BASE_URL+"contact-us" , formData, {
       headers: {
         'Content-Type': `multipart/form-data`,
-        Authorization: `Bearer ${params?.access_token}`
       }
     });
     return (response);

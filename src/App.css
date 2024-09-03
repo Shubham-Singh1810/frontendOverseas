@@ -318,3 +318,10 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.invalid-feedback{
+  margin-top: -10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}

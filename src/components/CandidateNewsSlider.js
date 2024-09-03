@@ -47,7 +47,7 @@ function insertBreaks(message) {
           >
             <img
               style={{ height: "45px", width: "45px", borderRadius: "50%" }}
-              src={v?.empPhoto}
+              src={v?.empPhoto=="https://overseas.ai/placeholder/person.jpg" ? "/images/person.jpg" : v?.empPhoto}
               alt="Profile"
             />
             <p

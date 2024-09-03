@@ -202,7 +202,7 @@ function JobList() {
               <div className="col-8 my-auto border rounded">
                 <img
                   className="img-fluid"
-                  src="https://overseas.ai/newfrontend/image/google-play.png"
+                  src="https://admin.overseas.ai/newfrontend/image/google-play.png"
                 />
               </div>
             </div>

@@ -193,13 +193,13 @@ function MyProfile() {
                   style={{
                     width: parseInt(
                       globalState?.user?.empData?.profileStrength
-                    ),
+                    )+"%",
                     height: "7px",
                     background: "green",
                   }}
                 ></div>
               </div>
-              <span>Profile Strength</span>
+              <span>Profile Strength : <i>{globalState?.user?.empData?.profileStrength}%</i></span>
 
               <div className="mt-3 mb-5 ms-2">
                 {navItems?.map((v, i) => {

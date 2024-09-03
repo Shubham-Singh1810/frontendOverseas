@@ -19,7 +19,7 @@ function Home() {
       let occupations = response?.occupation?.map(item => ({
         label: item.occupation,
         value: item.id,
-        img: "https://overseas.ai/storage/uploads/occupationImage/"+item.id+"/"+item.occuLgIcon
+        img: "https://backend.overseas.ai/storage/uploads/occupationImage/"+item.id+"/"+item.occuLgIcon
       }));
       setDepartmentList(occupations)
     } catch (error) {
@@ -32,7 +32,7 @@ function Home() {
       let institute = response?.data?.map(item => ({
         label: item.instituteName,
         value: item.id,
-        img: item.profileImageUrl=="https://overseas.ai/placeholder/institute.jpg" ?"/images/institute.png": item.profileImageUrl 
+        img: item.profileImageUrl=="https://backend.overseas.ai/placeholder/institute.jpg" ?"/images/institute.png": item.profileImageUrl 
       }));
       setInstituteList(institute)
     } catch (error) {
@@ -45,7 +45,7 @@ function Home() {
       let countries = response?.countries?.map(item => ({
         label: item.name,
         value: item.id,
-        img: `https://overseas.ai/storage/uploads/countryFlag/${item?.countryFlag}`
+        img: `https://backend.overseas.ai/storage/uploads/countryFlag/${item?.countryFlag}`
       }));
       setCountryList(countries);
     } catch (error) {

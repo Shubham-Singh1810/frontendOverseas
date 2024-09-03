@@ -74,18 +74,26 @@ function JobOpeningInTopCompany() {
                 <div className="bg-light px-4 my-3 mx-3 py-5 border shadow rounded">
                   <div className="col-5">
                     <img
-                      // style={{ height: "80px" }}
-                      src={v?.cmpLogoS3=="placeholder/logo.png"? "https://overseasdata.s3.ap-south-1.amazonaws.com/Company/6/logo.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAWDCXZNCOULZNVOK6%2F20240729%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20240729T095743Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Signature=e2da4312025d2bbb07f3d67f3db3b9b60690369085896b11a4ef29b02ca0e4ed" : v?.cmpLogoS3} 
+                      src={
+                        v?.cmpLogoS3 === "placeholder/logo.png"
+                          ? "https://overseasdata.s3.ap-south-1.amazonaws.com/Company/6/logo.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAWDCXZNCOULZNVOK6%2F20240729%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20240729T095743Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Signature=e2da4312025d2bbb07f3d67f3db3b9b60690369085896b11a4ef29b02ca0e4ed"
+                          : v?.cmpLogoS3
+                      }
                       alt="Company Logo"
-                      className="img-fluid"
+                     className="img-fluid"
                     />
                   </div>
-                  <h5 className="mt-4" style={{height:"40px"}}>{v?.cmpName}</h5>
+                  <h5 className="mt-4" style={{ height: "40px" }}>
+                    {v?.cmpName}
+                  </h5>
                   {/* <p className="mb-5">
                     {v?.cmpDescription?.substring(0, 100)}
                     {v?.cmpDescription?.length>100 && "..."}
                   </p> */}
-                  <button className="btn btn-outline-primary mt-4" onClick={()=>navigate("/companies")}>
+                  <button
+                    className="btn btn-outline-primary mt-4"
+                    onClick={() => navigate("/companies")}
+                  >
                     View More
                   </button>
                 </div>

@@ -76,7 +76,7 @@ function Footer() {
         label: item.occupation,
         value: item.id,
         img:
-          "https://overseas.ai/storage/uploads/occupationImage/" +
+          "https://backend.overseas.ai/storage/uploads/occupationImage/" +
           item.id +
           "/" +
           item.occuLgIcon,
@@ -264,7 +264,7 @@ function Footer() {
             <div className="mx-3">
               <div className="">
                 <img
-                  src="https://overseas.ai/frontend/logo/logo_en.gif"
+                  src="https://backend.overseas.ai/frontend/logo/logo_en.gif"
                   className="img-fluid rounded mt-2 mb-3"
                   style={{ height: "50px" }}
                 />
@@ -307,7 +307,7 @@ function Footer() {
                     href="https://wa.me/9534404400"
                     target="_blank"
                   >
-                    <i className="fa me-2 fa-whatsapp"></i>+91 8100929525
+                    <i className="fa me-2 fa-whatsapp"></i>+91 9907591478
                   </a>
                 </div>
                 <div className="mb-1">
@@ -354,7 +354,7 @@ function Footer() {
                   <div className=" d-flex justify-content-center ">
                     <div className="bg-light px-2 rounded" style={{ height: "50px", width: "150px" }}>
                       <img
-                        src="https://overseas.ai/newfrontend/image/google-play.png"
+                        src="https://admin.overseas.ai/newfrontend/image/google-play.png"
                         className="img-fluid"
                       />
                     </div>
@@ -369,7 +369,7 @@ function Footer() {
                   <div className="col-8 ">
                     <a href="https://play.google.com/store/apps/details?id=ai.overseas">
                       <img
-                        src="https://overseas.ai/newfrontend/image/google-play.png"
+                        src="https://admin.overseas.ai/newfrontend/image/google-play.png"
                         className="img-fluid px-2 py-1 rounded shadow bg-light"
                       />
                     </a>

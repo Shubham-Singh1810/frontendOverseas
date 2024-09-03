@@ -83,7 +83,7 @@ return
               <img
                 className="flagIcon"
                 src={
-                  "https://overseas.ai/storage/uploads/countryFlag/" +
+                  "https://backend.overseas.ai/storage/uploads/countryFlag/" +
                   value?.jobLocationCountry?.countryFlag
                 }
               />
