@@ -65,7 +65,6 @@ function Home() {
     <JobOpeningInTopCompany/>
     <JobsSliderList title="Meet Our Institutes"  rounded={false} backgroundColor="#F8F9FA" data={instituteList}  institute={true}/>
     <AppPromationSection/>
-    {/* <JobsSliderList title="Job Openings In Top Companies" backgroundColor="#F4FAFD" /> */}
     <SuccessfulPlacedCandidateList title="Find Jobs By Department" rounded={true} backgroundColor="#F4FAFD" />
     <NewsSlider/>
     </>
