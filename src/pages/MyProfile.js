@@ -236,7 +236,8 @@ function MyProfile() {
           </div>
           <div className="col-8  d-none d-md-block custom-myProfile-scrollbar">
             <div className="ms-2  p-2 ">
-              <h4 className="text-center py-1 bgBlue text-light">
+              {userData?.applied_jobs.length!=0 && <>
+                <h4 className="text-center py-1 bgBlue text-light">
                 Applied Jobs
               </h4>
               <div className="row">
@@ -257,8 +258,8 @@ function MyProfile() {
                 >
                   View All
                 </button>
-              </div>
-              <h4 className="text-center py-1 bg-warning text-dark">
+              </div></>}
+              {userData?.applied_courses.length!=0 && <><h4 className="text-center py-1 bg-warning text-dark">
                 Applied Courses
               </h4>
               <div className="row">
@@ -279,8 +280,8 @@ function MyProfile() {
                 >
                   View All
                 </button>
-              </div>
-              <h4 className="text-center py-1 bg-info text-light">
+              </div></>}
+              {userData?.applied_trade_tests.length!=0 && <><h4 className="text-center py-1 bg-info text-light">
                 Applied Tests
               </h4>
               <div className="row">
@@ -301,8 +302,9 @@ function MyProfile() {
                 >
                   View All
                 </button>
-              </div>
-              <h4 className="text-center py-1 bg-primary text-light">
+              </div></>}
+              {userData?.favourite_jobs.length!=0 && <>
+                <h4 className="text-center py-1 bg-primary text-light">
                 Favourite Jobs
               </h4>
               <div className="row">
@@ -323,7 +325,8 @@ function MyProfile() {
                 >
                   View All
                 </button>
-              </div>
+              </div></>}
+              
             </div>
           </div>
         </div>

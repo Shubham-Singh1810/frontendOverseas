@@ -10,6 +10,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGlobalState } from "../GlobalProvider";
+import { Helmet } from "react-helmet";
 
 function Login() {
   const navigate = useNavigate();
@@ -116,12 +117,17 @@ function Login() {
   };
 
   return (
-    <div
+    <><Helmet>
+    <title>Overseas Jobs Log In: Access Global Opportunities</title>
+    <meta name="description" content="Unlock your potential with overseas job listings. Log in to explore diverse career options." />
+    <meta name="keywords" content="overseas jobs login" />
+  </Helmet>
+  <div
       className="vh-100 d-flex justify-content-center align-items-center"
       style={{
-        background:
-          "url(https://www.bacancytechnology.com/main/img/job-recruitment-portal-development/banner.jpg?v-1)",
-        backgroundSize: "100% 100%",
+        background: "url(/images/logoBg.jpg)",
+        backgroundSize: "cover", // Maintain aspect ratio
+        backgroundPosition: "center", // Ensure it's centered
         backgroundRepeat: "no-repeat",
       }}
     >
@@ -139,7 +145,10 @@ function Login() {
           <i className="fa fa-close text-danger  bg-light border p-1 rounded"></i>
         </div>
         <div className="text-center">
-          <img src="https://overseas.ai/frontend/logo/logo_en.gif" alt="Logo" />
+          <img
+            src="https://backend.overseas.ai/frontend/logo/logo_en.gif"
+            alt="Logo"
+          />
         </div>
         <h5 className="text-center mt-3 mb-4">Welcome Back</h5>
         <form onSubmit={formik.handleSubmit}>
@@ -233,11 +242,11 @@ function Login() {
           )}
           {!isOtpSent ? (
             <p
-              className="mt-2"
+              className="mt-2 text-primary"
               style={{ cursor: "pointer" }}
               onClick={handleSendOtp}
             >
-              <b>Login Via OTP Verification</b>
+              <b><u>Login Via OTP Verification</u></b>
             </p>
           ) : null}
           {isOtpSent ? (
@@ -264,6 +273,8 @@ function Login() {
       </div>
       <ToastContainer />
     </div>
+  </>
+    
   );
 }
 

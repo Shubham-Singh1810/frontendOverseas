@@ -198,8 +198,8 @@ function Institutes() {
           {filteredArray?.map((v, i) => (
             <div
               key={i}
-              className="col-12 col-md-6"
-              onClick={() => navigate(`/institute-details/${v?.id}`)}
+              className={"col-12 col-md-6 "+ (v?.course_count==0 && " disabled")}
+              onClick={() => navigate(v?.course_count==0 ? "/institutes": `/institute-details/${v?.id}`)}
             >
               <div className="p-4 m-3 shadow rounded">
                 <div className="row">
@@ -242,7 +242,7 @@ function Institutes() {
                       <p className="mb-0 badge bg-secondary mb-0">
                         {v?.course_count} Courses
                       </p>
-                      <button className="btn btn-sm btn-primary">
+                      <button className={"btn btn-sm btn-primary " + ( v?.course_count==0 && " disabled")}>
                         View More
                       </button>
                     </div>

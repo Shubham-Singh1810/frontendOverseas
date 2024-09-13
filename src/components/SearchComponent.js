@@ -60,11 +60,11 @@ function SearchComponent({ fullWidth }) {
   };
 
   return (
-    <div className="row justify-content-center">
+    <div className="row col-12 justify-content-center justify-content-md-start ms-1">
       <div
         className={
-          "col-10 d-flex justify-content-between p-2 bg-light " +
-          (fullWidth ? "col-md-10" : "col-md-8")
+          "col-lg-8  d-flex justify-content-between p-2 bg-light " 
+          
         }
         style={{ borderRadius: "30px" }}
       >

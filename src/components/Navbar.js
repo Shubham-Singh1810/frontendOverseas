@@ -427,7 +427,7 @@ function Navbar() {
             <div className="container-fluid ">
               <Link className="navbar-brand" to="/">
                 <img
-                  src="https://backend.overseas.ai/frontend/logo/logo_en.gif"
+                  src="/images/brandlogo.gif"
                   style={{ height: 50, width: 160 }}
                   alt="logo"
                 />

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getCourseList } from "../services/institute.service";
 import CourseCard from "../components/CourseCard";
 import { useGlobalState } from "../GlobalProvider";
+import { Helmet } from "react-helmet";
 function TrainingInstitute() {
   const { globalState, setGlobalState } = useGlobalState();
   const [courseList, setCourseList] = useState([]);
@@ -16,7 +17,15 @@ function TrainingInstitute() {
     getCourseListFunc();
   }, []);
   return (
-    <div className="  mt-5 pt-5">
+    <><Helmet>
+    <title>Skill Training Institute: Elevate Your Career Today</title>
+    <meta
+      name="description"
+      content="Join Skill Training Institute to gain practical skills and knowledge to help you succeed in your career."
+    />
+    <meta name="keywords" content="skill training institute" />
+  </Helmet>
+  <div className="  mt-5 pt-5">
       <div className="mt-5 pt-md-5 container">
         <div className="row mx-3 mb-5 mt-3">
           <div className="col-md-6 col-12 my-auto order-md-1 order-2">
@@ -78,6 +87,8 @@ function TrainingInstitute() {
         </div>
       </div>
     </div>
+  </>
+    
   );
 }
 

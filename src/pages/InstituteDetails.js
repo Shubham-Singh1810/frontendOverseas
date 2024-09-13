@@ -21,6 +21,7 @@ function InstituteDetails() {
     }
   };
   useEffect(() => {
+    
     getCourseByInstituteFunc(params?.id);
   }, []);
   return (

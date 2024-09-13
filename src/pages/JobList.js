@@ -187,9 +187,20 @@ function JobList() {
             </div>
           ) : (
             <div className="row col-md-8 col-lg-6 col-12 m-0 p-0">
-              {searchKey.length > 0
-                ? searchJobsArr?.map((v, i) => <JobCard key={i} value={v} />)
-                : jobArr?.map((v, i) => <JobCard key={i} value={v} />)}
+              {searchKey.length > 0 ? (
+                searchJobsArr?.map((v, i) => <JobCard key={i} value={v} />)
+              ) : jobArr.length > 0 ? (
+                jobArr?.map((v, i) => <JobCard key={i} value={v} />)
+              ) : (
+                <div className="text-center mt-5">
+                  <img
+                  style={{ height: "280px", width: "280px", opacity:0.8 }}
+                  src="https://cdn-icons-png.flaticon.com/256/6840/6840178.png"
+                  className="img-fluid"
+                />
+                <h5 className="text-secondary"><b>No Job Found</b></h5>
+                </div>
+              )}
             </div>
           )}
 

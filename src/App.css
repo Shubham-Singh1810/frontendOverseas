@@ -1,13 +1,13 @@
 * {
   margin: 0px;
   padding: 0px;
-  /* overflow-x: hidden; */
 }
 body {
   overflow-x: hidden;
 }
 :root {
   --navbar-height: 92px;
+  overflow-x: hidden;
 }
 .helveticaFont {
   font-family: Helvetica;

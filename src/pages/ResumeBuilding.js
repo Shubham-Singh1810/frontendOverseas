@@ -4,6 +4,7 @@ import html2canvas from "html2canvas";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import { Helmet } from "react-helmet";
 import {
   getResumeOtp,
   verifyOtpForResumeUser,
@@ -107,7 +108,7 @@ function ResumeBuilding() {
     sessionStorage.getItem("resumePassport") && JSON.parse(sessionStorage.getItem("resumePassport"))[0]
   );
   const [experienceArr, setExperienceArr] = useState(
-    JSON.parse(sessionStorage.getItem("resumeExperience"))
+     JSON.parse(sessionStorage.getItem("resumeExperience"))
   );
   const [licenceArr, setLicenceArr] = useState(
     JSON.parse(sessionStorage.getItem("resumeLicence"))
@@ -154,6 +155,12 @@ function ResumeBuilding() {
         );
         setShowVerificationPop(false);
         setUserDetails(response?.data?.user);
+        setPassportDetails(response?.data?.passports);
+        setExperienceArr(response?.data?.experiences)
+        setLicenceArr(response?.data?.licences);
+        setTimeout(()=>{
+          window.location.reload()
+        },500)
       }
     } catch (error) {
       console.log(error);
@@ -179,7 +186,9 @@ function ResumeBuilding() {
       formData.append("district", userDetails.district);
       formData.append("village", userDetails.village);
       formData.append("panchayat", userDetails.panchayat);
-      formData.append("email", userDetails.email);
+      if(userDetails.email){
+        formData.append("email", userDetails.email);
+      }
       formData.append("ps", userDetails.ps);
       formData.append("id", userDetails.id);
       let response = await updateResumeApi(formData);
@@ -269,7 +278,15 @@ function ResumeBuilding() {
     } catch (error) {}
   };
   return (
-    <div className="">
+    <><Helmet>
+    <title>Overseas Jobs Resume: Building for Your Dream Career</title>
+    <meta
+      name="description"
+      content="Transform your resume for overseas job applications . Increase your visibility to employers and take the next step in your global career."
+    />
+    <meta name="keywords" content="resume format for overseas job" />
+  </Helmet>
+  <div className="">
       <div className="mt-5 pt-5">
         <div className="container mt-5 pt-5">
           <div className="row">
@@ -291,6 +308,7 @@ function ResumeBuilding() {
                   onClick={() => {
                     setShowWorkDetails(true);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   <h5 className="p-4 mb-0">
                     <i className="fa fa-suitcase me-1"></i> Work Experience
@@ -301,6 +319,7 @@ function ResumeBuilding() {
                   onClick={() => {
                     setShowEducationDetails(true);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   <h5 className="p-4 mb-0">
                     <i className="fa fa-graduation-cap me-1"></i> Education
@@ -311,6 +330,7 @@ function ResumeBuilding() {
                   onClick={() => {
                     setShowAddressDetails(true);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   <h5 className="p-4 mb-0">
                     <i className="fa fa-address-card me-1"></i> Address
@@ -365,7 +385,7 @@ function ResumeBuilding() {
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
-                height: imageDimensions.height,
+                height: imageDimensions?.height,
               }}
             >
               <div className="px-2 py-5">
@@ -444,7 +464,7 @@ function ResumeBuilding() {
                         <h5 className="mb-1">Gender : {userDetails?.gender}</h5>
                         <h5 className="mb-1">
                           Language Known :{" "}
-                          {userDetails &&
+                          {userDetails && userDetails?.languageKnown  &&
                             JSON.parse(userDetails?.languageKnown).map(
                               (v, i) => {
                                 return v + "  ";
@@ -473,13 +493,13 @@ function ResumeBuilding() {
                       </div>
                       <div className="mt-3">
                         <h5 className="mb-2">
-                          ✔ {userDetails?.highEdu} <br />{" "}
+                        {userDetails?.highEdu && "✔"}  {userDetails?.highEdu} <br />{" "}
                           <span style={{ fontSize: "14px" }}>
                             {userDetails?.highEduYear}
                           </span>
                         </h5>
                         <h5 className="mb-1">
-                          ✔ {userDetails?.techEdu} <br />{" "}
+                        {userDetails?.techEdu && "✔"}  {userDetails?.techEdu} <br />{" "}
                           <span style={{ fontSize: "14px" }}>
                             {userDetails?.techEduYear}
                           </span>
@@ -1319,6 +1339,8 @@ function ResumeBuilding() {
         </>
       )}
     </div>
+  </>
+    
   );
 }
 

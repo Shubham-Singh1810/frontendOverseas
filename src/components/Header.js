@@ -39,7 +39,7 @@ function Header() {
            <a href="https://www.facebook.com/overseasdreamjobs" target="_blank"><i className="fa fa-facebook bg-light textBlue rounded py-1 px-2 me-3" /></a> 
           </h6>
           <h6 className="mb-0">
-            <a href="https://www.facebook.com/overseasdreamjobs"  target="_blank"><i className="fa fa-linkedin bg-light textBlue rounded py-1 px-2 me-3" /></a>
+            <a href="https://www.linkedin.com/company/findoverseasjobs/?originalSubdomain=in"  target="_blank"><i className="fa fa-linkedin bg-light textBlue rounded py-1 px-2 me-3" /></a>
             
           </h6>
           <h6 className="mb-0">
@@ -75,7 +75,7 @@ function Header() {
             
           </h6>
           <h6 className="mb-0">
-          <i className="fa fa-language bg-light textBlue rounded py-1 px-2 ms-3" onClick={()=>setShowLangPopup(true)}/>
+          {/* <i className="fa fa-language bg-light textBlue rounded py-1 px-2 ms-3" onClick={()=>setShowLangPopup(true)}/> */}
           </h6>
         </div>
       </div>
