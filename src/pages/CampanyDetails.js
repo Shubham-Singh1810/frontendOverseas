@@ -53,6 +53,7 @@ function CampanyDetails() {
                   <img
                     src={hraDetails?.cmpLogoS3}
                     className="img-fluid "
+                    alt="Company Image"
                   />
                 </div>
                 <div className="col-md-9 col-12 my-md-auto ">
@@ -83,7 +84,7 @@ function CampanyDetails() {
               </div>
               <div className="col-4">
                 
-                  <img className="img-fluid" src="https://www.hirect.in/_nuxt/img/chat-directly-new.6e008a5.png"/>
+                  <img className="img-fluid" src="https://www.hirect.in/_nuxt/img/chat-directly-new.6e008a5.png" alt=" Image"/>
                 
               </div>
              </div>

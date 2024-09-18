@@ -363,7 +363,7 @@ function ResumeBuilding() {
                         className="text-secondary mb-3"
                         onClick={() => setShowLicencePop(true)}
                       >
-                        Licence
+                        License
                       </h5>
                       <h5 className="text-secondary mb-3">Award</h5>
                       <h5 className="text-secondary mb-3">Hobby</h5>
@@ -401,6 +401,7 @@ function ResumeBuilding() {
                         }}
                         className="border shadow-lg"
                         src={userDetails?.photo}
+                        alt="Profile Image"
                       />
                     </div>
                     <div className="ms-3">
@@ -992,7 +993,7 @@ function ResumeBuilding() {
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header d-flex justify-content-between ">
-                  <h5 className="modal-title">Licence Details</h5>
+                  <h5 className="modal-title">License Details</h5>
                   <button
                     type="button"
                     className="btn "
@@ -1005,7 +1006,7 @@ function ResumeBuilding() {
                 <div className="modal-body">
                   <div className="m-2 mt-0">
                     <div className="mb-4">
-                      <label>Licence Name</label>
+                      <label>License Name</label>
                       <input
                         className="form-control"
                         onChange={(e) =>
@@ -1017,7 +1018,7 @@ function ResumeBuilding() {
                       />
                     </div>
                     <div className="mb-3">
-                      <label>Licence Photo</label>
+                      <label>License Photo</label>
                       <input
                         className="form-control"
                         type="file"

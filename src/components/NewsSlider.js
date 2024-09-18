@@ -56,7 +56,7 @@ function NewsSlider() {
                   <img
                     src={newsArr[0]?.image}
                     className="d-block w-100 vh50"
-                    alt="..."
+                    alt="News Slider"
                   />
                  
                 </div>
@@ -64,7 +64,7 @@ function NewsSlider() {
                   <img
                    src={newsArr[1]?.image}
                     className="d-block w-100 vh50"
-                    alt="..."
+                    alt="News Slider"
                   />
                   
                 </div>
@@ -72,7 +72,7 @@ function NewsSlider() {
                   <img
                     src={newsArr[2]?.image}
                     className="d-block w-100 vh50"
-                    alt="..."
+                    alt="News Slider"
                   />
                   
                 </div>

@@ -54,7 +54,7 @@ function Navbar() {
         // },
         {
           name: "Skill Training",
-          path: "training-institute",
+          path: "skill-training-institute",
         },
         {
           name: "Trade Testing",
@@ -65,7 +65,7 @@ function Navbar() {
     {
       name: "Recruiters",
       icon: "fa fa-users",
-      path: "/companies",
+      path: "/recruiting-companies",
     },
     {
       name: "Collaboration",
@@ -73,7 +73,7 @@ function Navbar() {
       subMenu: [
         {
           name: "Training Institutes",
-          path: "institutes",
+          path: "training-institutes",
         },
         {
           name: "Trade Test Centres",
@@ -252,6 +252,7 @@ function Navbar() {
                               width: "35px",
                               borderRadius: "50%",
                             }}
+                            alt="Department Image"
                           />
                           <p className="mb-0" style={{ fontSize: "13px" }}>
                             {v?.label}
@@ -305,6 +306,7 @@ function Navbar() {
                               width: "35px",
                               borderRadius: "50%",
                             }}
+                            alt="Flag Image"
                           />
                           <p className="mb-0" style={{ fontSize: "13px" }}>
                             {v?.name}

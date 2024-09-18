@@ -8,6 +8,7 @@ import {
 } from "../services/institute.service";
 import { getInstituteList } from "../services/institute.service";
 import {useNavigate} from 'react-router-dom'
+import { Helmet } from "react-helmet";
 const validationSchema = Yup.object({
   instituteName: Yup.string().required("Required"),
   insPhone: Yup.string().required("Required"),
@@ -139,7 +140,16 @@ function Institutes() {
     getInstituteListFunc();
   }, []);
   return (
-    <div className="mt-5 pt-5">
+    <>
+    <Helmet>
+    <title>Training Institutes: Your Ultimate Guide</title>
+    <meta
+      name="description"
+      content="Discover the best training institutes near you. Explore overseas jobs comprehensive list"
+    />
+    <meta name="keywords" content="Training Isntitutes" />
+  </Helmet>
+  <div className="mt-5 pt-5">
       <div className="mt-5 pt-5 container">
         <div className="d-md-flex justify-content-between my-3 mx-4 pb-3">
           <h5
@@ -199,7 +209,7 @@ function Institutes() {
             <div
               key={i}
               className={"col-12 col-md-6 "+ (v?.course_count==0 && " disabled")}
-              onClick={() => navigate(v?.course_count==0 ? "/institutes": `/institute-details/${v?.id}`)}
+              onClick={() => navigate(v?.course_count==0 ? "/training-institutes": `/institute-details/${v?.id}`)}
             >
               <div className="p-4 m-3 shadow rounded">
                 <div className="row">
@@ -212,6 +222,7 @@ function Institutes() {
                           : v.profileImageUrl
                       }
                       className="img-fluid"
+                      alt="Profile Image"
                     />
                   </div>
                   <div className="col-md-8 col-12 mt-3 mt-md-0">
@@ -254,7 +265,7 @@ function Institutes() {
         </div>
         <div className="row mb-5 mt-3" ref={employerRegisterRef}>
           <div className="col-md-4 d-none d-md-block">
-            <img src="/images/fullMobileNew.png" alt="Institute" />
+            <img src="/images/fullMobileNew.png" alt="Mobile Image"/>
           </div>
           <div className="col-md-8 col-12 my-auto order-md-1 mt-5 mt-md-0">
             <div className="shadow rounded bg-light p-md-4 p-3 m-md-3 m-0">
@@ -570,6 +581,8 @@ function Institutes() {
       </div>
       <ToastContainer />
     </div>
+    </>
+   
   );
 }
 

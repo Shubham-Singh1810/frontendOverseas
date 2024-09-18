@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { getHraList } from "../services/hra.service";
-
+import { Helmet } from "react-helmet";
 function Companies() {
   const navigate = useNavigate();
   const [hraList, setHraList] = useState([]);
@@ -86,7 +86,15 @@ function Companies() {
   };
 
   return (
-    <div className="mt-5 pt-5">
+    <><Helmet>
+    <title>Recruiting Company: Top Overseas Job Apps Listed</title>
+    <meta
+      name="description"
+      content="Discover the best recruiting company list for overseas job apps. Find your next opportunity with trusted recruitment solutions tailored for you."
+    />
+    <meta name="keywords" content="Recruiting companies" />
+  </Helmet>
+  <div className="mt-5 pt-5">
       <div className="mt-5 pt-md-5 container ">
         <div className="d-md-flex justify-content-between my-3 mx-4 pb-3">
           <h5
@@ -249,7 +257,8 @@ function Companies() {
           </div>
         </div>
       </div>
-    </div>
+    </div></>
+    
   );
 }
 

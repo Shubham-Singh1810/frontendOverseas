@@ -102,7 +102,7 @@ function CourseDetails() {
               </div>
             </div>
             <div className="col-md-6 col-12">
-              <img className="img-fluid mt-3 mt-md-0" src={courseDetails?.course_image} />
+              <img className="img-fluid mt-3 mt-md-0" src={courseDetails?.course_image} alt="course Image"/>
             </div>
           </div>
           <div className="row mt-5 mb-4">
@@ -164,6 +164,7 @@ function CourseDetails() {
                         width: "200px",
                         borderRadius: "50%",
                       }}
+                      alt="course Image"
                     />
                   </div>
                   <p className="text-center my-3">
@@ -178,7 +179,7 @@ function CourseDetails() {
           <button
             className="btn btn-outline-primary "
             style={{ width: "200px" }}
-            onClick={() => navigate("/training-institute")}
+            onClick={() => navigate("/skill-training-institute")}
           >
             View All
           </button>

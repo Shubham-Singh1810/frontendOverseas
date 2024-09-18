@@ -57,10 +57,10 @@ function JobDiscription() {
               {jobDetails?.jobDescription}
             </p>
             <div className="d-flex justify-content-center my-2 imgContainer">
-              <img src="https://admin.overseas.ai/storage/uploads/countryFlag/United%20Arab%20Emirates.png" />
-              <img src="https://admin.overseas.ai/newfrontend/image/job-card/accommodation.png" />
-              <img src="https://admin.overseas.ai/newfrontend/image/job-card/health.png" />
-              <img src="https://admin.overseas.ai/newfrontend/image/job-card/transportation.png" />
+              <img src="https://admin.overseas.ai/storage/uploads/countryFlag/United%20Arab%20Emirates.png" alt="Country Flag"/>
+              <img src="https://admin.overseas.ai/newfrontend/image/job-card/accommodation.png" alt="Image"/>
+              <img src="https://admin.overseas.ai/newfrontend/image/job-card/health.png" alt="Image"/>
+              <img src="https://admin.overseas.ai/newfrontend/image/job-card/transportation.png" alt="Image"/>
             </div>
           </div>
           <div className="my-3">

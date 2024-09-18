@@ -79,7 +79,7 @@ function TradeTestCourseDetails() {
         <div className="container mt-5 py-md-5">
           <div className="row mt-5 pt-md-2">
             <div className="col-md-6 col-12">
-              <img className="img-fluid" src={courseDetails?.course_image} />
+              <img className="img-fluid" src={courseDetails?.course_image} alt="Course Image"/>
             </div>
             <div className="col-md-6 col-12 my-auto">
               <h1 className="mb-3 mt-4 mt-md-0">{courseDetails?.course_name}</h1>
@@ -139,6 +139,7 @@ function TradeTestCourseDetails() {
                         width: "200px",
                         borderRadius: "50%",
                       }}
+                      alt="Course Image"
                     />
                   </div>
                   <p className="text-center my-3">

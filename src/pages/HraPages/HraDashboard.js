@@ -93,6 +93,7 @@ function HraDashboard() {
                       width: "110px",
                       borderRadius: "50%",
                     }}
+                    alt="Profile Image"
                   />
                   <p
                     className="text-center textBlue"

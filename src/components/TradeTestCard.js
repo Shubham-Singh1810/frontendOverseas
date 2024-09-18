@@ -45,6 +45,7 @@ function TradeTestCard({ v , getTestTradeListFunc}) {
                   : v?.course_image
               }
               className="img-fluid"
+              alt="Test Image"
             />
           </div>
           <div className="col-12 col-md-8">

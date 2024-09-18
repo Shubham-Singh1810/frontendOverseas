@@ -166,6 +166,7 @@ function MyProfile() {
                       width: "110px",
                       borderRadius: "50%",
                     }}
+                    alt="Profile Image"
                   />
                   <p className="text-center textBlue" style={{cursor:"pointer"}} onClick={()=>alert("Work in progress")}>
                     <u>Edit</u>

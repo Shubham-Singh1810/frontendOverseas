@@ -62,7 +62,7 @@ function Aboutus() {
           </div>
         </div>
         <div className="col-md-6 my-auto col-12 d-flex justify-content-center my-auto">
-          <img src="http://localhost:3001/images/firefighter.png" />
+          <img src="http://localhost:3001/images/firefighter.png" alt="About Image"/>
         </div>
       </div>
       <div className="row m-0">

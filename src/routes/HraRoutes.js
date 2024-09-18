@@ -43,8 +43,8 @@ function HraRoutes() {
         <Route path="/contact-us" element={<Contactus/>}/>
         <Route path="/job/:location/:title/:id" element={<JobDiscription/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/companies" element={<Companies/>}/>
-        <Route path="/institutes" element={<Institutes/>}/>
+        <Route path="/recruiting-companies" element={<Companies/>}/>
+        <Route path="/training-institutes" element={<Institutes/>}/>
         <Route path="/institute-details/:id" element={<InstituteDetails/>}/>
         <Route path="/trade-test-center" element={<TradeTestCenters/>}/>
         <Route path="/trade-test-center-details/:id" element={<TradeTestCenterDetails/>}/>
@@ -54,7 +54,7 @@ function HraRoutes() {
         <Route path="/otp-verification" element={<OtpVerification/>}/>
         <Route path="/my-profile" element={<MyProfile/>}/>
         <Route path="/resume-building" element={<ResumeBuilding/>}/>
-        <Route path="/training-institute" element={<TrainingInstitute/>}/>
+        <Route path="/skill-training-institute" element={<TrainingInstitute/>}/>
         <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
         <Route path="/course-details/:id" element={<CourseDetails/>}/>
         <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>

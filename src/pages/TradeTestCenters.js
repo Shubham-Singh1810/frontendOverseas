@@ -212,6 +212,7 @@ function TradeTestCenter() {
                           : v.profileImageUrl
                       }
                       className="img-fluid"
+                      alt="Profile Image"
                     />
                   </div>
                   <div className="col-md-8 col-12 mt-3 mt-md-0">
@@ -564,7 +565,7 @@ function TradeTestCenter() {
             </div>
           </div>
           <div className="col-md-4 d-none d-md-block">
-            <img src="/images/fullMobileNew.png" alt="Institute" />
+            <img src="/images/fullMobileNew.png" alt="Institute"/>
           </div>
         </div>
       </div>

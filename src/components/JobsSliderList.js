@@ -90,6 +90,7 @@ function JobsSliderList({ title, backgroundColor, rounded, data, institute }) {
                           width: "230px",
                           borderRadius: rounded ? "50%" : "0px",
                         }}
+                        alt="Image"
                       />
                     </div>
                     <p className="text-center my-3">
@@ -104,7 +105,7 @@ function JobsSliderList({ title, backgroundColor, rounded, data, institute }) {
             <button
               className="btn btn-outline-primary "
               style={{ width: "200px" }}
-              onClick={() => navigate(institute? "/institutes": "/jobs")}
+              onClick={() => navigate(institute? "/training-institutes": "/jobs")}
             >
               View All
             </button>

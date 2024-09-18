@@ -267,6 +267,7 @@ function Footer() {
                   src="https://backend.overseas.ai/frontend/logo/logo_en.gif"
                   className="img-fluid rounded mt-2 mb-3"
                   style={{ height: "50px" }}
+                  alt="logo Image"
                 />
                 <p>
                   Overseas.ai links skilled individuals with employers globally,
@@ -364,6 +365,7 @@ function Footer() {
                     <img
                       src="/images/appQR.png"
                       className="img-fluid rounded shadow"
+                      alt="app qr Image"
                     />
                   </div>
                   <div className="col-8 ">
@@ -371,6 +373,7 @@ function Footer() {
                       <img
                         src="https://admin.overseas.ai/newfrontend/image/google-play.png"
                         className="img-fluid px-2 py-1 rounded shadow bg-light"
+                        alt="play store"
                       />
                     </a>
                   </div>

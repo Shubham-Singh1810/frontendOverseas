@@ -1,3 +1,4 @@
+
 import React from "react";
 import Statics from "../components/Statics";
 import SelectUserType from "../components/SelectUserType";
@@ -14,7 +15,6 @@ function InstituteSignUp() {
       }}
     >
       <div className="mt-5 pt-md-5 pt-2 container selectRegisterForm">
-
         <div className="row mt-5 py-5 justify-content-center">
           <SelectUserType/>
           <div className="col-md-6 col-12 my-auto order-md-1 ">

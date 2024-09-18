@@ -46,6 +46,7 @@ function InstituteDetails() {
                               : instituteDetails?.profileImage
                           }
                           className="img-fluid"
+                          alt=" Image"
                         />
                       </div>
                       <div className="col-md-8 col-12 mt-3 mt-md-0">
@@ -81,7 +82,7 @@ function InstituteDetails() {
                   </div>
                 </div>
                 <div className="col-2 d-md-block d-none">
-                  <img className="img-fluid" src="/images/fullMobileNew.png" />
+                  <img className="img-fluid" src="/images/fullMobileNew.png" alt="Mobile Image"/>
                 </div>
               </div>
             </div>

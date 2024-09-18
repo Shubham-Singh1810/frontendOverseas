@@ -47,6 +47,7 @@ function AppliedCourseCard({ v , getCourseListFunc}) {
                   : v?.course_image
               }
               className="img-fluid"
+              alt="Course Image"
             />
           </div>
           <div className="col-12 col-md-8">

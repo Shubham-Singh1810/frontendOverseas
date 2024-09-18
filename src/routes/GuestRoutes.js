@@ -34,18 +34,18 @@ function GuestRoutes() {
         <Route path="/jobs/:filter" element={<JobList/>}/>
         <Route path="/resume-building" element={<ResumeBuilding/>}/>
         <Route path="/contact-us" element={<Contactus/>}/>
-        <Route path="/institutes" element={<Institutes/>}/>
+        <Route path="/training-institutes" element={<Institutes/>}/>
         <Route path="/institute-details/:id" element={<InstituteDetails/>}/>
         <Route path="/trade-test-center" element={<TradeTestCenters/>}/>
         <Route path="/trade-test-center-details/:id" element={<TradeTestCenterDetails/>}/>
         <Route path="/job/:location/:title/:id" element={<JobDiscription/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/companies" element={<Companies/>}/>
+        <Route path="/recruiting-companies" element={<Companies/>}/>
         <Route path="/company/:id" element={<CampanyDetails/>}/>
         <Route path="/candidate-register-step2" element={<CandidateRegister/>}/>
         <Route path="/candidate-register" element={<CandidateSignUp/>}/>
         <Route path="/otp-verification" element={<OtpVerification/>}/>
-        <Route path="/training-institute" element={<TrainingInstitute/>}/>
+        <Route path="/skill-training-institute" element={<TrainingInstitute/>}/>
         <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
         <Route path="/course-details/:id" element={<CourseDetails/>}/>
         <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>

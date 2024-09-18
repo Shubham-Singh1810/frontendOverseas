@@ -92,7 +92,7 @@ function JobOpeningInTopCompany() {
                   </p> */}
                   <button
                     className="btn btn-outline-primary mt-4"
-                    onClick={() => navigate("/companies")}
+                    onClick={() => navigate("/recruiting-companies")}
                   >
                     View More
                   </button>
@@ -106,7 +106,7 @@ function JobOpeningInTopCompany() {
           <button
             className="btn btn-primary"
             style={{ width: "200px" }}
-            onClick={() => navigate("/companies")}
+            onClick={() => navigate("/recruiting-companies")}
           >
             View All
           </button>

@@ -86,6 +86,7 @@ function CandidateSignUp() {
               src="https://cdn-icons-png.flaticon.com/256/8662/8662443.png"
               className="img-fluid "
               style={{ height: "300px" }}
+              alt="Image"
             />
           </div>
           <Formik

@@ -104,12 +104,13 @@ function Notifications() {
           <img className="img-fluid" src="/images/fullMobileNew.png" />
           <div className="row mx-2">
             <div className="col-4">
-              <img className="img-fluid" src="/images/appQR.png" />
+              <img className="img-fluid" src="/images/appQR.png" alt="App Qr"/>
             </div>
             <div className="col-8 my-auto border rounded">
               <img
                 className="img-fluid"
                 src="https://admin.overseas.ai/newfrontend/image/google-play.png"
+                alt="Play Store Image"
               />
             </div>
           </div>

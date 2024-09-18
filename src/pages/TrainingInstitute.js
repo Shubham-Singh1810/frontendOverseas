@@ -40,6 +40,7 @@ function TrainingInstitute() {
               className="img-fluid"
               src="/images/institute.png"
               style={{ height: "350px" }}
+              alt="Profile Image"
             />
           </div>
         </div>

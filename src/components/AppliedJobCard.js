@@ -69,6 +69,7 @@ function AppliedJobCard({ value }) {
                   "https://backend.overseas.ai/storage/uploads/countryFlag/" +
                   value?.jobLocationCountry?.countryFlag
                 }
+                alt="Country Flag"
               />
               <p className="mb-0 ms-2">{value?.jobLocationCountry?.name}</p>
             </div>
@@ -79,6 +80,7 @@ function AppliedJobCard({ value }) {
           <div className="col-4  col-md-4">
             <img
               className="img-fluid rounded"
+              alt="Job Image"
               src={value?.jobPhoto}
               // src="https://overseasdata.s3.ap-south-1.amazonaws.com/JobData/3/JOB030538.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAWDCXZNCOULZNVOK6%2F20240508%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20240508T122934Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Signature=2c3b3cf4f0c4b096dc4a451a7e23d8b82929f50b99d67792465dcc8dc51ce572"
             />

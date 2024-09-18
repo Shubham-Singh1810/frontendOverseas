@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getCourseList, getTradeTestList } from "../services/institute.service";
 import TradeTestCard from "../components/TradeTestCard";
 import { useGlobalState } from "../GlobalProvider";
+import { Helmet } from "react-helmet";
 function TradeTestingList() {
   const [courseList, setCourseList] = useState([]);
   const { globalState, setGlobalState } = useGlobalState();
@@ -15,7 +16,16 @@ function TradeTestingList() {
     getTestTradeListFunc();
   }, []);
   return (
-    <div className="  mt-5 pt-5">
+    <>
+    <Helmet>
+    <title>Trade Testing Institute: Elevate Your Skills Today</title>
+    <meta
+      name="description"
+      content="Join our Trade Testing Institute to upgrade your skills with expert training."
+    />
+    <meta name="keywords" content="Trade Testing Isntitute" />
+  </Helmet>
+  <div className="  mt-5 pt-5">
       <div className="mt-5 pt-md-5 container">
         <div className="row mx-3 mb-5 mt-3">
           <div className="col-md-6 col-12 my-auto   d-flex justify-content-center">
@@ -23,6 +33,7 @@ function TradeTestingList() {
               className="img-fluid"
               src="/images/tiltedApp.png"
               style={{ height: "350px" }}
+              alt="Mobile Image"
             />
           </div>
           <div className="col-md-6 col-12 my-auto">
@@ -79,6 +90,8 @@ function TradeTestingList() {
         </div>
       </div>
     </div>
+    </>
+    
   );
 }
 

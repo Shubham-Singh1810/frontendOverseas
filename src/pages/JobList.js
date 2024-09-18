@@ -7,6 +7,7 @@ import {
 } from "../services/job.service";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import JobFilter from "../components/JobFilter";
+import { Helmet } from "react-helmet";
 function JobList() {
   const params = useParams();
   const [jobArr, setJobArr] = useState([]);
@@ -49,7 +50,26 @@ function JobList() {
       setShowLoader(false);
     }
   };
-
+  const [metaData, setMetaData] = useState({
+    title: "All Jobs: Discover Opportunities with Overseas jobs",
+    keyword: "All jobs",
+    discription:
+      "Explore all jobs available with the Overseas.ai app. Find your dream job abroad and build your career",
+  });
+  const capitaliseFirstLetterOfString = (string) => {
+    let newString = "";
+    let arr = string.split(' ');
+    
+    // Capitalize the first letter of each word
+    arr = arr.map(word => {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(); // Capitalize the first letter and keep the rest lowercase
+    });
+    
+    // Join the array back into a single string
+    newString = arr.join(' ');
+    
+    return newString;
+  };
   const getJobKey = async () => {
     setShowLoader(true);
     try {
@@ -59,6 +79,14 @@ function JobList() {
       setJobArr(response?.jobs);
       pageNumber(response?.totalJobs);
       setShowLoader(false);
+      setMetaData({
+        title:
+        capitaliseFirstLetterOfString(params.filter.replace(/-/g, " ")) +
+          " : Discover Opportunities with Overseas jobs",
+        keyword: params.filter.replace(/-/g, " "),
+        discription:
+          "Explore all jobs available with the Overseas.ai app. Find your dream job abroad and build your career",
+      });
     } catch (error) {
       console.error("Error fetching job list:", error);
       setShowLoader(false);
@@ -79,9 +107,16 @@ function JobList() {
       setShowLoader(false);
     }
   };
+
   useEffect(() => {
     if (location.pathname == "/jobs/last-week") {
       getJobsOfTheWeek();
+      setMetaData({
+        title: "Jobs of the week: Discover the Top Jobs of the Week",
+        keyword: "Jobs of the week",
+        discription:
+          "Explore the best job opportunities of the week at overseas jobs leading employment agency.Don't miss out on your dream job.",
+      });
       return;
     }
     if (location.pathname === "/jobs") {
@@ -144,178 +179,189 @@ function JobList() {
     setSearchKey(key);
   };
   return (
-    <div className="container mt-md-5 pt-5">
-      <div className="mt-5 pt-5 mx-0">
-        <div className="row justify-content-center ">
-          <div
-            className="col-lg-5 col-md-6 col-11 mb-2 d-flex align-items-center justify-content-between  border p-2 rounded"
-            style={{ height: "46.5px" }}
-          >
-            <input
-              style={{
-                border: "none",
-                width: "80%",
-                paddingLeft: "10px",
-                outline: "none",
-              }}
-              placeholder="Search By Job Title"
-              onChange={(e) => handleSearch(e.target.value)}
-            />
-            <h4 className="mb-0 text-secondary">
-              <i
-                className={"fa " + (!showFilter ? "fa-filter" : "fa-search")}
-                onClick={() => setShowFilter(true)}
-              ></i>
-            </h4>
-          </div>
-        </div>
-        <div className="row m-0 p-0">
-          {showFilter && (
-            <JobFilter
-              setShowFilter={setShowFilter}
-              setPayload={setPayload}
-              payload={payload}
-              showFilter={showFilter}
-            />
-          )}
-
-          {showLoader ? (
-            <div className="vh-100 row col-md-8 col-lg-6 col-12 justify-content-center align-items-center">
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          ) : (
-            <div className="row col-md-8 col-lg-6 col-12 m-0 p-0">
-              {searchKey.length > 0 ? (
-                searchJobsArr?.map((v, i) => <JobCard key={i} value={v} />)
-              ) : jobArr.length > 0 ? (
-                jobArr?.map((v, i) => <JobCard key={i} value={v} />)
-              ) : (
-                <div className="text-center mt-5">
-                  <img
-                  style={{ height: "280px", width: "280px", opacity:0.8 }}
-                  src="https://cdn-icons-png.flaticon.com/256/6840/6840178.png"
-                  className="img-fluid"
-                />
-                <h5 className="text-secondary"><b>No Job Found</b></h5>
-                </div>
-              )}
-            </div>
-          )}
-
-          <div className="col-lg-3 d-none d-md-none d-lg-block">
-            <img className="img-fluid" src="/images/fullMobileNew.png" />
-            <div className="row mx-2">
-              <div className="col-4">
-                <img className="img-fluid" src="/images/appQR.png" />
-              </div>
-              <div className="col-8 my-auto border rounded">
-                <img
-                  className="img-fluid"
-                  src="https://admin.overseas.ai/newfrontend/image/google-play.png"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <nav
-          aria-label="Page navigation example"
-          className="d-flex justify-content-center my-5"
-        >
-          <ul className="pagination">
-            <li className={`page-item ${pageNo === 1 ? "disabled" : ""}`}>
-              <a
-                className="page-link"
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handlePageChange(pageNo - 1);
+    <>
+      <Helmet>
+        <title>{metaData?.title}</title>
+        <meta name="description" content={metaData?.discription} />
+        <meta name="keywords" content={metaData?.keyword} />
+      </Helmet>
+      <div className="container mt-md-5 pt-5">
+        <div className="mt-5 pt-5 mx-0">
+          <div className="row justify-content-center ">
+            <div
+              className="col-lg-5 col-md-6 col-11 mb-2 d-flex align-items-center justify-content-between  border p-2 rounded"
+              style={{ height: "46.5px" }}
+            >
+              <input
+                style={{
+                  border: "none",
+                  width: "80%",
+                  paddingLeft: "10px",
+                  outline: "none",
                 }}
-              >
-                Prev
-              </a>
-            </li>
-            {start > 1 && (
-              <>
-                <li className="page-item">
+                placeholder="Search By Job Title"
+                onChange={(e) => handleSearch(e.target.value)}
+              />
+              <h4 className="mb-0 text-secondary">
+                <i
+                  className={"fa " + (!showFilter ? "fa-filter" : "fa-search")}
+                  onClick={() => setShowFilter(true)}
+                ></i>
+              </h4>
+            </div>
+          </div>
+          <div className="row m-0 p-0">
+            {showFilter && (
+              <JobFilter
+                setShowFilter={setShowFilter}
+                setPayload={setPayload}
+                payload={payload}
+                showFilter={showFilter}
+              />
+            )}
+
+            {showLoader ? (
+              <div className="vh-100 row col-md-8 col-lg-6 col-12 justify-content-center align-items-center">
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            ) : (
+              <div className="row col-md-8 col-lg-6 col-12 m-0 p-0">
+                {searchKey.length > 0 ? (
+                  searchJobsArr?.map((v, i) => <JobCard key={i} value={v} />)
+                ) : jobArr.length > 0 ? (
+                  jobArr?.map((v, i) => <JobCard key={i} value={v} />)
+                ) : (
+                  <div className="text-center mt-5">
+                    <img
+                      style={{ height: "280px", width: "280px", opacity: 0.8 }}
+                      src="https://cdn-icons-png.flaticon.com/256/6840/6840178.png"
+                      className="img-fluid"
+                      alt="No Job Found"
+                    />
+                    <h5 className="text-secondary">
+                      <b>No Job Found</b>
+                    </h5>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="col-lg-3 d-none d-md-none d-lg-block">
+              <img className="img-fluid" src="/images/fullMobileNew.png" />
+              <div className="row mx-2">
+                <div className="col-4">
+                  <img className="img-fluid" src="/images/appQR.png" alt="App Qr"/>
+                </div>
+                <div className="col-8 my-auto border rounded">
+                  <img
+                    className="img-fluid"
+                    src="https://admin.overseas.ai/newfrontend/image/google-play.png"
+                    alt="Play Store Image"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <nav
+            aria-label="Page navigation example"
+            className="d-flex justify-content-center my-5"
+          >
+            <ul className="pagination">
+              <li className={`page-item ${pageNo === 1 ? "disabled" : ""}`}>
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handlePageChange(pageNo - 1);
+                  }}
+                >
+                  Prev
+                </a>
+              </li>
+              {start > 1 && (
+                <>
+                  <li className="page-item">
+                    <a
+                      className="page-link"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handlePageChange(1);
+                      }}
+                    >
+                      1
+                    </a>
+                  </li>
+                  {start > 2 && (
+                    <li className="page-item disabled">
+                      <span className="page-link">...</span>
+                    </li>
+                  )}
+                </>
+              )}
+              {totalPage.slice(start - 1, end).map((v) => (
+                <li
+                  key={v}
+                  className={`page-item ${v === pageNo ? "active" : ""}`}
+                >
                   <a
                     className="page-link"
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      handlePageChange(1);
+                      handlePageChange(v);
                     }}
                   >
-                    1
+                    {v}
                   </a>
                 </li>
-                {start > 2 && (
-                  <li className="page-item disabled">
-                    <span className="page-link">...</span>
+              ))}
+              {end < totalPage.length && (
+                <>
+                  {end < totalPage.length - 1 && (
+                    <li className="page-item disabled">
+                      <span className="page-link">...</span>
+                    </li>
+                  )}
+                  <li className="page-item">
+                    <a
+                      className="page-link"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handlePageChange(totalPage.length);
+                      }}
+                    >
+                      {totalPage.length}
+                    </a>
                   </li>
-                )}
-              </>
-            )}
-            {totalPage.slice(start - 1, end).map((v) => (
+                </>
+              )}
               <li
-                key={v}
-                className={`page-item ${v === pageNo ? "active" : ""}`}
+                className={`page-item ${
+                  pageNo === totalPage.length ? "disabled" : ""
+                }`}
               >
                 <a
                   className="page-link"
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    handlePageChange(v);
+                    handlePageChange(pageNo + 1);
                   }}
                 >
-                  {v}
+                  Next
                 </a>
               </li>
-            ))}
-            {end < totalPage.length && (
-              <>
-                {end < totalPage.length - 1 && (
-                  <li className="page-item disabled">
-                    <span className="page-link">...</span>
-                  </li>
-                )}
-                <li className="page-item">
-                  <a
-                    className="page-link"
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handlePageChange(totalPage.length);
-                    }}
-                  >
-                    {totalPage.length}
-                  </a>
-                </li>
-              </>
-            )}
-            <li
-              className={`page-item ${
-                pageNo === totalPage.length ? "disabled" : ""
-              }`}
-            >
-              <a
-                className="page-link"
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handlePageChange(pageNo + 1);
-                }}
-              >
-                Next
-              </a>
-            </li>
-          </ul>
-        </nav>
+            </ul>
+          </nav>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

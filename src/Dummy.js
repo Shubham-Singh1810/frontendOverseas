@@ -6,7 +6,7 @@
                       <img
                         src={imageUrl}
                         style={{ height: "150px", width: "150px", borderRadius: "50%" }}
-                        alt="Profile"
+                        alt="Profile Image"
                       />
                     </div>
                     <h3 className="mb-0">Shubham Singh</h3>

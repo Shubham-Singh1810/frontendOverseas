@@ -130,6 +130,7 @@ function SuccessfulPlacedCandidateList({ title, backgroundColor, rounded }) {
                         height: "250px",
                         width: "300px",
                       }}
+                      alt="Profile Image"
                     />
                   </div>
                   <p className="text-center my-2">
@@ -161,6 +162,7 @@ function SuccessfulPlacedCandidateList({ title, backgroundColor, rounded }) {
                         height: "250px",
                         width: "300px",
                       }}
+                      alt="Profile Image"
                     />
                   </div>
                   <p className="text-center my-2">
