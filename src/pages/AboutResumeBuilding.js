@@ -18,7 +18,7 @@ function AboutResumeBuilding() {
         <div className="row mx-3 mb-5 my-3">
           <div className="col-md-6 col-12 my-auto order-md-1 order-2">
             <div className="py-5">
-              <h5 className="textBlue">RESUME BUILDER</h5>
+              <h2 className="textBlue">RESUME BUILDER</h2>
               <h1 className="heading ">Get your customised resume builder</h1>
               <p>With Overseas resume builder</p>
               <button className="btn btn-primary" onClick={()=>navigate("/resume-building")}>Create Now</button>

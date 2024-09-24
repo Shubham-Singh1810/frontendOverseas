@@ -9,7 +9,7 @@ function AppPromationSection() {
       <div className="row py-5 ">
         <div className="col-md-7 col-12 order-lg-1 order-2 my-auto">
           <div className="text-md-start text-center">
-          <motion.h1
+          <motion.h3
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
             transition={{
@@ -18,7 +18,7 @@ function AppPromationSection() {
             className="heading mt-4 mt-md-0"
           >
             Get the <span className="textBlue">Overseas Jobs</span> App
-          </motion.h1>
+          </motion.h3>
           <motion.div className="d-flex justify-content-center justify-content-md-start  mt-3">
             <motion.div
               className=""
@@ -86,6 +86,7 @@ function AppPromationSection() {
             }}
             className="img-fluid"
             src="/images/tiltedApp.png"
+            alt="Mobile Image"
           />
         </div>
       </div>

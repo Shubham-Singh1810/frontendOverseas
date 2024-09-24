@@ -101,7 +101,7 @@ function SearchComponent({ fullWidth }) {
             onClick={handleMicClick}
           >
             <h2 className="mb-0">
-              <i className={`fa fa-microphone${isListening ? "-slash" : ""}`}></i>
+              <i className={`fa fa-microphone${isListening ? " text-success" : ""}`}></i>
             </h2>
           </div>
         </div>

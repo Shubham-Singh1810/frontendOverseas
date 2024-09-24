@@ -1,150 +1,216 @@
 import React from "react";
 
 function Aboutus() {
+  const arr = [
+    {
+      title: "About Us Overseas",
+      discription:
+        "We connect employers and job-seekers across borders through the power of Video. We go beyond traditional resumes and cover letters and utilize authentic videos to establish the credentials of the blue and grey-collar workers to prospective employers.",
+    },
+    {
+      title: "Our Mission",
+      discription:
+        "Changing the functioning of blue and grey-collar recruitment across the border by leveraging the power of video. We expect capable, skilled and ambitious workers to get due benefits by demonstrating their skills and talents.",
+    },
+    {
+      title: "Our Vission",
+      discription:
+        "To become a well-renowned platform connecting overseas employers and employees in the blue and grey-collar sectors, transforming the global recruitment process. We envision a future where Overseas employers can easily identify and connect with the best talents across borders.",
+    },
+  ];
   return (
-    <div className="mx-lg-5 mt-5 pt-md-0 pt-5 mx-md-2 mx-0">
-      <div className="row vh-100 m-0">
-        <div className="col-md-6 my-auto col-12 ">
-          <h1>About Us</h1>
-          <div className="mx-2 mt-4">
-            <p>
-              Welcome to Overseas.ai, the premier video-based job platform that
-              connects talented individuals with exciting career opportunities.
-              We are dedicated to revolutionizing the way employers and
-              employees engage, learn, and grow in the global job market.
-            </p>
-            <p>
-              At Overseas.ai, we understand the power of video in showcasing
-              skills, personality, and potential. Our platform empowers job
-              seekers to create dynamic video profiles, allowing them to stand
-              out from the crowd and capture the attention of employers seeking
-              top talent.
-            </p>
-            <p>
-              But we don't stop there. We go beyond traditional job matching by
-              offering comprehensive skill training programs directly on our
-              platform. We believe that continuous learning and personal growth
-              are essential for career success. That's why we provide a range of
-              professional development resources, including online courses,
-              webinars, and workshops, to help employees enhance their skills
-              and stay ahead in their fields.
-            </p>
-            <p>
-              Moreover, we recognize the value of firsthand insights when
-              considering overseas job opportunities. Through Overseas.ai,
-              candidates who have successfully migrated to foreign countries can
-              share their experiences, providing invaluable knowledge and
-              guidance to those aspiring to work abroad. This unique feature
-              enables aspiring employees to better understand the overseas job
-              environment and make informed decisions about their career paths.
-            </p>
-            <p>
-              For employers, Overseas.ai offers a large, diverse, and highly
-              skilled database of candidates. Our advanced search filters and
-              intelligent matching algorithms make it easy for employers to find
-              the best-suited candidates for their organizations. By utilizing
-              video profiles, employers gain a deeper understanding of
-              candidates' abilities, communication styles, and cultural fit,
-              facilitating more effective hiring decisions.{" "}
-            </p>
-            <p>
-              We are committed to fostering a vibrant and supportive community
-              of professionals, where connections are forged, knowledge is
-              shared, and careers are transformed. Whether you are an employer
-              seeking top talent or an employee looking for exciting
-              opportunities and growth, Overseas.ai is your go-to destination.
-            </p>
-            <p>
-              Join us today and experience a world of possibilities. Empower
-              your career journey with Overseas.ai, where video connects, skills
-              evolve, and global opportunities await.
-            </p>
+    <div className="mt-5 pt-md-5">
+      <div className="mt-5 pt-5 container">
+        <div className="py-3 border  rounded shadow-sm">
+          <h1 className=" textBlue text-center">
+            Know Overseas.ai, Our Mission & Vision and Areas of Impact
+          </h1>
+        </div>
+        <div className="row justify-content-between">
+          <div className="col-lg-6 col-md-12 col-12 my-5">
+            <div className="mt-4">
+              {arr?.map((v, i) => {
+                return (
+                  <div className="mb-5">
+                    <h3 className="textBlue">{v?.title}</h3>
+                    <h5 className="text-secondary">{v?.discription}</h5>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="col-lg-5 col-md-12 col-12 my-auto">
+            <img src="/images/about.png" className="img-fluid" />
           </div>
         </div>
-        <div className="col-md-6 my-auto col-12 d-flex justify-content-center my-auto">
-          <img src="http://localhost:3001/images/firefighter.png" alt="About Image"/>
+        <div className="my-5">
+        <h2 className=" textBlue my-4">
+        Areas of Impact
+          </h2>
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button textBlue"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                  style={{fontSize:"23px", fontWeight:"500"}} 
+                >
+                  Productive Use of Time
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse show"
+                aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  Interestingly, most informal sector workers spent their time
+                  surfing videos on different social media (Facebook, Tik Tok,
+                  Instagram etc), an activity that may not be socioeconomically
+                  productive for the individual or the population. We envisage
+                  that a major part of their spare time can be used in observing
+                  and creating these work videos which will make them engaged
+                  with this platform and help them cross-learning. Our platform
+                  will provide an alternative work + entertainment opportunity
+                  where the users can use their time productively.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button
+                  class="accordion-button collapsed textBlue"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                  style={{fontSize:"23px", fontWeight:"500"}} 
+                >
+                  Skill-based connection building & learning opportunity
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  The target group is mostly unconnected as they are not users
+                  of professional social media platforms like LinkedIn. A
+                  platform like LinkedIn is primarily meant for whitecollar/
+                  educated workers. The proposed video-based cross-learning
+                  platform will allow individuals with a similar skill set to be
+                  connected, learn from each other, and employers to hire
+                  individuals.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed textBlue"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                  style={{fontSize:"23px", fontWeight:"500"}} 
+                >
+                  Encouraging International Migration for the targeted segment
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  Skilled workers with low education have limited opportunities
+                  for temporary migration. For example, India/Bangladesh/the
+                  Philippines supply construction workers, nurses etc to middle
+                  eastern countries and some extent to Europe. Usually, foreign
+                  employers have limited opportunities to evaluate the skill set
+                  of prospective hires. Such a video platform showcasing various
+                  facets of the skill set of the candidates may be quite helpful
+                  in this regard. We are already piloting our prototype portal
+                  to address this issues
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button
+                  class="accordion-button collapsed textBlue"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour"
+                  aria-expanded="false"
+                  aria-controls="collapseFour"
+                  style={{fontSize:"23px", fontWeight:"500"}} 
+                >
+                  A new market for tools and technologies
+                </button>
+              </h2>
+              <div
+                id="collapseFour"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingFour"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  The network building and new learning possibilities may have
+                  spillover outcomes in terms of opening up the market for tools
+                  and technologies. The target segment, siloed in their local
+                  economy, is hardly aware of the tools and technologies
+                  available in other economies for performing the same task.
+                  This initiative may provide a drive to the target groups
+                  engaged in occupations like farming, plumbing, nursing, and
+                  welding (just to name a few) to reorient their work plan due
+                  to new knowledge about the tools and technologies available
+                  elsewhere in the world.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFive">
+                <button
+                  class="accordion-button collapsed textBlue"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFive"
+                  aria-expanded="false"
+                  aria-controls="collapseFive"
+                  style={{fontSize:"23px", fontWeight:"500"}} 
+                >
+                  A new market for handicrafts and other niche skill sets
+                </button>
+              </h2>
+              <div
+                id="collapseFive"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingFive"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  Similarly, various niche skill sets that might be valued
+                  globally and yet confined in the local economy, might get
+                  access to the global market. There are excellent skill sets
+                  (for example, handicrafts or organic production) that may get
+                  global attention if they get the necessary exposure.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="row m-0">
-        <div className="col-lg-3 col-md-4 col-12 p-3 shadow rounded mb-2 ">
-          <h5>Mission Statement:</h5>
-          <p className="mb-0 mt-2">
-            At Overseas.ai, our mission is to empower blue-collar workers
-            worldwide by providing them access to a global job market where they
-            can showcase their skills and secure meaningful employment
-            opportunities in their respective sectors. We strive to create an
-            inclusive and supportive platform that enables these workers to take
-            control of their careers and achieve socio-economic growth.
-          </p>
-        </div>
-        <div className="col-lg-3 col-md-4 col-12 p-3 shadow rounded mb-2">
-        <h5>Vision Statement:</h5>
-        <p className="mb-0 mt-2">
-          Our vision is to revolutionize the blue-collar job industry by
-          fostering a global community where workers are connected, respected,
-          and valued. We aim to be the leading platform that transforms the
-          lives of blue-collar workers, offering them a world of opportunities,
-          skill enhancement programs, and the tools they need to succeed.
-          Through our platform, we envision a future where every blue-collar
-          worker can soar to new heights and achieve their aspirations.
-        </p>
-      </div>
-      <div className="col-lg-3 col-md-4 col-12 p-3 shadow rounded mb-2">
-        <h5>Area of Impact Statement:</h5>
-        <p className="mb-0 mt-2">
-          At Overseas.ai, we are committed to making a positive socio-economic
-          impact on the lives of blue-collar workers. We focus on several key
-          areas:
-        </p>
-      </div>
-      <div className="col-lg-3 col-md-4 col-12 p-3 shadow rounded mb-2">
-        <h5>Empowerment:</h5>
-        <p className="mb-0 mt-2">
-          We empower blue-collar workers by providing them with a global job
-          market that recognizes and values their skills. By creating a platform
-          where they can showcase their abilities, we enable them to take
-          control of their careers and find employment opportunities that align
-          with their expertise.
-        </p>
-      </div>
-      <div className="col-lg-3 col-md-4 col-12 p-3 shadow rounded mb-2">
-        <h5>Skill Enhancement:</h5>
-        <p className="mb-0 mt-2">
-          We believe in the continuous growth and development of blue-collar
-          workers. Through our platform, we offer skill training programs and
-          resources that help them enhance their capabilities, stay relevant in
-          their industries, and increase their employability.
-        </p>
-      </div>
-      <div className="col-lg-3 col-md-4 col-12 p-3 shadow rounded mb-2">
-        <h5>Access to Opportunities:</h5>
-        <p className="mb-0 mt-2">
-          We bridge the gap between workers and employers by connecting
-          blue-collar workers with a diverse range of job opportunities
-          worldwide. By expanding their horizons and offering access to a wider
-          job market, we provide them with greater chances to secure meaningful
-          employment and improve their socio-economic conditions.
-        </p>
-      </div>
-      <div className="col-lg-3 col-md-4 col-12 p-3 shadow rounded mb-2">
-        <h5>Community and Suppor:</h5>
-        <p className="mb-0 mt-2">
-          We foster a vibrant and supportive community for blue-collar workers,
-          where they can connect, share knowledge, and support one another. We
-          strive to create an environment that promotes collaboration,
-          networking, and mutual growth, ensuring that they feel valued and
-          empowered throughout their journey.
-        </p>
-      </div>
-      </div>
-
-      
-      
-      <p className="mt-3 mb-5">
-        Together, through our mission, vision, and area of impact, we aim to
-        uplift the lives of blue-collar workers, create equal opportunities, and
-        drive positive change in the global job market.
-      </p>
     </div>
   );
 }

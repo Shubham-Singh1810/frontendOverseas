@@ -53,14 +53,15 @@ function JobOpeningInTopCompany() {
       ref={container}
     >
       <div className="container">
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
           transition={{ duration: 1 }}
-          className="text-center mb-5 mt-5"
+          className="text-center textBlue mb-5 mt-5"
+          style={{fontWeight:"500"}}
         >
-          Job Openings in Top companies
-        </motion.h1>
+         Job Openings in Top companies
+        </motion.h2>
 
         <div className="w-100">
           <Slider {...settings}>
@@ -76,7 +77,7 @@ function JobOpeningInTopCompany() {
                     <img
                       src={
                         v?.cmpLogoS3 === "placeholder/logo.png"
-                          ? "https://overseasdata.s3.ap-south-1.amazonaws.com/Company/6/logo.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAWDCXZNCOULZNVOK6%2F20240729%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20240729T095743Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Signature=e2da4312025d2bbb07f3d67f3db3b9b60690369085896b11a4ef29b02ca0e4ed"
+                          ? "https://overseasdata.s3.ap-south-1.amazonaws.com/Company/6/logo.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAWDCXZNCOULZNVOK6%2F20240924%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20240924T105807Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Signature=eb24a3ad133c29d1ea4d7099087432434fa62611d25dba8ac36c3542cbee65b6"
                           : v?.cmpLogoS3
                       }
                       alt="Company Logo"

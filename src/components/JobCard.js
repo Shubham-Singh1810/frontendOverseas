@@ -9,13 +9,12 @@ function JobCard({ value }) {
   const navigate = useNavigate();
   const handleApplyJob = async (event) => {
     event.stopPropagation();
-    if(!globalState?.user){
-toast.warning("Please login to apply");
-setTimeout(()=>{
-  navigate("/login")
-
-}, 1000)
-return
+    if (!globalState?.user) {
+      toast.warning("Please login to apply");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+      return;
     }
     let payload = {
       id: value?.id,
@@ -51,7 +50,7 @@ return
       }
     >
       <div className="mx-2 my-3 card p-2 p-md-3 shadow">
-        <h5>{value?.jobTitle}</h5>
+        <h2 style={{fontSize:"22px"}}>{value?.jobTitle}</h2>
         <div className="row">
           <div className="d-flex col-md-12 col-8 justify-content-between mb-md-2 my-auto">
             <div className="d-block d-md-flex justify-content-between w-100">

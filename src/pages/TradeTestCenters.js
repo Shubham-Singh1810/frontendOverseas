@@ -141,13 +141,13 @@ function TradeTestCenter() {
   return (
     <div className="mt-5 pt-5">
       <div className="mt-5 pt-5 container">
-        <div className="d-md-flex justify-content-between my-3 mx-4 pb-3">
-          <h5
-            className="textBlue"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: "600" }}
+        <div className="d-md-flex align-items-center justify-content-between my-3 mx-4 pb-3">
+          <h1
+            className="textBlue "
+            style={{fontSize:"32px"}}
           >
-            OUR TRADE TEST CENTER
-          </h5>
+           <b>OUR TRADE TEST CENTER</b> 
+          </h1>
           <button
             className="btn btn-outline-primary"
             onClick={handleScrollToRegister}

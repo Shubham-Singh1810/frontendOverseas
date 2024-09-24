@@ -122,9 +122,9 @@ function TradeTestCourseDetails() {
         </div>
       </div>
       <div className="">
-        <h1 className=" text-center mb-5 mt-5 textBlue">
-          <b>Test offered by Institute</b>
-        </h1>
+        <h2 className=" text-center mb-5 mt-5 textBlue">
+          <b>{courseDetails?.institute_details?.instituteName}</b>
+        </h2>
         <div className="my-5 py-4">
           <Slider {...settings}>
             {courseList?.map((v, i) => {

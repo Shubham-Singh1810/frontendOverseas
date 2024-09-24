@@ -57,11 +57,9 @@ function CampanyDetails() {
                   />
                 </div>
                 <div className="col-md-9 col-12 my-md-auto ">
-                  <h5>{hraDetails?.cmpName}</h5>
+                  <h2>{hraDetails?.cmpName}</h2>
                   <p className="mb-0">Since {hraDetails?.cmpWorkingFrom}</p>
                   <div>{renderStars(hraDetails?.cmpRating)}</div>
-                  
-                  
                 </div>
                 <div className="col-12">
                   <p className="">{hraDetails?.cmpDescription}</p>
@@ -91,7 +89,7 @@ function CampanyDetails() {
             </div>
           </div>
         </div>
-       <h4 className=" my-3 pt-5"><span className="shadow py-1 px-2 rounded">Job Posted By Hra</span></h4>
+       <h4 className=" my-3 pt-5"><span className="shadow py-1 px-2 rounded">Job Posted By {hraDetails?.cmpName}</span></h4>
         <div className="row">
           {hraJobList?.map((v, i) => {
 

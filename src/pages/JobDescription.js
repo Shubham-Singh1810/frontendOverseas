@@ -47,9 +47,9 @@ function JobDiscription() {
         <div className="col-md-8 my-5 ">
           <BreadCrumb />
           <div className=" p-3 mx-0 mt-5  border shadow-lg rounded">
-            <h2 className="textBlue text-center fontSans">
+            <h1 className="textBlue text-center fontSans">
               {jobDetails?.jobTitle}
-            </h2>
+            </h1>
             <p className="my-3 text-center fontSans">
               Job Id : {jobDetails?.jobID}
             </p>
@@ -57,10 +57,10 @@ function JobDiscription() {
               {jobDetails?.jobDescription}
             </p>
             <div className="d-flex justify-content-center my-2 imgContainer">
-              <img src="https://admin.overseas.ai/storage/uploads/countryFlag/United%20Arab%20Emirates.png" alt="Country Flag"/>
-              <img src="https://admin.overseas.ai/newfrontend/image/job-card/accommodation.png" alt="Image"/>
-              <img src="https://admin.overseas.ai/newfrontend/image/job-card/health.png" alt="Image"/>
-              <img src="https://admin.overseas.ai/newfrontend/image/job-card/transportation.png" alt="Image"/>
+              <img src={`https://admin.overseas.ai/storage/uploads/countryFlag/${jobDetails?.jobLocationCountry?.countryFlag}`} alt="Country Flag"/>
+              <img src="https://admin.overseas.ai/newfrontend/image/job-card/accommodation.png" alt="Accommodation Image"/>
+              <img src="https://admin.overseas.ai/newfrontend/image/job-card/health.png" alt="Health Image"/>
+              <img src="https://admin.overseas.ai/newfrontend/image/job-card/transportation.png" alt="Transportation Image"/>
             </div>
           </div>
           <div className="my-3">

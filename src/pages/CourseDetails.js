@@ -66,8 +66,6 @@ function CourseDetails() {
         console.log(response);
         if (response?.message == "Application submitted successfully!") {
           toast.success("Application submitted successfully!");
-          
-          
         } else {
           toast.success(response?.message);
         }
@@ -130,7 +128,6 @@ function CourseDetails() {
           {courseDetails?.appliedStatus ? (
             <button
               className="btn w-100 btn-sm btn-warning"
-           
             >
               Applied
             </button>
@@ -147,9 +144,9 @@ function CourseDetails() {
         </div>
       </div>
       <div className="">
-        <h1 className=" text-center mb-5 mt-5 textBlue">
-          <b>Courses offered by Institute</b>
-        </h1>
+        <h2 className=" text-center mb-5 mt-5 textBlue">
+          <b>Courses offered by {courseDetails?.institute_details?.instituteName}</b>
+        </h2>
         <div className="my-5 py-4">
           <Slider {...settings}>
             {courseList?.map((v, i) => {

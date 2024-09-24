@@ -347,19 +347,6 @@ function Footer() {
             <div className="mx-3">
               <div className="  rounded">
                 <h3 className="mb-1">Download Our App Now</h3>
-                {/* <div className=" d-flex justify-content-center my-3">
-                    <div style={{ height: "150px", width: "150px" }}>
-                      <img src="/images/appQR.png" className="img-fluid" />
-                    </div>
-                  </div>
-                  <div className=" d-flex justify-content-center ">
-                    <div className="bg-light px-2 rounded" style={{ height: "50px", width: "150px" }}>
-                      <img
-                        src="https://admin.overseas.ai/newfrontend/image/google-play.png"
-                        className="img-fluid"
-                      />
-                    </div>
-                  </div> */}
                 <div className="row justify-content-center mt-3">
                   <div className="col-4">
                     <img

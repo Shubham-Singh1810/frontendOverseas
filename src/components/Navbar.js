@@ -217,7 +217,7 @@ function Navbar() {
       {showDepartment && (
         <>
           <div className="modal show d-block" tabIndex="-1">
-            <div className="modal-dialog">
+            <div className="modal-dialog ">
               <div className="modal-content">
                 <div className="modal-header d-flex justify-content-between">
                   <h5 className="modal-title">Select Department</h5>
@@ -229,7 +229,7 @@ function Navbar() {
                     <i className="fa fa-close"></i>
                   </button>
                 </div>
-                <div className="modal-body row">
+                <div className="modal-body row ">
                   {departmentList?.map((v, i) => {
                     return (
                       <div className="col-md-6 col-12">

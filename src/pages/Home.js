@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , Suspense } from "react";
 import HeroSection from "../components/HeroSection";
 import AppPromationSection from "../components/AppPromationSection";
-import JobsSliderList from "../components/JobsSliderList";
 import SuccessfulPlacedCandidateList from "../components/SuccessfulPlacedCandidateList";
-import RegionList from "../components/RegionList";
-import JobOpeningInTopCompany from "../components/JobOpeningInTopCompany";
-import CandidateNewsSlider from "../components/CandidateNewsSlider";
-import NewsSlider from "../components/NewsSlider";
 import { getOccupations, getCountriesForJobs } from "../services/info.service";
 import { getInstituteList } from "../services/institute.service";
 import { Helmet } from "react-helmet";
+const JobsSliderList = React.lazy(() => import('../components/JobsSliderList'));
+const JobOpeningInTopCompany = React.lazy(() => import('../components/JobOpeningInTopCompany'));
+const NewsSlider = React.lazy(() => import('../components/NewsSlider'));
 function Home() {
   const [departmentList, setDepartmentList] = useState([]);
   const [instituteList, setInstituteList] = useState([]);
@@ -77,6 +75,7 @@ function Home() {
         <meta name="keywords" content="overseas jobs" />
       </Helmet>
       <HeroSection data={departmentList} />
+      <Suspense fallback={<div>Loading...</div>}>
       <JobsSliderList
         title="Job Opening In Top Countries"
         rounded={true}
@@ -92,6 +91,7 @@ function Home() {
       <JobOpeningInTopCompany />
       <JobsSliderList
         title="Meet Our Institutes"
+        titleH4={true}
         rounded={false}
         backgroundColor="#F8F9FA"
         data={instituteList}
@@ -104,6 +104,8 @@ function Home() {
         backgroundColor="#F4FAFD"
       />
       <NewsSlider />
+      </Suspense>
+      
     </>
   );
 }

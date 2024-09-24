@@ -48,15 +48,15 @@ function HeroSection({ data }) {
                     delay: 0.5,
                   }}
                   className="   mb-5 "
-                  style={{ color: "whitesmoke" }}
+                  style={{ color: "whitesmoke" , fontWeight:"500"}}
                 >
-                  <b>
+                  
                     We connect employers and job-seekers across borders through
                     the power of Video. We go beyond traditional resumes and
                     cover letters and utilize authentic videos to establish the
                     credentials of the blue and grey-collar workers to
                     prospective employers.
-                  </b>
+                  
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 100 }}

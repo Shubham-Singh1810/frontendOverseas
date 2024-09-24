@@ -6,7 +6,6 @@ import CookieConsent from "react-cookie-consent";  // Import react-cookie-consen
 import "./App.css";
 import { GlobalStateProvider } from './GlobalProvider';
 import AllRoutes from "./routes/AllRoutes";
-
 function App() {
   const { pathname } = useLocation();
 

@@ -50,9 +50,9 @@ function TradeTestCenterDetails() {
                         />
                       </div>
                       <div className="col-md-8 col-12 mt-3 mt-md-0">
-                        <p style={{ fontWeight: "500" }}>
+                        <h1 style={{ fontWeight: "500", fontSize:"30px" }}>
                           {instituteDetails?.instituteName}
-                        </p>
+                        </h1>
                         <p>
                           <span style={{ fontWeight: "500" }}>Since : </span>
                           {instituteDetails?.insSince}
@@ -88,11 +88,11 @@ function TradeTestCenterDetails() {
             </div>
           </div>
         </div>
-        <h4 className=" my-3 pt-md-5 ms-3 ms-0">
+        <h2 className=" my-3 pt-md-5 ms-3 ms-0">
           <span className="shadow py-1 px-2 rounded">
-            Course Provided By Institute
+            Course Provided By {instituteDetails?.instituteName}
           </span>
-        </h4>
+        </h2>
         <div className="row">
           {courseList?.map((v, i) => {
             return <TradeTestCard v={v} />;

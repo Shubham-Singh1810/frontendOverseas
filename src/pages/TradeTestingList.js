@@ -46,12 +46,12 @@ function TradeTestingList() {
             </div>
           </div>
         </div>
-        <h5
+        <h2
           className="text-center my-md-5 pt-md-5 pb-3 textBlue"
           style={{ fontFamily: "Inter, sans-serif", fontWeight: "600" }}
         >
           TRADE TESTING WE OFFER
-        </h5>
+        </h2>
         <div className="row mb-3">
           <div className="col-6">
             <input className="form-control" placeholder="Search" />

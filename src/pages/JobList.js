@@ -24,7 +24,6 @@ function JobList() {
     jobExpTypeReq: "",
     sortBy: "",
   });
-
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState([]);
   const [showFilter, setShowFilter] = useState(window.innerWidth > 700);
@@ -51,6 +50,7 @@ function JobList() {
     }
   };
   const [metaData, setMetaData] = useState({
+    heading: "All Jobs",
     title: "All Jobs: Discover Opportunities with Overseas jobs",
     keyword: "All jobs",
     discription:
@@ -58,16 +58,16 @@ function JobList() {
   });
   const capitaliseFirstLetterOfString = (string) => {
     let newString = "";
-    let arr = string.split(' ');
-    
+    let arr = string.split(" ");
+
     // Capitalize the first letter of each word
-    arr = arr.map(word => {
+    arr = arr.map((word) => {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(); // Capitalize the first letter and keep the rest lowercase
     });
-    
+
     // Join the array back into a single string
-    newString = arr.join(' ');
-    
+    newString = arr.join(" ");
+
     return newString;
   };
   const getJobKey = async () => {
@@ -80,8 +80,11 @@ function JobList() {
       pageNumber(response?.totalJobs);
       setShowLoader(false);
       setMetaData({
+        heading: capitaliseFirstLetterOfString(
+          params.filter.replace(/-/g, " ")
+        ),
         title:
-        capitaliseFirstLetterOfString(params.filter.replace(/-/g, " ")) +
+          capitaliseFirstLetterOfString(params.filter.replace(/-/g, " ")) +
           " : Discover Opportunities with Overseas jobs",
         keyword: params.filter.replace(/-/g, " "),
         discription:
@@ -112,6 +115,7 @@ function JobList() {
     if (location.pathname == "/jobs/last-week") {
       getJobsOfTheWeek();
       setMetaData({
+        heading: "Jobs of the week",
         title: "Jobs of the week: Discover the Top Jobs of the Week",
         keyword: "Jobs of the week",
         discription:
@@ -187,6 +191,8 @@ function JobList() {
       </Helmet>
       <div className="container mt-md-5 pt-5">
         <div className="mt-5 pt-5 mx-0">
+          
+          <h1 className="textBlue  fontSans mb-3 mb-md-5"><i className="fa fa-suitcase"></i> <u>{metaData?.heading}</u></h1>
           <div className="row justify-content-center ">
             <div
               className="col-lg-5 col-md-6 col-11 mb-2 d-flex align-items-center justify-content-between  border p-2 rounded"
@@ -252,7 +258,11 @@ function JobList() {
               <img className="img-fluid" src="/images/fullMobileNew.png" />
               <div className="row mx-2">
                 <div className="col-4">
-                  <img className="img-fluid" src="/images/appQR.png" alt="App Qr"/>
+                  <img
+                    className="img-fluid"
+                    src="/images/appQR.png"
+                    alt="App Qr"
+                  />
                 </div>
                 <div className="col-8 my-auto border rounded">
                   <img
