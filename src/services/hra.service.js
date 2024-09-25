@@ -13,6 +13,21 @@ export const getHraList = async access_token => {
     throw error;
   }
 };
+
+
+export const createJobByHr = async (access_token, formData) => {
+  try {
+    const response = await axios.post(BASE_URL + 'create-job', formData, {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
 // Function to get job by hra
 export const getJobByHra = async params => {
   try {
@@ -122,6 +137,35 @@ export const editReviewForHra = async (formData, access_token) => {
     return response;
   } catch (error) {
     console.error('Error fetching data:', error.response?.data);
+    throw error;
+  }
+};
+export const getCompanyHrList = async access_token => {
+  try {
+    const response = await axios.get(BASE_URL + 'get-hr-details', {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+
+export const hraPostedJobs = async (access_token, formData) => {
+  try {
+    const response = await axios.post(BASE_URL + 'all-created-jobs',formData, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
     throw error;
   }
 };

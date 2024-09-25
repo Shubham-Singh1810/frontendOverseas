@@ -55,7 +55,7 @@ function HraDashboard() {
     {
       name: "View Jobs",
       icon: "fa fa-briefcase",
-      path: "/my-documents",
+      path: "/hra-jobs",
     },
     {
       name: "View Application",

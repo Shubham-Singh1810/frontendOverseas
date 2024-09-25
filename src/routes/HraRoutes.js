@@ -33,6 +33,7 @@ import TradeTestCenterDetails from '../pages/TradeTestCenterDetails'
 import HraDashboard from '../pages/HraPages/HraDashboard'
 import AboutResumeBuilding from '../pages/AboutResumeBuilding'
 import CreateJobs from '../pages/HraPages/CreateJobs'
+import HraViewJobs from '../pages/HraPages/HraViewJobs'
 function HraRoutes() {
   return (
     <Routes>
@@ -66,8 +67,9 @@ function HraRoutes() {
         <Route path="/hra-dashboard" element={<HraDashboard/>}/>
         <Route path="/about-resume-building" element={<AboutResumeBuilding/>}/>
         <Route path="/create-jobs" element={<CreateJobs/>}/>
+        <Route path="/hra-jobs" element={<HraViewJobs/>}/>
         
-        {/* <Route path="*" element={<PageNotFound/>}/> */}
+        <Route path="*" element={<PageNotFound/>}/>
     </Routes>
   )
 }
