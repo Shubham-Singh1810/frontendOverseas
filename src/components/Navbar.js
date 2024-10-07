@@ -106,7 +106,6 @@ function Navbar() {
     },
     
   ];
-
   const [departmentList, setDepartmentList] = useState([]);
   const getOccupationsListFunc = async () => {
     try {

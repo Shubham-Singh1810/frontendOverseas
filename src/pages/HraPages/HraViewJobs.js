@@ -7,9 +7,9 @@ import HraJobCard from "../../components/HraJobCard";
 import { useNavigate } from "react-router-dom";
 function HraViewJobs() {
   const { globalState, setGlobalState } = useGlobalState();
+  const navigate = useNavigate()
   const [loader, setLoader]=useState()
   const [jobList, setJobList]=useState([]);
-  const navigate = useNavigate()
   const getJobsPostedByHra = async () => {
     setLoader(true)
     try {
@@ -46,7 +46,7 @@ function HraViewJobs() {
         </div>
         <div className="p-2 bgBlue px-md-4 px-3 borderRadiusLeft20">
           <i className="fa fa-suitcase text-light me-2"></i>
-          <span className="text-light">HRA Posted Jobs</span>
+          <span className="text-light">My Posted Jobs</span>
         </div>
       </div>
     </div>

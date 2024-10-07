@@ -34,6 +34,11 @@ import HraDashboard from '../pages/HraPages/HraDashboard'
 import AboutResumeBuilding from '../pages/AboutResumeBuilding'
 import CreateJobs from '../pages/HraPages/CreateJobs'
 import HraViewJobs from '../pages/HraPages/HraViewJobs'
+import BulkHire from '../pages/HraPages/BulkHire'
+import ViewApplication from '../pages/HraPages/ViewApplication'
+import RecommandedCandidates from '../pages/HraPages/RecommandedCandidates'
+import EditJob from '../pages/HraPages/EditJob'
+import NotificationList from '../pages/HraPages/NotificationList'
 function HraRoutes() {
   return (
     <Routes>
@@ -67,7 +72,12 @@ function HraRoutes() {
         <Route path="/hra-dashboard" element={<HraDashboard/>}/>
         <Route path="/about-resume-building" element={<AboutResumeBuilding/>}/>
         <Route path="/create-jobs" element={<CreateJobs/>}/>
+        <Route path="/edit-jobs/:id" element={<EditJob/>}/>
         <Route path="/hra-jobs" element={<HraViewJobs/>}/>
+        <Route path="/create-bulk-hire" element={<BulkHire/>}/>
+        <Route path="/view-candidate-aplication-list" element={<ViewApplication/>}/>
+        <Route path="/recommanded-candidates" element={<RecommandedCandidates/>}/>
+        <Route path="/hra-notifications" element={<NotificationList/>}/>
         
         <Route path="*" element={<PageNotFound/>}/>
     </Routes>

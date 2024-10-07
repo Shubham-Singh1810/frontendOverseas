@@ -1,24 +1,30 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useGlobalState } from "../../GlobalProvider";
 import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
+import CandidateCard from "../../components/CandidateCard";
+import HraJobCard from "../../components/HraJobCard";
+import {getHraDashboardData} from "../../services/hra.service"
 function HraDashboard() {
     const navigate = useNavigate()
   const { globalState, setGlobalState } = useGlobalState();
+  const[hraData, setHraData]=useState()
   const statice = [
     {
-      name: "Job Application",
-      count: "50",
-      icon: "fa fa-list me-2",
-    },
-    {
       name: "Posted Jobs",
-      count: "24",
+      count: hraData?.totalPostedJobs,
       icon: "fa fa-suitcase me-2",
     },
+    {
+      name: "Job Application",
+      count: hraData?.totalAppliedCandidates,
+      icon: "fa fa-list me-2",
+    },
+    
 
     {
-      name: "Candidates",
-      count: "24",
+      name: "Bulk Hiring Request",
+      count: hraData?.totalPostedBulkHiring,
       icon: "fa fa-user me-2",
     },
   ];
@@ -50,7 +56,7 @@ function HraDashboard() {
     {
       name: "Bulk Hire",
       icon: "fa fa-users",
-      path: "/applied-jobs",
+      path: "/create-bulk-hire",
     },
     {
       name: "View Jobs",
@@ -60,17 +66,17 @@ function HraDashboard() {
     {
       name: "View Application",
       icon: "fa fa-list",
-      path: "/saved-jobs",
+      path: "/view-candidate-aplication-list",
     },
     {
       name: "Recommended Candidate",
       icon: "fa fa-user",
-      path: "/notifications",
+      path: "/recommanded-candidates",
     },
     {
       name: "Notification",
       icon: "fa fa-bell",
-      path: "/candidate-experiences",
+      path: "/hra-notifications",
     },
     {
       name: "Need Help",
@@ -78,6 +84,49 @@ function HraDashboard() {
       path: "/contact-us",
     },
   ]);
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    responsive: [
+      {
+        breakpoint: 1300, // screen width up to 1024px (tablet)
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 900, // screen width up to 1024px (tablet)
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600, // screen width up to 600px (mobile)
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  const handleHraDashboardData = async()=>{
+    try {
+      let response = await getHraDashboardData(globalState.user.access_token);
+      setHraData(response.data.data)
+    } catch (error) {
+      
+    }
+  }
+  useEffect(()=>{
+    handleHraDashboardData()
+  },[])
   return (
     <div className="container mt-5 pt-5">
       <div className="mt-md-5 py-md-5 mb-5">
@@ -178,6 +227,60 @@ function HraDashboard() {
                 </div>
               );
             })}
+            <div className="ms-2  p-2 ">
+              {hraData?.latestPostedJobs.length>0 && <>
+                <h4 className="text-center py-1 bgBlue text-light">
+                Posted Jobs
+              </h4>
+              <div className="row">
+                <Slider {...settings}>
+                  {hraData?.latestPostedJobs.map((v, i) => {
+                    return (
+                      <div className="">
+                        <HraJobCard value={v} slider={true}/>
+                      </div>
+                    );
+                  })}
+                </Slider>
+              </div>
+              <div className="d-flex justify-content-end mt-2 mb-5 me-4">
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() => navigate("/hra-jobs")}
+                >
+                  View All
+                </button>
+              </div></>}
+              
+              
+            </div>
+             <div className="ms-2  p-2 ">
+              {hraData?.latestAppliedCandidates.length>0 && <>
+                <h4 className="text-center py-1 bgBlue text-light">
+                Job Application
+              </h4>
+              <div className="row">
+                <Slider {...settings}>
+                  {hraData?.latestAppliedCandidates.map((v, i) => {
+                    return (
+                        <CandidateCard value={v} slider={true}/>
+                    );
+                  })}
+                </Slider>
+              </div>
+              <div className="d-flex justify-content-end mt-2 mb-5 me-4">
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() => navigate("/view-candidate-aplication-list")}
+                >
+                  View All
+                </button>
+              </div></>}
+              
+              
+            </div>
+            
+            
           </div>
         </div>
       </div>

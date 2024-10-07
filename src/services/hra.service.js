@@ -28,6 +28,20 @@ export const createJobByHr = async (access_token, formData) => {
     throw error;
   }
 };
+export const editJobByHr = async (access_token, formData, jobId) => {
+  console.log(jobId)
+  try {
+    const response = await axios.post(BASE_URL + 'edit-job/'+jobId, formData, {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
 // Function to get job by hra
 export const getJobByHra = async params => {
   try {
@@ -165,6 +179,77 @@ export const hraPostedJobs = async (access_token, formData) => {
     });
     return response;
   } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+export const createBulkHiringRequest = async (access_token, formData) => {
+  try {
+    const response = await axios.post(BASE_URL + 'request-bulk-hiring', formData, {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+
+export const appliedCandidateList = async (access_token, formData) => {
+  try {
+    const response = await axios.post(BASE_URL + 'applied-candidates-list',{pageNo:1}, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+export const candidateByJobRecommanded = async (access_token, jobId) => {
+  try {
+    const response = await axios.get(BASE_URL + 'get-job-wise-recommandations/'+ jobId, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+export const getHraDashboardData = async (access_token, formData) => {
+  try {
+    const response = await axios.get(BASE_URL + 'get-hra-dashboard-analytics', {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+
+export const getHraNotification = async (access_token) => {
+  try {
+    const response = await axios.get(BASE_URL+"get-notifications", {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    });
+    return (response);
+  } catch (error) {
+    // Handle error (e.g., log or throw an error)
     console.error('Error fetching data:', error);
     throw error;
   }

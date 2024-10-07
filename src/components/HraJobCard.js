@@ -4,24 +4,11 @@ import { applyJobApi } from "../services/job.service";
 import { useGlobalState } from "../GlobalProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-function HraJobCard({ value }) {
+function HraJobCard({ value, slider }) {
   const { globalState, setGlobalState } = useGlobalState();
   const navigate = useNavigate();
   return (
-    <div
-      className="col-lg-6 col-12 p-0 p-md-2"
-      onClick={() =>
-        navigate(
-          `/job/${value?.jobLocationCountry?.name
-            ?.trim()
-            .replace(/\s+/g, "-")
-            .replace(/\//g, "-")}/${value?.jobTitle
-            ?.trim()
-            .replace(/\s+/g, "-")
-            .replace(/\//g, "-")}/${value?.id}`
-        )
-      }
-    >
+    <div className={(slider ? "col-lg-12" : "col-lg-6" ) + " col-12 p-0 p-md-2 "}>
       <div className="mx-2 my-3 card p-2 p-md-3 shadow">
         {value?.interviewPlaceNotification && <div style={{fontSize:"22px"}} className="d-flex justify-content-end"><i className="fa fa-bell-o text-danger"></i></div>}
         
@@ -79,18 +66,28 @@ function HraJobCard({ value }) {
             />
           </div>
         </div>
-        {value?.totalAppliedCandidates >0 ?<p><a href="">{value?.totalAppliedCandidates} Candidates Applied in this Job</a></p>: <p>{value?.totalAppliedCandidates} Candidates Applied in this Job</p>}
+        {value?.totalAppliedCandidates >0 ?<p><a href="#">{value?.totalAppliedCandidates} Candidates Applied in this Job</a></p>: <p>{value?.totalAppliedCandidates} Candidates Applied in this Job</p>}
         <p className="text-danger">Job Deadline - {value?.jobDeadline}</p>
         <div className="d-flex justify-content-between align-items-center">
           <div>
-          <button className="btn btn-primary bgBlue btn-sm" >
+          <button className="btn btn-primary bgBlue btn-sm" onClick={()=>navigate(`/edit-jobs/${value.id}`)}>
             Update
           </button>
           <button className="btn btn-primary bgBlue btn-sm ms-2">
             Applied Candidates
           </button>
           </div>
-          <p className="mb-0 mt-4 text-primary" style={{ cursor: "pointer" }}>
+          <p className="mb-0 mt-4 text-primary" style={{ cursor: "pointer" }} onClick={() =>
+        navigate(
+          `/job/${value?.jobLocationCountry?.name
+            ?.trim()
+            .replace(/\s+/g, "-")
+            .replace(/\//g, "-")}/${value?.jobTitle
+            ?.trim()
+            .replace(/\s+/g, "-")
+            .replace(/\//g, "-")}/${value?.id}`
+        )
+      }>
             Read Details
           </p>
         </div>
