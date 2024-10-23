@@ -23,6 +23,9 @@ import TradeTestCourseDetails from '../pages/TradeTestCourseDetails'
 import InstituteDetails from '../pages/InstituteDetails'
 import TradeTestCenterDetails from '../pages/TradeTestCenterDetails'
 import AboutResumeBuilding from '../pages/AboutResumeBuilding'
+import PricingPage from '../pages/PricingPage'
+import TermAndCondition from '../pages/TermAndCondition'
+import PrivacyPolicy from '../pages/PrivacyPolicy'
 function GuestRoutes() {
   const location = useLocation()
   
@@ -50,6 +53,9 @@ function GuestRoutes() {
         <Route path="/course-details/:id" element={<CourseDetails/>}/>
         <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>
         <Route path="/about-resume-building" element={<AboutResumeBuilding/>}/>
+        <Route path="/pricing" element={<PricingPage/>}/>
+        <Route path="/terms-condition" element={<TermAndCondition/>}/>
+        <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

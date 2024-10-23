@@ -29,11 +29,11 @@ function Footer() {
     },
     {
       name: "Privacy Policy",
-      link: "/",
+      link: "/privacy-policy",
     },
     {
       name: "Terms & Conditions",
-      link: "/",
+      link: "/terms-condition",
     },
   ];
 

@@ -7,6 +7,7 @@ import { applyCourse } from "../services/institute.service";
 function TradeTestCard({ v , getTestTradeListFunc}) {
   const { globalState, setGlobalState } = useGlobalState();
   const handleCourseApply = async () => {
+  
     if (globalState.user) {
       try {
         let response = await applyCourse({

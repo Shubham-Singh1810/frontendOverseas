@@ -46,7 +46,7 @@ function JobDiscription() {
       <div className="row p-0 m-0 w-100 justify-content-center d-flex">
         <div className="col-md-8 my-5 ">
           <BreadCrumb />
-          <div className=" p-3 mx-0 mt-5  border shadow-lg rounded">
+          <div className=" p-3 mx-0 mt-5   border shadow-lg rounded">
             <h1 className="textBlue text-center fontSans">
               {jobDetails?.jobTitle}
             </h1>

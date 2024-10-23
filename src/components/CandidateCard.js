@@ -3,10 +3,39 @@ import { useNavigate, useNavigation } from "react-router-dom";
 import { applyJobApi } from "../services/job.service";
 import { useGlobalState } from "../GlobalProvider";
 import { ToastContainer, toast } from "react-toastify";
+import {
+  markCandidate,rejectUnmatchingCandidate
+} from "../services/hra.service";
 import "react-toastify/dist/ReactToastify.css";
-function CandidateCard({ value, slider }) {
-  const { globalState, setGlobalState } = useGlobalState();
+function CandidateCard({ value, slider , jobId, showMarkBtn, jobPrimaryId, getRecommandedCandidate}) {
   const navigate = useNavigate();
+  const { globalState, setGlobalState } = useGlobalState();
+  const handleMarkCandidate = async()=>{
+    try {
+      let response = await markCandidate(globalState?.user.access_token, jobPrimaryId , value?.personId);
+      if(response?.data?.message=="Job matching candidate accepted successfully"){
+        toast.success("Job matching candidate accepted successfully");
+        getRecommandedCandidate(jobPrimaryId)
+      }else{
+        toast.error("Something went wrong");
+      }
+    } catch (error) {
+      toast.error("Internal Server Error");
+    }
+  }
+  const handleNotIntrestedCandidate = async()=>{
+    try {
+      let response = await rejectUnmatchingCandidate(globalState?.user.access_token, jobPrimaryId , value?.personId);
+      if(response?.data?.message=="Job unmatching candidate rejected successfully"){
+        toast.success("Job unmatching candidate rejected successfully");
+        getRecommandedCandidate(jobPrimaryId)
+      }else{
+        toast.error("Something went wrong");
+      }
+    } catch (error) {
+      toast.error("Internal Server Error");
+    }
+  }
   return (
     <div className={(slider ? "col-lg-12" : "col-lg-6" ) + " col-12 p-0 p-md-2 "}>
       <div className="mx-2 my-2 card p-2 p-md-3 shadow">
@@ -53,7 +82,7 @@ function CandidateCard({ value, slider }) {
             />
           </div>
         </div>
-
+        
         <div className="d-flex justify-content-between align-items-center">
           {value?.appliedOn && <h6 className="mb-0 mt-4 ">
             Applied On :{" "}
@@ -68,9 +97,14 @@ function CandidateCard({ value, slider }) {
               )
             }
           >
-            Job Id : <span className=" badge bg-primary">{value?.jobId}</span>
+            Job Id : <span className=" badge bg-primary">{ jobId ? jobId : value?.jobId}</span>
           </h6>
         </div>
+        {showMarkBtn && <div className="d-flex mt-3">
+          {value?.markedDetails?.status==1 ? <button className="btn btn-sm btn-success disabled me-2" >Marked</button>:<button className="btn btn-sm btn-outline-success me-2" onClick={()=>handleMarkCandidate()}>Mark</button>}
+          {value?.markedDetails?.status!=1 && <button className="btn btn-sm btn-danger" onClick={()=>handleNotIntrestedCandidate()}>Not Intrested</button>}
+        </div>}
+        
       </div>
       <ToastContainer />
     </div>

@@ -39,6 +39,8 @@ import ViewApplication from '../pages/HraPages/ViewApplication'
 import RecommandedCandidates from '../pages/HraPages/RecommandedCandidates'
 import EditJob from '../pages/HraPages/EditJob'
 import NotificationList from '../pages/HraPages/NotificationList'
+import TermAndCondition from '../pages/TermAndCondition'
+import PrivacyPolicy from '../pages/PrivacyPolicy'
 function HraRoutes() {
   return (
     <Routes>
@@ -77,8 +79,10 @@ function HraRoutes() {
         <Route path="/create-bulk-hire" element={<BulkHire/>}/>
         <Route path="/view-candidate-aplication-list" element={<ViewApplication/>}/>
         <Route path="/recommanded-candidates" element={<RecommandedCandidates/>}/>
+        <Route path="/recommanded-candidates/:id" element={<RecommandedCandidates/>}/>
         <Route path="/hra-notifications" element={<NotificationList/>}/>
-        
+        <Route path="/terms-condition" element={<TermAndCondition/>}/>
+        <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
         <Route path="*" element={<PageNotFound/>}/>
     </Routes>
   )

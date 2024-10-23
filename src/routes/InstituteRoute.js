@@ -30,10 +30,19 @@ import SavedJobs from '../pages/SavedJobs'
 import Notifications from '../pages/Notifications'
 import InstituteDetails from '../pages/InstituteDetails'
 import TradeTestCenterDetails from '../pages/TradeTestCenterDetails'
+import HraDashboard from '../pages/HraPages/HraDashboard'
 import AboutResumeBuilding from '../pages/AboutResumeBuilding'
+import CreateJobs from '../pages/HraPages/CreateJobs'
+import HraViewJobs from '../pages/HraPages/HraViewJobs'
+import BulkHire from '../pages/HraPages/BulkHire'
+import ViewApplication from '../pages/HraPages/ViewApplication'
+import RecommandedCandidates from '../pages/HraPages/RecommandedCandidates'
+import EditJob from '../pages/HraPages/EditJob'
+import NotificationList from '../pages/HraPages/NotificationList'
+import InstituteDashboard from '../pages/InstitutesPages/InstituteDashboard'
 import TermAndCondition from '../pages/TermAndCondition'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
-function UserRoutes() {
+function InstituteRoute() {
   return (
     <Routes>
         <Route path="/" element={<Home/>}/>
@@ -54,7 +63,6 @@ function UserRoutes() {
         <Route path="/otp-verification" element={<OtpVerification/>}/>
         <Route path="/my-profile" element={<MyProfile/>}/>
         <Route path="/resume-building" element={<ResumeBuilding/>}/>
-        <Route path="/about-resume-building" element={<AboutResumeBuilding/>}/>
         <Route path="/skill-training-institute" element={<TrainingInstitute/>}/>
         <Route path="/trade-testing-institute" element={<TradeTestingList/>}/>
         <Route path="/course-details/:id" element={<CourseDetails/>}/>
@@ -64,12 +72,20 @@ function UserRoutes() {
         <Route path="/my-documents" element={<MyDocuments/>}/>
         <Route path="/saved-jobs" element={<SavedJobs/>}/>
         <Route path="/notifications" element={<Notifications/>}/>
+        <Route path="/institute-dashboard" element={<InstituteDashboard/>}/>
+        <Route path="/about-resume-building" element={<AboutResumeBuilding/>}/>
+        <Route path="/create-jobs" element={<CreateJobs/>}/>
+        <Route path="/edit-jobs/:id" element={<EditJob/>}/>
+        <Route path="/hra-jobs" element={<HraViewJobs/>}/>
+        <Route path="/create-bulk-hire" element={<BulkHire/>}/>
+        <Route path="/view-candidate-aplication-list" element={<ViewApplication/>}/>
+        <Route path="/recommanded-candidates" element={<RecommandedCandidates/>}/>
+        <Route path="/hra-notifications" element={<NotificationList/>}/>
         <Route path="/terms-condition" element={<TermAndCondition/>}/>
         <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
-        
-        {/* <Route path="*" element={<PageNotFound/>}/> */}
+        <Route path="*" element={<PageNotFound/>}/>
     </Routes>
   )
 }
 
-export default UserRoutes
+export default InstituteRoute

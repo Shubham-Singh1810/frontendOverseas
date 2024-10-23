@@ -325,3 +325,23 @@ body {
   margin-bottom: 10px;
   font-weight: 500;
 }
+.marginNavTop {
+  margin-top: 180px;
+}
+@media only screen and (max-width:600px){
+  .marginNavTop {
+    margin-top: 120px;
+  }
+}
+.vh50{
+  height: 50vh;
+}
+.termsCondition h3{
+  color: #17487F;
+  font-weight: 600;
+  font-size: 30px;
+}
+.termsCondition p {
+  color: gray;
+  font-weight: 500; 
+}

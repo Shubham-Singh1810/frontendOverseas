@@ -6,6 +6,7 @@ import UserRoutes from "./UserRoutes";
 import HraRoutes from "./HraRoutes";
 import { useLocation } from "react-router-dom";
 import { useGlobalState } from "../GlobalProvider";
+import InstituteRoute from "./InstituteRoute";
 
 function AllRoutes() {
   const location = useLocation();
@@ -18,6 +19,8 @@ function AllRoutes() {
         return <UserRoutes />;
       case "company":
         return <HraRoutes />;
+        case "institute":
+        return <InstituteRoute />;
       default:
         return <GuestRoutes />;
     }

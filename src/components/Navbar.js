@@ -12,6 +12,7 @@ function Navbar() {
   const [showLangPopup, setShowLangPopup] = useState(false);
   const [showCountry, setShowCountry] = useState(false);
   const [showSkill, setShowSkill] = useState(false);
+  
   const navItem = [
     {
       name: "Jobs",
@@ -81,12 +82,19 @@ function Navbar() {
         },
       ],
     },
+    // {
+    //   name: "Pricing",
+    //   icon: "fa fa-credit-card",
+    //   path: "/pricing",
+    // },
     {
       name: !globalState?.user
         ? "Login/Register"
         : globalState?.user?.user?.type === "person"
         ? "My Profile"
         : globalState?.user?.user?.type === "company"
+        ? "Dashboard"
+        : globalState?.user?.user?.type === "institute"
         ? "Dashboard"
         : "Login/Register",
       icon: !globalState?.user
@@ -102,9 +110,10 @@ function Navbar() {
         ? "/my-profile"
         : globalState?.user?.user?.type === "company"
         ? "/hra-dashboard"
+        : globalState?.user?.user?.type === "institute"
+        ? "/institute-dashboard"
         : "/login",
     },
-    
   ];
   const [departmentList, setDepartmentList] = useState([]);
   const getOccupationsListFunc = async () => {
@@ -211,6 +220,8 @@ function Navbar() {
   useEffect(() => {
     navigatePage();
   }, [searchKey]);
+  
+  console.log("dfsdf", globalState?.user?.user?.type)
   return (
     <>
       {showDepartment && (

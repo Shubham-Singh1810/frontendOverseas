@@ -18,7 +18,6 @@ function CourseCard({ v , getCourseListFunc}) {
         if (response?.message == "Application submitted successfully!") {
           toast.success("Application submitted successfully!");
           setTimeout(()=>{
-
             getCourseListFunc()
           }, 5000)
           

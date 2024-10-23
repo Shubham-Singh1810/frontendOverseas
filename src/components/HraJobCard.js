@@ -12,7 +12,7 @@ function HraJobCard({ value, slider }) {
       <div className="mx-2 my-3 card p-2 p-md-3 shadow">
         {value?.interviewPlaceNotification && <div style={{fontSize:"22px"}} className="d-flex justify-content-end"><i className="fa fa-bell-o text-danger"></i></div>}
         
-        <h2 style={{fontSize:"22px"}}>{value?.jobTitle}</h2>
+        <h2 style={{fontSize:"22px"}}>{value?.jobTitle} </h2>
         <div className="row">
           <div className="d-flex col-md-12 col-8 justify-content-between mb-md-2 my-auto">
             <div className="d-block d-md-flex justify-content-between w-100">
@@ -70,11 +70,14 @@ function HraJobCard({ value, slider }) {
         <p className="text-danger">Job Deadline - {value?.jobDeadline}</p>
         <div className="d-flex justify-content-between align-items-center">
           <div>
-          <button className="btn btn-primary bgBlue btn-sm" onClick={()=>navigate(`/edit-jobs/${value.id}`)}>
+          <button className="btn btn-primary bgBlue m-1 btn-sm" onClick={()=>navigate(`/edit-jobs/${value.id}`)}>
             Update
           </button>
-          <button className="btn btn-primary bgBlue btn-sm ms-2">
+          <button className="btn btn-primary bgBlue m-1 btn-sm ms-2">
             Applied Candidates
+          </button>
+          <button className="btn btn-primary bgBlue m-1 btn-sm ms-2" onClick={()=>navigate("/recommanded-candidates/"+value?.id)}>
+            Get Recommendations
           </button>
           </div>
           <p className="mb-0 mt-4 text-primary" style={{ cursor: "pointer" }} onClick={() =>

@@ -225,6 +225,34 @@ export const candidateByJobRecommanded = async (access_token, jobId) => {
     throw error;
   }
 };
+export const markCandidate = async (access_token, jobId , candidateId) => {
+  try {
+    const response = await axios.get(BASE_URL + `accept-job-matching-candidate/${jobId}/${candidateId}`, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+export const rejectUnmatchingCandidate = async (access_token, jobId , candidateId) => {
+  try {
+    const response = await axios.get(BASE_URL + `reject-job-matching-candidate/${jobId}/${candidateId}`, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
 export const getHraDashboardData = async (access_token, formData) => {
   try {
     const response = await axios.get(BASE_URL + 'get-hra-dashboard-analytics', {
