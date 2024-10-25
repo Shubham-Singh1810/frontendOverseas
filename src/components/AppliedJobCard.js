@@ -49,13 +49,16 @@ function AppliedJobCard({ value }) {
 
         <div className="d-flex justify-content-between mb-2">
           <div className="d-block d-md-flex justify-content-between w-100">
-            <p className="mb-0 text-sm">
-              {value?.jobWages} {value?.jobLocationCountry?.currencyName} ={" "}
-              {Math.round(
-                value?.jobWages * value?.jobLocationCountry?.currencyValue
-              )}{" "}
-              INR
-            </p>
+          {value?.givenCurrencyValue ? (
+                <p className="mb-0 text-sm">
+                  {value?.jobWages} {value?.jobWagesCurrencyType} ={" "}
+                  {Math.round(value?.jobWages * value?.givenCurrencyValue)} INR
+                </p>
+              ) : (
+                <p className="mb-0 text-sm">
+                  {value?.jobWages} {value?.jobWagesCurrencyType}
+                </p>
+              )}
             
           </div>
         </div>

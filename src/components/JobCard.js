@@ -50,17 +50,20 @@ function JobCard({ value }) {
       }
     >
       <div className="mx-2 my-3 card p-2 p-md-3 shadow">
-        <h2 style={{fontSize:"22px"}}>{value?.jobTitle}</h2>
+        <h2 style={{ fontSize: "22px" }}>{value?.jobTitle}</h2>
         <div className="row">
           <div className="d-flex col-md-12 col-8 justify-content-between mb-md-2 my-auto">
             <div className="d-block d-md-flex justify-content-between w-100">
-              <p className="mb-0 text-sm">
-                {value?.jobWages} {value?.jobLocationCountry?.currencyName} ={" "}
-                {Math.round(
-                  value?.jobWages * value?.jobLocationCountry?.currencyValue
-                )}{" "}
-                INR
-              </p>
+              {value?.givenCurrencyValue ? (
+                <p className="mb-0 text-sm">
+                  {value?.jobWages} {value?.jobWagesCurrencyType} ={" "}
+                  {Math.round(value?.jobWages * value?.givenCurrencyValue)} INR
+                </p>
+              ) : (
+                <p className="mb-0 text-sm">
+                  {value?.jobWages} {value?.jobWagesCurrencyType}
+                </p>
+              )}
               <p className="mb-0 text-sm">
                 <small class=" text-success">
                   Apply Before - {value?.jobDeadline}

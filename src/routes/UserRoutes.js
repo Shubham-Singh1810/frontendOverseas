@@ -33,6 +33,7 @@ import TradeTestCenterDetails from '../pages/TradeTestCenterDetails'
 import AboutResumeBuilding from '../pages/AboutResumeBuilding'
 import TermAndCondition from '../pages/TermAndCondition'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
+import PricingPage from '../pages/PricingPage'
 function UserRoutes() {
   return (
     <Routes>
@@ -66,6 +67,7 @@ function UserRoutes() {
         <Route path="/notifications" element={<Notifications/>}/>
         <Route path="/terms-condition" element={<TermAndCondition/>}/>
         <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+        <Route path="/pricing" element={<PricingPage/>}/>
         
         {/* <Route path="*" element={<PageNotFound/>}/> */}
     </Routes>
