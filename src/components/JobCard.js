@@ -27,8 +27,8 @@ function JobCard({ value }) {
       );
       if (response?.data?.msg == "Job Applied Successfully") {
         toast.success(response?.data?.msg);
-      } else {
-        toast.error("Something went wrong");
+      } else if(response?.data?.error=="You have already applied for Job."){
+        toast.info("You have already applied for Job.");
       }
     } catch (error) {
       toast.error("Internal Server Error");

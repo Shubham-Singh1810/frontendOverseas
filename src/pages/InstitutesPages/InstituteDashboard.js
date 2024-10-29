@@ -122,11 +122,12 @@ function InstituteDashboard() {
   return (
     <div className="vh-100 d-flex align-items-center justify-content-center">
       <div>
-        <h2 className="text-secondary border bg-light shadow p-4 rounded">
+        <h3 className="text-secondary border bg-light shadow p-4 rounded">
           <a href="https://admin.overseas.ai/" target="blank">
             Services are currently accessible through this link
           </a>
-        </h2>
+        </h3>
+        <button className="btn btn-danger" onClick={logoutFunc}>Logout</button>
       </div>
     </div>
   );

@@ -26,6 +26,7 @@ import AboutResumeBuilding from '../pages/AboutResumeBuilding'
 import PricingPage from '../pages/PricingPage'
 import TermAndCondition from '../pages/TermAndCondition'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
+import CheckOut from '../pages/CheckOut'
 function GuestRoutes() {
   const location = useLocation()
   
@@ -54,6 +55,7 @@ function GuestRoutes() {
         <Route path="/test-details/:id" element={<TradeTestCourseDetails/>}/>
         <Route path="/about-resume-building" element={<AboutResumeBuilding/>}/>
         <Route path="/pricing" element={<PricingPage/>}/>
+        <Route path="/check-out" element={<CheckOut/>}/>
         <Route path="/terms-condition" element={<TermAndCondition/>}/>
         <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
         <Route path="*" element={<Navigate to="/" />} />

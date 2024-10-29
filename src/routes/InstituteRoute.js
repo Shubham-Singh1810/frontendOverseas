@@ -42,6 +42,8 @@ import NotificationList from '../pages/HraPages/NotificationList'
 import InstituteDashboard from '../pages/InstitutesPages/InstituteDashboard'
 import TermAndCondition from '../pages/TermAndCondition'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
+import PricingPage from '../pages/PricingPage'
+import CheckOut from '../pages/CheckOut'
 function InstituteRoute() {
   return (
     <Routes>
@@ -83,6 +85,8 @@ function InstituteRoute() {
         <Route path="/hra-notifications" element={<NotificationList/>}/>
         <Route path="/terms-condition" element={<TermAndCondition/>}/>
         <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+        <Route path="/pricing" element={<PricingPage/>}/>
+        <Route path="/check-out" element={<CheckOut/>}/>
         <Route path="*" element={<PageNotFound/>}/>
     </Routes>
   )

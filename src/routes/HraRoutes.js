@@ -41,6 +41,8 @@ import EditJob from '../pages/HraPages/EditJob'
 import NotificationList from '../pages/HraPages/NotificationList'
 import TermAndCondition from '../pages/TermAndCondition'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
+import PricingPage from '../pages/PricingPage'
+import CheckOut from '../pages/CheckOut'
 function HraRoutes() {
   return (
     <Routes>
@@ -82,6 +84,8 @@ function HraRoutes() {
         <Route path="/recommanded-candidates/:id" element={<RecommandedCandidates/>}/>
         <Route path="/hra-notifications" element={<NotificationList/>}/>
         <Route path="/terms-condition" element={<TermAndCondition/>}/>
+        <Route path="/pricing" element={<PricingPage/>}/>
+        <Route path="/check-out" element={<CheckOut/>}/>
         <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
         <Route path="*" element={<PageNotFound/>}/>
     </Routes>

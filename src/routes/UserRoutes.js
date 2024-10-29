@@ -34,6 +34,7 @@ import AboutResumeBuilding from '../pages/AboutResumeBuilding'
 import TermAndCondition from '../pages/TermAndCondition'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
 import PricingPage from '../pages/PricingPage'
+import CheckOut from '../pages/CheckOut'
 function UserRoutes() {
   return (
     <Routes>
@@ -68,6 +69,7 @@ function UserRoutes() {
         <Route path="/terms-condition" element={<TermAndCondition/>}/>
         <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
         <Route path="/pricing" element={<PricingPage/>}/>
+        <Route path="/check-out" element={<CheckOut/>}/>
         
         {/* <Route path="*" element={<PageNotFound/>}/> */}
     </Routes>
